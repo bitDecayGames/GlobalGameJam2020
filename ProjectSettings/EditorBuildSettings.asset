@@ -18,6 +18,9 @@ EditorBuildSettings:
     path: Assets/_Game/Scenes/Splash Screen/GameJamSplash.unity
     guid: 907c37ab556c5064ea3a14dee3e5f853
   - enabled: 0
-    path: Assets/_Game/Scenes/Test/Test.unity
-    guid: 0f957f72debf038459d86ccf7898bf05
+    path: 
+    guid: 00000000000000000000000000000000
+  - enabled: 0
+    path: 
+    guid: 00000000000000000000000000000000
   m_configObjects: {}
