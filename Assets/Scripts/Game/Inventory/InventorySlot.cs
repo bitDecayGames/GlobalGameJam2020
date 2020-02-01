@@ -1,0 +1,126 @@
+using UnityEngine;
+
+public class InventorySlot : MonoBehaviour, InventoryDropListener {
+    private const float INVENTORY_DROP_RADIUS = 2.0f;
+    private static Vector3 INVENTORY_DROP_RADIUS_VECTOR = new Vector3(INVENTORY_DROP_RADIUS, INVENTORY_DROP_RADIUS, INVENTORY_DROP_RADIUS);
+
+    public SpriteRenderer Icon;
+    public InventoryType Item;
+    [HideInInspector] public InventoryItemToSprites ItemMap; // this gets set in the Inventory object
+    public bool locked = false;
+    public bool isShop = false;
+    public float price = 0.0f;
+
+    private bool isDragging = false;
+    private SpriteRenderer DragIcon;
+    private Camera cam;
+    private Color normalColor;
+    private Color draggingColor;
+    private Color fadedColor;
+    private SpriteMask _mask;
+    private Collider2D _collider;
+
+    private void Start() {
+        cam = FindObjectOfType<Camera>();
+        normalColor = Icon.color;
+        draggingColor = new Color(1, 1, 1, 0.9f);
+        fadedColor = new Color(.8f, .8f, .8f, 0.9f);
+        _mask = GetComponent<SpriteMask>();
+        _collider = GetComponent<Collider2D>();
+        if (!isShop) InventoryDropNotifier.AddListener(this);
+    }
+
+    public bool Set(ItemKey itemKey) {
+        if (itemKey != null) {
+            Icon.sprite = itemKey.image;
+            Item = itemKey.inventoryType;
+            return true;
+        }
+
+        return false;
+    }
+
+    public void OnMouseDrag() {
+        if (!isDragging && Item != InventoryType.EMPTY && !locked) {
+            // on mouse drag start
+            var drag = new GameObject();
+            drag.transform.SetParent(transform);
+            DragIcon = drag.AddComponent<SpriteRenderer>();
+            DragIcon.sprite = Icon.sprite;
+            DragIcon.sortingLayerName = Icon.sortingLayerName;
+            DragIcon.color = draggingColor;
+            DragIcon.maskInteraction = SpriteMaskInteraction.VisibleInsideMask;
+            var mask = drag.AddComponent<SpriteMask>();
+            mask.sprite = _mask.sprite;
+            Icon.color = fadedColor;
+            isDragging = true;
+        } else if (isDragging) {
+            Vector3 mousePos = cam.ScreenToWorldPoint(Input.mousePosition);
+            var mePos = transform.parent.position;
+            mousePos.z = mePos.z;
+            var pos = mousePos - mePos;
+            if (pos.magnitude > INVENTORY_DROP_RADIUS) {
+                pos.Normalize();
+                pos.Scale(INVENTORY_DROP_RADIUS_VECTOR);
+            }
+            DragIcon.transform.position = pos + mePos;
+        }
+    }
+
+    public void OnMouseUp() {
+        if (isDragging) {
+            isDragging = false;
+            Icon.color = normalColor;
+            var pos = DragIcon.transform.position;
+            Destroy(DragIcon.gameObject);
+            var pos2 = new Vector2(pos.x, pos.y);
+            if (isShop) {
+                if (InventoryDropNotifier.NotifyOfCheckDrop(gameObject, pos2)) {
+                    if (ShopPurchaseNotifier.NotifyOfPurchase(gameObject, Item, price)) {
+                        InventoryDropNotifier.NotifyOfDrop(gameObject, pos2, Item);
+                        Debug.Log($"Purchased {Item}");
+                        // TODO: FX play successful purchase ca-ching! because user bought the Item
+                    } else {
+                        Debug.Log($"Failed to purchase {Item}");
+                        // TODO: FX play "can't purchase this object" because user tried to purchase something they can't afford
+                    }
+                }
+            } else if (InventoryDropNotifier.NotifyOfDrop(gameObject, pos2, Item)) {
+                Debug.Log($"Moved item {Item}");
+                // TODO: FX: play moved item (Item) into some other inventory
+                Set(ItemMap.Get(InventoryType.EMPTY));
+            }
+        }
+    }
+
+    public bool IsOverlappingPoint(Vector2 point) {
+        return _collider.OverlapPoint(point);
+    }
+
+    public bool OnInventoryDrop(GameObject source, Vector2 worldPosition, InventoryType item) {
+        if (OnInventoryCheckDrop(source, worldPosition)) {
+            var itemKey = ItemMap.Get(item);
+            return Set(itemKey);
+        }
+
+        return false;
+    }
+
+    public bool OnInventoryCheckDrop(GameObject source, Vector2 worldPosition) {
+        return !locked && source != gameObject && IsOverlappingPoint(worldPosition) && Item == InventoryType.EMPTY;
+    }
+
+    private void OnDestroy() {
+        if (!isShop) InventoryDropNotifier.RemoveListener(this);
+    }
+}
+
+public enum InventoryType {
+    EMPTY,
+    PLUNGER,
+    WRENCH,
+    DUCTTAPE,
+    DRAIN_SNAKE,
+    PAINT,
+    LIGHT_BULB,
+}

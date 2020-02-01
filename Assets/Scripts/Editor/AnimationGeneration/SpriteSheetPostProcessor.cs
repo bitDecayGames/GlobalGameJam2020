@@ -1,5 +1,1 @@
-namespace Editor.AnimationGeneration {
-    public class SpriteSheetPostProcessor {
-        
-    }
-}
+public class SpriteSheetPostProcessor { }
