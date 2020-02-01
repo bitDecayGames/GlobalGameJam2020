@@ -9,6 +9,9 @@ public class PositionSeeker : MonoBehaviour
 
     public float Speed;
     public Vector2 dest;
+
+    [HideInInspector]
+    public Vector2 lastMove = new Vector2();
     
     // Start is called before the first frame update
     void Start()
@@ -21,7 +24,8 @@ public class PositionSeeker : MonoBehaviour
     {
         if (Vector2.Distance(V3toV2(transform.position), dest) > 0)
         {
-            transform.position += V2toV3((dest - V3toV2(transform.position)).normalized * Speed * Time.deltaTime);
+            lastMove = (dest - V3toV2(transform.position)).normalized * Speed * Time.deltaTime;
+            transform.position += V2toV3(lastMove);
         }
 
         if (Vector2.Distance(V3toV2(transform.position), dest) < THRESHOLD)
