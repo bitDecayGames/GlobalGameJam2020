@@ -3,11 +3,12 @@ using UnityEngine;
 public class InventorySlot : MonoBehaviour, InventoryDropListener {
     private const float INVENTORY_DROP_RADIUS = 2.0f;
     private static Vector3 INVENTORY_DROP_RADIUS_VECTOR = new Vector3(INVENTORY_DROP_RADIUS, INVENTORY_DROP_RADIUS, INVENTORY_DROP_RADIUS);
-    
+
     public SpriteRenderer Icon;
     public InventoryType Item;
     [HideInInspector] public InventoryItemToSprites ItemMap; // this gets set in the Inventory object
     public bool locked = false;
+    public bool isShop = false;
 
     private bool isDragging = false;
     private SpriteRenderer DragIcon;
@@ -25,7 +26,7 @@ public class InventorySlot : MonoBehaviour, InventoryDropListener {
         fadedColor = new Color(.8f, .8f, .8f, 0.9f);
         _mask = GetComponent<SpriteMask>();
         _collider = GetComponent<Collider2D>();
-        InventoryDropNotifier.AddListener(this);
+        if (!isShop) InventoryDropNotifier.AddListener(this);
     }
 
     public bool Set(ItemKey itemKey) {
@@ -55,7 +56,7 @@ public class InventorySlot : MonoBehaviour, InventoryDropListener {
             isDragging = true;
         } else if (isDragging) {
             Vector3 mousePos = cam.ScreenToWorldPoint(Input.mousePosition);
-            var mePos = transform.position;
+            var mePos = transform.parent.position;
             mousePos.z = mePos.z;
             var pos = mousePos - mePos;
             if (pos.magnitude > INVENTORY_DROP_RADIUS) {
@@ -74,17 +75,21 @@ public class InventorySlot : MonoBehaviour, InventoryDropListener {
             var pos = DragIcon.transform.position;
             Destroy(DragIcon.gameObject);
             if (InventoryDropNotifier.NotifyOfDrop(gameObject, new Vector2(pos.x, pos.y), Item)) {
-                Set(ItemMap.Get(InventoryType.EMPTY));
+                if (isShop) {
+                    // TODO: MW here is where we should notify some shop listener or something
+                } else {
+                    Set(ItemMap.Get(InventoryType.EMPTY));                    
+                }
             }
         }
     }
 
-    public bool isOverlappingPoint(Vector2 point) {
+    public bool IsOverlappingPoint(Vector2 point) {
         return _collider.OverlapPoint(point);
     }
 
     public bool OnInventoryDrop(GameObject source, Vector2 worldPosition, InventoryType item) {
-        if (source != gameObject && isOverlappingPoint(worldPosition) && Item == InventoryType.EMPTY) {
+        if (!locked && source != gameObject && IsOverlappingPoint(worldPosition) && Item == InventoryType.EMPTY) {
             var itemKey = ItemMap.Get(item);
             return Set(itemKey);
         }
@@ -93,7 +98,7 @@ public class InventorySlot : MonoBehaviour, InventoryDropListener {
     }
 
     private void OnDestroy() {
-        InventoryDropNotifier.RemoveListener(this);
+        if (!isShop) InventoryDropNotifier.RemoveListener(this);
     }
 }
 
