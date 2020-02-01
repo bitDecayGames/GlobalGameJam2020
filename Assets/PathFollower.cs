@@ -25,17 +25,13 @@ public class PathFollower : MonoBehaviour
             return;
         }
         
-        if (seeker.arrived)
-        {
-            index++;
-        }
-        
         if (index >= path.Count)
         {
             return;
         }
-        else
+        else if (seeker.arrived)
         {
+            index++;
             setDest();
         }
     }
@@ -49,10 +45,11 @@ public class PathFollower : MonoBehaviour
 
     void setDest()
     {
-        if (path.Count == 0)
+        if (path.Count == 0 || index >= path.Count)
         {
             return;
         }
-        seeker.dest = VectorMath.V3toV2(path[index].transform.position);
+        // Add .5 to each so it goes to the center
+        seeker.dest = VectorMath.V3toV2(path[index].transform.position) + new Vector2(0.5f, 0.5f);
     }
 }
