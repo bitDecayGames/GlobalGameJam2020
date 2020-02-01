@@ -1,5 +1,22 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-8964302620065479731
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/PauseSong/Track2
+  m_EditorClassIdentifier: 
+  Name: Track2
+  Min: 0
+  Max: 1
+  Default: 0
+  Exists: 1
 --- !u!114 &-8957553499413963295
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -32,7 +49,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Path: FmodProject/Build/Desktop/Master Bank.strings.bank
   SubDir: 
-  lastModified: 637159310290000000
+  lastModified: 637161421000000000
   LoadResult: 0
   FileSizes: []
   Exists: 1
@@ -163,6 +180,24 @@ MonoBehaviour:
   LoadResult: 0
   FileSizes: []
   Exists: 1
+--- !u!114 &-2750613668275763021
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/SFX.bank
+  m_EditorClassIdentifier: 
+  Path: FmodProject/Build/Desktop/SFX.bank
+  SubDir: 
+  lastModified: 637161421000000000
+  LoadResult: 0
+  FileSizes: []
+  Exists: 1
 --- !u!114 &-2367736795482764876
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -178,15 +213,33 @@ MonoBehaviour:
   Path: event:/Music/PauseSong
   guid: ddef19305185b34cac4b5761a11bdae3
   Banks:
-  - {fileID: 3987777633364189241}
+  - {fileID: -2012766493325494823}
   IsStream: 0
   Is3D: 0
   IsOneShot: 0
   Parameters:
-  - {fileID: -8227259091414051846}
+  - {fileID: -8964302620065479731}
   MinDistance: 0
   MaxDistance: 0
   Length: 6562
+--- !u!114 &-2012766493325494823
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master Bank.bank
+  m_EditorClassIdentifier: 
+  Path: FmodProject/Build/Desktop/Master Bank.bank
+  SubDir: 
+  lastModified: 637161421000000000
+  LoadResult: 0
+  FileSizes: []
+  Exists: 1
 --- !u!114 &-1794785731703166084
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -253,18 +306,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   EditorBanks:
   - {fileID: -8818150993487535405}
-  - {fileID: 3987777633364189241}
-  - {fileID: -8543493940329050006}
+  - {fileID: -2012766493325494823}
+  - {fileID: -2750613668275763021}
   EditorEvents:
   - {fileID: 5868731399050969966}
   - {fileID: 4149738239283866603}
   - {fileID: -2367736795482764876}
   EditorParameters: []
   MasterBanks:
-  - {fileID: 3987777633364189241}
+  - {fileID: -2012766493325494823}
   StringsBanks:
   - {fileID: -8818150993487535405}
-  stringsBankWriteTime: 637159310290000000
+  stringsBankWriteTime: 637161421000000000
   cacheVersion: 3
 --- !u!114 &532990871862526810
 MonoBehaviour:
@@ -303,6 +356,23 @@ MonoBehaviour:
   FileSizes:
   - Name: Desktop
     Value: 824
+  Exists: 1
+--- !u!114 &1748026108375838016
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/AnotherDay/HighPass
+  m_EditorClassIdentifier: 
+  Name: HighPass
+  Min: 0
+  Max: 1
+  Default: 0
   Exists: 1
 --- !u!114 &1766783977834622636
 MonoBehaviour:
@@ -431,7 +501,7 @@ MonoBehaviour:
   Path: event:/SFX/Sound
   guid: c8954e5b52578545b9895dd460098ff3
   Banks:
-  - {fileID: -8543493940329050006}
+  - {fileID: -2750613668275763021}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -525,12 +595,12 @@ MonoBehaviour:
   Path: event:/Music/AnotherDay
   guid: 81da7b4d568694449287f4707f79ca54
   Banks:
-  - {fileID: 3987777633364189241}
+  - {fileID: -2012766493325494823}
   IsStream: 1
   Is3D: 0
   IsOneShot: 1
   Parameters:
-  - {fileID: -3881299715111041612}
+  - {fileID: 1748026108375838016}
   MinDistance: 0
   MaxDistance: 0
   Length: 117786
