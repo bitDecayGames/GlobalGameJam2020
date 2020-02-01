@@ -54,17 +54,20 @@ public class InventorySlot : MonoBehaviour, InventoryDropListener {
             DragIcon.sortingLayerName = Icon.sortingLayerName;
             DragIcon.color = draggingColor;
             Icon.color = fadedColor;
-            var textObj = new GameObject();
-            textObj.transform.SetParent(drag.transform);
-            var text = textObj.AddComponent<TextMeshPro>();
-            var textLocPos = text.transform.localPosition;
-            textLocPos.y = 0.4f;
-            text.transform.localPosition = textLocPos;
-            text.text = $"${price}";
-            text.alignment = TextAlignmentOptions.Center;
-            text.fontSize = 4;
-            text.color = textColor;
-            text.sortingLayerID = DragIcon.sortingLayerID;
+            if (isShop) {
+                var textObj = new GameObject();
+                textObj.transform.SetParent(drag.transform);
+                var text = textObj.AddComponent<TextMeshPro>();
+                var textLocPos = text.transform.localPosition;
+                textLocPos.y = 0.4f;
+                text.transform.localPosition = textLocPos;
+                text.text = $"${price}";
+                text.alignment = TextAlignmentOptions.Center;
+                text.fontSize = 4;
+                text.color = textColor;
+                text.sortingLayerID = DragIcon.sortingLayerID;
+            }
+
             isDragging = true;
         } else if (isDragging) {
             Vector3 mousePos = cam.ScreenToWorldPoint(Input.mousePosition);
