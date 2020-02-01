@@ -41,9 +41,21 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: UI Background
+    uniqueID: 2835508291
+    locked: 0
   - name: UI
     uniqueID: 508739695
     locked: 0
   - name: Transition
     uniqueID: 375434313
+    locked: 0
+  - name: Background
+    uniqueID: 3931463459
+    locked: 0
+  - name: Foreground
+    uniqueID: 3160629557
+    locked: 0
+  - name: Sky
+    uniqueID: 247122455
     locked: 0

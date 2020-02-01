@@ -395,6 +395,9 @@
  <Reference Include="UnityEditor.Purchasing">
  <HintPath>C:/Unity Projects/GlobalGameJam2020/Library/PackageCache/com.unity.purchasing@2.0.6/Editor/UnityEditor.Purchasing.dll</HintPath>
  </Reference>
+ <Reference Include="JetBrains.Rider.Unity.Editor.Plugin.Repacked">
+ <HintPath>C:/Unity Projects/GlobalGameJam2020/Assets/Plugins/Editor/JetBrains/JetBrains.Rider.Unity.Editor.Plugin.Repacked.dll</HintPath>
+ </Reference>
  <Reference Include="nunit.framework">
  <HintPath>C:/Unity Projects/GlobalGameJam2020/Library/PackageCache/com.unity.ext.nunit@1.0.0/net35/unity-custom/nunit.framework.dll</HintPath>
  </Reference>
