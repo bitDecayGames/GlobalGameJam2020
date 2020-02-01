@@ -13,17 +13,17 @@ MonoBehaviour:
   m_Name: InventoryMap
   m_EditorClassIdentifier: 
   items:
-  - image: {fileID: 21300000, guid: 9dfc4452b2b7a4dd8a73f5013e40a2be, type: 3}
+  - image: {fileID: 21300000, guid: 03f1fbe3541dc46f5a4e33b28e986e58, type: 3}
     inventoryType: 0
-  - image: {fileID: 21300000, guid: 71c35b6d4570d43c8973a0c1de8c37ae, type: 3}
+  - image: {fileID: 21300000, guid: 445c36a17eb87456782a5352f39b01fd, type: 3}
     inventoryType: 1
-  - image: {fileID: 0}
+  - image: {fileID: 21300000, guid: c8e7c4ccbcbb34bf19ea662088f5fe99, type: 3}
     inventoryType: 2
   - image: {fileID: 0}
     inventoryType: 3
   - image: {fileID: 0}
     inventoryType: 4
-  - image: {fileID: 0}
+  - image: {fileID: 21300000, guid: 8e4a44e0684844f52ae34bcb950bfb70, type: 3}
     inventoryType: 5
-  - image: {fileID: 0}
+  - image: {fileID: 21300000, guid: 4009f74d947c84cdfb33d5b85bda82b5, type: 3}
     inventoryType: 6

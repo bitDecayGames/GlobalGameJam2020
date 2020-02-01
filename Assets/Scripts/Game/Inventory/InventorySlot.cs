@@ -1,7 +1,8 @@
+using TMPro;
 using UnityEngine;
 
 public class InventorySlot : MonoBehaviour, InventoryDropListener {
-    private const float INVENTORY_DROP_RADIUS = 2.0f;
+    private const float INVENTORY_DROP_RADIUS = 4.0f;
     private static Vector3 INVENTORY_DROP_RADIUS_VECTOR = new Vector3(INVENTORY_DROP_RADIUS, INVENTORY_DROP_RADIUS, INVENTORY_DROP_RADIUS);
 
     public SpriteRenderer Icon;
@@ -9,6 +10,7 @@ public class InventorySlot : MonoBehaviour, InventoryDropListener {
     [HideInInspector] public InventoryItemToSprites ItemMap; // this gets set in the Inventory object
     public bool locked = false;
     public bool isShop = false;
+    public bool isTrash = false;
     public float price = 0.0f;
 
     private bool isDragging = false;
@@ -17,6 +19,7 @@ public class InventorySlot : MonoBehaviour, InventoryDropListener {
     private Color normalColor;
     private Color draggingColor;
     private Color fadedColor;
+    private Color textColor;
     private SpriteMask _mask;
     private Collider2D _collider;
 
@@ -25,6 +28,7 @@ public class InventorySlot : MonoBehaviour, InventoryDropListener {
         normalColor = Icon.color;
         draggingColor = new Color(1, 1, 1, 0.9f);
         fadedColor = new Color(.8f, .8f, .8f, 0.9f);
+        textColor = new Color(71 / 255.0f, 170 / 255.0f, 44 / 255.0f);
         _mask = GetComponent<SpriteMask>();
         _collider = GetComponent<Collider2D>();
         if (!isShop) InventoryDropNotifier.AddListener(this);
@@ -49,10 +53,21 @@ public class InventorySlot : MonoBehaviour, InventoryDropListener {
             DragIcon.sprite = Icon.sprite;
             DragIcon.sortingLayerName = Icon.sortingLayerName;
             DragIcon.color = draggingColor;
-            DragIcon.maskInteraction = SpriteMaskInteraction.VisibleInsideMask;
-            var mask = drag.AddComponent<SpriteMask>();
-            mask.sprite = _mask.sprite;
             Icon.color = fadedColor;
+            if (isShop) {
+                var textObj = new GameObject();
+                textObj.transform.SetParent(drag.transform);
+                var text = textObj.AddComponent<TextMeshPro>();
+                var textLocPos = text.transform.localPosition;
+                textLocPos.y = 0.4f;
+                text.transform.localPosition = textLocPos;
+                text.text = $"${price}";
+                text.alignment = TextAlignmentOptions.Center;
+                text.fontSize = 4;
+                text.color = textColor;
+                text.sortingLayerID = DragIcon.sortingLayerID;
+            }
+
             isDragging = true;
         } else if (isDragging) {
             Vector3 mousePos = cam.ScreenToWorldPoint(Input.mousePosition);
@@ -99,8 +114,13 @@ public class InventorySlot : MonoBehaviour, InventoryDropListener {
 
     public bool OnInventoryDrop(GameObject source, Vector2 worldPosition, InventoryType item) {
         if (OnInventoryCheckDrop(source, worldPosition)) {
-            var itemKey = ItemMap.Get(item);
-            return Set(itemKey);
+            if (isTrash) {
+                // TODO: FX: play item went into trash can noise
+                return true;
+            } else {
+                var itemKey = ItemMap.Get(item);
+                return Set(itemKey);
+            }
         }
 
         return false;

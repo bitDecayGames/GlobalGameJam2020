@@ -6,7 +6,10 @@ public class Inventory : MonoBehaviour {
     public List<InventorySlot> Slots;
 
     private void Start() {
-        Slots.ForEach(s => s.ItemMap = ItemMap);
+        Slots.ForEach(s => {
+            s.ItemMap = ItemMap;
+            s.Set(ItemMap.Get(s.Item));
+        });
     }
 
     public void SetSlot(int index, InventoryType itemType) {
@@ -33,6 +36,11 @@ public class Inventory : MonoBehaviour {
         }
     }
 
+    /// <summary>
+    /// Use this method to remove items from a car's inventory when they reach a customer's house
+    /// </summary>
+    /// <param name="itemType">the type of inventory item</param>
+    /// <returns>true if the item was in the players inventory</returns>
     public bool RemoveItemType(InventoryType itemType) {
         var index = Slots.FindIndex(s => s.Item == itemType);
         if (index >= 0) {
@@ -40,6 +48,20 @@ public class Inventory : MonoBehaviour {
             return true;
         } else {
             Debug.LogWarning($"There was no item type of {itemType} in this inventory");
+            return false;
+        }
+    }
+
+    /// <summary>
+    /// Use this method to check a car's inventory for the presence of an item
+    /// </summary>
+    /// <param name="itemType">the type of inventory item</param>
+    /// <returns>true if the item was in the players inventory</returns>
+    public bool CheckForItemType(InventoryType itemType) {
+        var index = Slots.FindIndex(s => s.Item == itemType);
+        if (index >= 0) {
+            return true;
+        } else {
             return false;
         }
     }
