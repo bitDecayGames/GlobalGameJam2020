@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using SuperTiled2Unity;
 using UnityEngine;
@@ -27,17 +28,29 @@ public class MapLoader : MonoBehaviour
         for (var i = 0; i < _baseDataLayer.transform.childCount; i++)
         {
             var currentTile = _baseDataLayer.transform.GetChild(i);
-            currentTile.gameObject.AddComponent<Tile>();
+            var props = currentTile.GetComponent<SuperCustomProperties>();
+            
+            CustomProperty solidProp;
+            var found = props.TryGetCustomProperty("type", out solidProp);
+            if (!found)
+            {
+                throw new Exception($"Unable to find 'solid' property on custom properties of object");
+            }
+            
+            var tileComp = currentTile.gameObject.AddComponent<Tile>();
+            TileType tType;
+            TileType.TryParse(solidProp.GetValueAsString(), true, out tType);
+            tileComp.tileType = tType;
             if (i % _map.m_Height != 0)
             {
-                currentTile.GetComponent<Tile>().north = _baseDataLayer.transform.GetChild(i - 1).GetComponent<Tile>();
-                _baseDataLayer.transform.GetChild(i - 1).GetComponent<Tile>().south = currentTile.GetComponent<Tile>();
+                tileComp.north = _baseDataLayer.transform.GetChild(i - 1).GetComponent<Tile>();
+                _baseDataLayer.transform.GetChild(i - 1).GetComponent<Tile>().south = tileComp;
             }
 
             if ((i - _map.m_Height) >= 0)
             {
-                currentTile.GetComponent<Tile>().west = _baseDataLayer.transform.GetChild(i - _map.m_Height).GetComponent<Tile>();
-                _baseDataLayer.transform.GetChild(i - _map.m_Height).GetComponent<Tile>().east = currentTile.GetComponent<Tile>();
+                tileComp.west = _baseDataLayer.transform.GetChild(i - _map.m_Height).GetComponent<Tile>();
+                _baseDataLayer.transform.GetChild(i - _map.m_Height).GetComponent<Tile>().east = tileComp;
             }
         }
     }
