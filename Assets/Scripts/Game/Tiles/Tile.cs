@@ -15,6 +15,6 @@ public class Tile : MonoBehaviour {
 
 public enum TileType {
     SOLID,
-    FRONT_DOOR,
+    DOOR,
     ROAD,
 }
