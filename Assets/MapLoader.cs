@@ -23,6 +23,8 @@ public class MapLoader : MonoBehaviour
 
         _baseDataLayer = _map.transform.Find("Grid").Find("data").GetComponent<SuperTileLayer>();
 
+        var testList = new List<Tile>();
+        
         // Rig up all the cardinal directions. THIS LOOP ASSUMES some things:
         // children are in Columns from left to right
         for (var i = 0; i < _baseDataLayer.transform.childCount; i++)
@@ -52,7 +54,13 @@ public class MapLoader : MonoBehaviour
                 tileComp.west = _baseDataLayer.transform.GetChild(i - _map.m_Height).GetComponent<Tile>();
                 _baseDataLayer.transform.GetChild(i - _map.m_Height).GetComponent<Tile>().east = tileComp;
             }
+
+            testList.Add(tileComp);
         }
+        
+        var testCar = FindObjectOfType<PathFollower>();
+        testCar.SetList(testList);
+
     }
 
     // Update is called once per frame
