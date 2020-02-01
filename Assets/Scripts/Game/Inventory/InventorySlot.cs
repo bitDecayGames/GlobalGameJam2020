@@ -3,11 +3,13 @@ using UnityEngine;
 public class InventorySlot : MonoBehaviour, InventoryDropListener {
     private const float INVENTORY_DROP_RADIUS = 2.0f;
     private static Vector3 INVENTORY_DROP_RADIUS_VECTOR = new Vector3(INVENTORY_DROP_RADIUS, INVENTORY_DROP_RADIUS, INVENTORY_DROP_RADIUS);
-    
+
     public SpriteRenderer Icon;
     public InventoryType Item;
     [HideInInspector] public InventoryItemToSprites ItemMap; // this gets set in the Inventory object
     public bool locked = false;
+    public bool isShop = false;
+    public float price = 0.0f;
 
     private bool isDragging = false;
     private SpriteRenderer DragIcon;
@@ -25,7 +27,7 @@ public class InventorySlot : MonoBehaviour, InventoryDropListener {
         fadedColor = new Color(.8f, .8f, .8f, 0.9f);
         _mask = GetComponent<SpriteMask>();
         _collider = GetComponent<Collider2D>();
-        InventoryDropNotifier.AddListener(this);
+        if (!isShop) InventoryDropNotifier.AddListener(this);
     }
 
     public bool Set(ItemKey itemKey) {
@@ -41,7 +43,6 @@ public class InventorySlot : MonoBehaviour, InventoryDropListener {
     public void OnMouseDrag() {
         if (!isDragging && Item != InventoryType.EMPTY && !locked) {
             // on mouse drag start
-            Debug.Log($"Mouse drag on inventory slot: {Item}");
             var drag = new GameObject();
             drag.transform.SetParent(transform);
             DragIcon = drag.AddComponent<SpriteRenderer>();
@@ -55,7 +56,7 @@ public class InventorySlot : MonoBehaviour, InventoryDropListener {
             isDragging = true;
         } else if (isDragging) {
             Vector3 mousePos = cam.ScreenToWorldPoint(Input.mousePosition);
-            var mePos = transform.position;
+            var mePos = transform.parent.position;
             mousePos.z = mePos.z;
             var pos = mousePos - mePos;
             if (pos.magnitude > INVENTORY_DROP_RADIUS) {
@@ -68,23 +69,36 @@ public class InventorySlot : MonoBehaviour, InventoryDropListener {
 
     public void OnMouseUp() {
         if (isDragging) {
-            Debug.Log($"Mouse up on inventory slot: {Item}");
             isDragging = false;
             Icon.color = normalColor;
             var pos = DragIcon.transform.position;
             Destroy(DragIcon.gameObject);
-            if (InventoryDropNotifier.NotifyOfDrop(gameObject, new Vector2(pos.x, pos.y), Item)) {
+            var pos2 = new Vector2(pos.x, pos.y);
+            if (isShop) {
+                if (InventoryDropNotifier.NotifyOfCheckDrop(gameObject, pos2)) {
+                    if (ShopPurchaseNotifier.NotifyOfPurchase(gameObject, Item, price)) {
+                        InventoryDropNotifier.NotifyOfDrop(gameObject, pos2, Item);
+                        Debug.Log($"Purchased {Item}");
+                        // TODO: FX play successful purchase ca-ching! because user bought the Item
+                    } else {
+                        Debug.Log($"Failed to purchase {Item}");
+                        // TODO: FX play "can't purchase this object" because user tried to purchase something they can't afford
+                    }
+                }
+            } else if (InventoryDropNotifier.NotifyOfDrop(gameObject, pos2, Item)) {
+                Debug.Log($"Moved item {Item}");
+                // TODO: FX: play moved item (Item) into some other inventory
                 Set(ItemMap.Get(InventoryType.EMPTY));
             }
         }
     }
 
-    public bool isOverlappingPoint(Vector2 point) {
+    public bool IsOverlappingPoint(Vector2 point) {
         return _collider.OverlapPoint(point);
     }
 
     public bool OnInventoryDrop(GameObject source, Vector2 worldPosition, InventoryType item) {
-        if (source != gameObject && isOverlappingPoint(worldPosition) && Item == InventoryType.EMPTY) {
+        if (OnInventoryCheckDrop(source, worldPosition)) {
             var itemKey = ItemMap.Get(item);
             return Set(itemKey);
         }
@@ -92,8 +106,12 @@ public class InventorySlot : MonoBehaviour, InventoryDropListener {
         return false;
     }
 
+    public bool OnInventoryCheckDrop(GameObject source, Vector2 worldPosition) {
+        return !locked && source != gameObject && IsOverlappingPoint(worldPosition) && Item == InventoryType.EMPTY;
+    }
+
     private void OnDestroy() {
-        InventoryDropNotifier.RemoveListener(this);
+        if (!isShop) InventoryDropNotifier.RemoveListener(this);
     }
 }
 
