@@ -231,6 +231,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Icon: {fileID: 8942068548222033860}
   Item: 0
+  ItemMap: {fileID: 0}
+  locked: 0
+  isShop: 0
 --- !u!58 &8942068548222033858
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -394,6 +397,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Icon: {fileID: 8942068548655278884}
   Item: 0
+  ItemMap: {fileID: 0}
+  locked: 0
+  isShop: 0
 --- !u!58 &8942068548655278882
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -562,6 +568,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Icon: {fileID: 8942068549553038543}
   Item: 0
+  ItemMap: {fileID: 0}
+  locked: 0
+  isShop: 0
 --- !u!58 &8942068549553038541
 CircleCollider2D:
   m_ObjectHideFlags: 0

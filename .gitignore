@@ -16,6 +16,8 @@ Assets/StreamingAssets/*.bank
 fmod.log
 fmod_editor.log
 FmodProject/.cache
+Assets/Plugins/FMOD/Cache/Editor/FMODStudioCache.asset
+Assets/Plugins/FMOD/Cache/Editor/FMODStudioCache.asset.meta
 
 // Paid libraries
 Assets/ProCamera2D

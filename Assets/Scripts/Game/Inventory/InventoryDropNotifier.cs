@@ -15,4 +15,8 @@ public static class InventoryDropNotifier {
     public static bool NotifyOfDrop(GameObject source, Vector2 worldPosition, InventoryType item) {
         return listeners.Exists(l => l.OnInventoryDrop(source, worldPosition, item));
     }
+
+    public static bool NotifyOfCheckDrop(GameObject source, Vector2 worldPosition) {
+        return listeners.Exists(l => l.OnInventoryCheckDrop(source, worldPosition));
+    }
 }
