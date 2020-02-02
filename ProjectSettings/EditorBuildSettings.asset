@@ -41,7 +41,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/_Game/Scenes/Development/Tanner.unity
     guid: 7d233b572d53497418d119392ea23188
-  - enabled: 1
-    path: Assets/_Game/Scenes/Menus/GameOver.unity.unity
+  - enabled: 0
+    path: 
     guid: 00000000000000000000000000000000
+  - enabled: 1
+    path: Assets/_Game/Scenes/Menus/GameOver.unity
+    guid: d886af6f4698847d6a83e6bfb7f6788d
   m_configObjects: {}
