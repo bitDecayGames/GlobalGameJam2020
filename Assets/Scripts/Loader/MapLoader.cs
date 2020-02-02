@@ -181,17 +181,20 @@ public class MapLoader : MonoBehaviour
 
                 truckSpawn.Set(x, y);
                 
-                CreateSingleTruck(x, y);
+                var truckInventory = CreateSingleTruck(x, y);
+                truckInventory.SetSlot(0, InventoryType.WRENCH);
+                truckInventory.SetSlot(1, InventoryType.LIGHT_BULB);
+                truckInventory.SetSlot(2, InventoryType.PAINT);
             }
         }
     }
 
-    public void CreateTruckDefaultSpawn()
+    public Inventory CreateTruckDefaultSpawn()
     {
-        CreateSingleTruck((int) truckSpawn.x, (int) truckSpawn.y);
+        return CreateSingleTruck((int) truckSpawn.x, (int) truckSpawn.y);
     }
 
-    public void CreateSingleTruck(int cellX, int cellY)
+    public Inventory CreateSingleTruck(int cellX, int cellY)
     {
         var truck = Instantiate(truckPrefab);
 
@@ -203,6 +206,7 @@ public class MapLoader : MonoBehaviour
         truck.GetComponent<PathFollower>().SetList(new List<Tile>() {truckStartCell.gameObject.GetComponent<Tile>()});
 
         truck.GetComponent<SpriteRenderer>().sortingOrder = 2;
+        return truck.GetComponentInChildren<Inventory>();
     }
 
     void UpdateEnvironment()
