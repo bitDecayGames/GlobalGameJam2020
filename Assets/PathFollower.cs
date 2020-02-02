@@ -101,6 +101,8 @@ public class PathFollower : MonoBehaviour
 
     public void SetDestinationObject(GameObject destObj)
     {
+        // FMOD
+        FMODSoundEffectsPlayer.Instance.PlaySoundEffect(SFX.ClickGo);
         if (destination != null)
         {
             var occ = destination.GetComponentInChildren<Occupiable>();

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.00.00">
+	<object class="AudioFile" id="{de669be8-c017-4f81-9f41-6898aeea6f9d}">
+		<property name="assetPath">
+			<value>PhoneAnswer2.wav</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>44.0999985</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>1.1682766439909298</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{fe823660-c101-4fc8-9657-8b0fde2a30b7}</destination>
+		</relationship>
+	</object>
+</objects>

@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = System.Random;
 
 public class Job : MonoBehaviour {
     private const float BUBBLE_WIDTH = 0.5f;
@@ -15,6 +16,7 @@ public class Job : MonoBehaviour {
     private InventoryItemToSprites itemMap;
     private Action OnJobComplete;
     private Action<bool> OnJobEnd; // true if the job is successfully completed
+    private int SoundEffectId;
 
     public void Init(InventoryItemToSprites itemMap, List<InventoryType> Required, float SecondsUntilFailure, float SecondsToComplete, Action<bool> OnJobEnd) {
         this.itemMap = itemMap;
@@ -73,6 +75,22 @@ public class Job : MonoBehaviour {
     /// </summary>
     /// <param name="OnJobComplete">A call back to let you know that you've completed the job so you can remove the items for that job and re-enable car select-ability</param>
     public void MarkJobAsBeingWorkedOn(Action OnJobComplete) {
+        // FMOD: Job reached
+        FMODSoundEffectsPlayer.Instance.PlaySoundEffect(SFX.JobReached);
+        Random random = new Random();
+        switch (random.Next(0, 3))
+        {
+            case 0:
+                SoundEffectId = FMODSoundEffectsPlayer.Instance.PlaySustainedSoundEffect(SFX.WorkMetalLoop);
+                break;
+            case 1:
+                SoundEffectId = FMODSoundEffectsPlayer.Instance.PlaySustainedSoundEffect(SFX.WorkSquishLoop);
+                break;
+            case 2:
+                SoundEffectId = FMODSoundEffectsPlayer.Instance.PlaySustainedSoundEffect(SFX.WorkWoodLoop);
+                break;
+        }
+        FMODSoundEffectsPlayer.Instance.PlaySoundEffect(SFX.JobReached);
         Debug.Log("JOB BEING WORKED");
         IsBeingWorkedOn = true;
         this.OnJobComplete = OnJobComplete;
@@ -87,8 +105,8 @@ public class Job : MonoBehaviour {
                 IsComplete = true;
             }
         } else if (IsComplete) {
-            // TODO: FX: play some completed job sound (maybe based on the Required types?)
-            if (OnJobComplete != null) OnJobComplete();
+            FMODSoundEffectsPlayer.Instance.StopSustainedSoundEffect(SoundEffectId);
+            if (OnJobComplete != null) { OnJobComplete();}
             if (OnJobEnd != null) OnJobEnd(true);
             Destroy(this);
             for (int i = 0; i < transform.childCount; i++)
@@ -96,7 +114,7 @@ public class Job : MonoBehaviour {
                 Destroy(transform.GetChild(i).gameObject);
             }
         } else if (IsFailed) {
-            // TODO: FX: play some failed job sound (maybe based on the Required types?)
+            // FMOD: play some failed job sound (maybe based on the Required types?)
             if (OnJobEnd != null) OnJobEnd(false);
             Destroy(this);
             for (int i = 0; i < transform.childCount; i++)
