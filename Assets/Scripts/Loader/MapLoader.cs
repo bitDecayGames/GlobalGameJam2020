@@ -5,13 +5,14 @@ using SuperTiled2Unity;
 using UnityEngine;
 
 public class MapLoader : MonoBehaviour
-{    
+{
     private SuperMap _map;
     private SuperTileLayer _baseDataLayer;
     public GameObject truckPrefab;
     public GameObject storeInventory;
     public GameObject HQInventory;
 
+    private Vector2 truckSpawn = new Vector2();
     
     // Start is called before the first frame update
     void Start()
@@ -177,10 +178,17 @@ public class MapLoader : MonoBehaviour
             {
                 var x = (int)Math.Floor(childObj.transform.position.x);
                 var y = (int)Math.Floor(Math.Abs(childObj.transform.position.y));
+
+                truckSpawn.Set(x, y);
                 
                 CreateSingleTruck(x, y);
             }
         }
+    }
+
+    public void CreateTruckDefaultSpawn()
+    {
+        CreateSingleTruck((int) truckSpawn.x, (int) truckSpawn.y);
     }
 
     public void CreateSingleTruck(int cellX, int cellY)

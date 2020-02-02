@@ -27,7 +27,7 @@ public class ScrollScript : MonoBehaviour
 
         if (timePassed >= EndTime)
         {
-            SceneManager.LoadScene("Game");
+            SceneManager.LoadScene("TitleScreen");
         }
     }
 }
