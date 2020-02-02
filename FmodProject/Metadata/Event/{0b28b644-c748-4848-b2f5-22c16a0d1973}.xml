@@ -53,7 +53,7 @@
 			<destination>{719e0d5a-5c8b-4e75-a18c-cfe3e04177d5}</destination>
 		</relationship>
 		<relationship name="output">
-			<destination>{83c39e82-6cf9-4d15-899c-23c466d355fe}</destination>
+			<destination>{1cfa0b28-6954-4a40-8af6-0756fc68891b}</destination>
 		</relationship>
 	</object>
 	<object class="EventAutomatableProperties" id="{57ea188e-c78e-4d61-8cf0-5a7c84ee1455}" />
@@ -130,6 +130,7 @@
 	<object class="MixerBusEffectChain" id="{ecabd646-2a2f-4ae5-a2cf-527def4a631e}">
 		<relationship name="effects">
 			<destination>{edb7b80d-6d70-4164-a75d-1a14ddc20df7}</destination>
+			<destination>{62da6f9b-ff2e-4894-a08c-afb51e609350}</destination>
 		</relationship>
 	</object>
 	<object class="MixerBusPanner" id="{066de046-6471-4872-a4b4-25baaadf2918}" />
@@ -141,5 +142,13 @@
 	</object>
 	<object class="MixerBusPanner" id="{07398ac9-bb43-4c22-9cc4-6c2211294735}" />
 	<object class="MixerBusFader" id="{edb7b80d-6d70-4164-a75d-1a14ddc20df7}" />
+	<object class="MultibandEqEffect" id="{62da6f9b-ff2e-4894-a08c-afb51e609350}">
+		<property name="frequencyA">
+			<value>705.863708</value>
+		</property>
+		<property name="qualityA">
+			<value>1.50955176</value>
+		</property>
+	</object>
 	<object class="MixerBusFader" id="{fff64380-4e5f-421c-bd5d-910b8995cb25}" />
 </objects>
