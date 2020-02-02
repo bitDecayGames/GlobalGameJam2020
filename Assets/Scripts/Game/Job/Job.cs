@@ -55,14 +55,14 @@ public class Job : MonoBehaviour {
         textObj.transform.SetParent(transform);
         var text = textObj.AddComponent<TextMeshPro>();
         var textLocPos = text.transform.localPosition;
-        
+
         text.text = MoneyConverter.FloatToMoney(Price);
         text.alignment = TextAlignmentOptions.Left;
         text.fontSize = 4;
         text.color = new Color(71 / 255.0f, 170 / 255.0f, 44 / 255.0f);
         text.sortingLayerID = SortingLayer.NameToID("UI");
         text.rectTransform.sizeDelta = new Vector2(5, 1);
-        
+
         textLocPos.y = VERTICAL_OFFSET;
         textLocPos.z = 0;
         textLocPos.x = 3f;
@@ -99,25 +99,27 @@ public class Job : MonoBehaviour {
     /// </summary>
     /// <param name="OnJobComplete">A call back to let you know that you've completed the job so you can remove the items for that job and re-enable car select-ability</param>
     public void MarkJobAsBeingWorkedOn(Action OnJobComplete) {
-        // FMOD: Job reached
-        FMODSoundEffectsPlayer.Instance.PlaySoundEffect(SFX.JobReached);
-        Random random = new Random();
-        switch (random.Next(0, 3)) {
-            case 0:
-                SoundEffectId = FMODSoundEffectsPlayer.Instance.PlaySustainedSoundEffect(SFX.WorkMetalLoop);
-                break;
-            case 1:
-                SoundEffectId = FMODSoundEffectsPlayer.Instance.PlaySustainedSoundEffect(SFX.WorkSquishLoop);
-                break;
-            case 2:
-                SoundEffectId = FMODSoundEffectsPlayer.Instance.PlaySustainedSoundEffect(SFX.WorkWoodLoop);
-                break;
-        }
+        if (!IsBeingWorkedOn) {
+            // FMOD: Job reached
+            FMODSoundEffectsPlayer.Instance.PlaySoundEffect(SFX.JobReached);
+            Random random = new Random();
+            switch (random.Next(0, 3)) {
+                case 0:
+                    SoundEffectId = FMODSoundEffectsPlayer.Instance.PlaySustainedSoundEffect(SFX.WorkMetalLoop);
+                    break;
+                case 1:
+                    SoundEffectId = FMODSoundEffectsPlayer.Instance.PlaySustainedSoundEffect(SFX.WorkSquishLoop);
+                    break;
+                case 2:
+                    SoundEffectId = FMODSoundEffectsPlayer.Instance.PlaySustainedSoundEffect(SFX.WorkWoodLoop);
+                    break;
+            }
 
-        FMODSoundEffectsPlayer.Instance.PlaySoundEffect(SFX.JobReached);
-        Debug.Log("JOB BEING WORKED");
-        IsBeingWorkedOn = true;
-        this.OnJobComplete = OnJobComplete;
+            FMODSoundEffectsPlayer.Instance.PlaySoundEffect(SFX.JobReached);
+            Debug.Log("JOB BEING WORKED");
+            IsBeingWorkedOn = true;
+            this.OnJobComplete = OnJobComplete;
+        }
     }
 
     private void Update() {

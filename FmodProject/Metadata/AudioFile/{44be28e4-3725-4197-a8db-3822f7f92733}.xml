@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.00.00">
+	<object class="AudioFile" id="{44be28e4-3725-4197-a8db-3822f7f92733}">
+		<property name="assetPath">
+			<value>aaj_1564_ClsscIdle1.wav</value>
+		</property>
+		<property name="isStreaming">
+			<value>true</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>44.0999985</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>18.1118820861678</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{fe823660-c101-4fc8-9657-8b0fde2a30b7}</destination>
+		</relationship>
+	</object>
+</objects>
