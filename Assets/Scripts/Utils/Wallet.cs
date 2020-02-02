@@ -4,9 +4,11 @@ using UnityEngine;
 public class Wallet : MonoBehaviour, ShopPurchaseListener {
     public int Money;
     public TextMeshProUGUI TextMeshProUI;
+    public int TotalMoney;
 
     private void Start() {
         ShopPurchaseNotifier.AddListener(this);
+        TotalMoney = Money;
     }
 
     private void OnDestroy() {
@@ -19,6 +21,7 @@ public class Wallet : MonoBehaviour, ShopPurchaseListener {
 
     public void AddMoney(int money) {
         Money += money;
+        TotalMoney += money;
     }
 
     public void SubtractMoney(int money) {
