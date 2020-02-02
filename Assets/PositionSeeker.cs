@@ -19,7 +19,8 @@ public class PositionSeeker : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        // Start this where we are
+        dest = VectorMath.V3toV2(transform.position);
     }
 
     // Update is called once per frame

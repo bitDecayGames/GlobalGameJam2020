@@ -8,7 +8,7 @@ public class MapLoader : MonoBehaviour
 {    
     private SuperMap _map;
     private SuperTileLayer _baseDataLayer;
-    public GameObject tilePrefab;
+    public GameObject truckPrefab;
 
     
     // Start is called before the first frame update
@@ -23,16 +23,13 @@ public class MapLoader : MonoBehaviour
 
         LoadTiles();
         LoadBuildings();
+        CreateTrucks();
 
-        
     }
 
     void LoadTiles()
     {
         _baseDataLayer = _map.transform.Find("Grid").Find("data").GetComponent<SuperTileLayer>();
-
-        // TODO: Remove when real level parsing is in place
-        var pathSet = false;
 
         Tile neighbor;
         
@@ -87,23 +84,12 @@ public class MapLoader : MonoBehaviour
                 tileComp.west = _baseDataLayer.transform.GetChild(i - _map.m_Height).GetComponent<Tile>();
                 _baseDataLayer.transform.GetChild(i - _map.m_Height).GetComponent<Tile>().east = tileComp;
             }
-
-            if (!pathSet)
-            {
-                pathSet = true;
-                var testCar = FindObjectOfType<PathFollower>();
-                testCar.SetList(new List<Tile>() {tileComp});
-            }
         }
     }
 
     void LoadBuildings()
     {
         _baseDataLayer = _map.transform.Find("Grid").Find("data").GetComponent<SuperTileLayer>();
-
-        // TODO: Remove when real level parsing is in place
-        var pathSet = false;
-        
         
         var jobMgr = UnityEngine.Object.FindObjectOfType<JobManager>();
         if (jobMgr == null)
@@ -130,5 +116,21 @@ public class MapLoader : MonoBehaviour
                 jobMgr.AddPossibleLocation(currentTile.gameObject);
             }
         }
+    }
+
+    void CreateTrucks()
+    {
+        var objs = _map.transform.Find("Grid").Find("poi").GetComponent<SuperObjectLayer>();
+        for (int i = 0; i < objs.transform.childCount; i++)
+        {
+            var childObj = objs.transform.GetChild(i);
+            if (childObj.name == "truckSpawn")
+            {
+                var truck = Instantiate(truckPrefab);
+                truck.transform.position = childObj.transform.position;
+            }
+        }
+
+        
     }
 }

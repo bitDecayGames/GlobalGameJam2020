@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.2" tiledversion="1.2.1" orientation="orthogonal" renderorder="right-up" width="20" height="10" tilewidth="80" tileheight="80" infinite="0" nextlayerid="3" nextobjectid="55">
+<map version="1.2" tiledversion="1.2.1" orientation="orthogonal" renderorder="right-up" width="20" height="10" tilewidth="80" tileheight="80" infinite="0" nextlayerid="4" nextobjectid="56">
  <tileset firstgid="1" source="../Art/Tilesets/roadsTiles.tsx"/>
  <tileset firstgid="73" source="buildings.tsx"/>
  <layer id="1" name="data" width="20" height="10">
@@ -57,5 +57,10 @@
   <object id="52" gid="83" x="1280" y="160" width="80" height="160"/>
   <object id="53" gid="83" x="960" y="720" width="80" height="160"/>
   <object id="54" gid="83" x="480" y="400" width="80" height="160"/>
+ </objectgroup>
+ <objectgroup id="3" name="poi">
+  <object id="55" name="truckSpawn" x="1080.63" y="519.226">
+   <point/>
+  </object>
  </objectgroup>
 </map>
