@@ -7,7 +7,7 @@ public class Job : MonoBehaviour {
     private const float BUBBLE_WIDTH = 0.5f;
     private const float VERTICAL_OFFSET = 0.75f;
     
-    private List<InventoryType> Required;
+    public List<InventoryType> Required;
     private float SecondsRemainingUntilFailure;
     private float SecondsRemainingToComplete;
     private bool IsBeingWorkedOn;

@@ -175,18 +175,26 @@ public class MapLoader : MonoBehaviour
             var childObj = objs.transform.GetChild(i);
             if (childObj.name == "truckSpawn")
             {
-                var truck = Instantiate(truckPrefab);
-                truck.transform.position = childObj.transform.position;
-
-                var x = Math.Floor(truck.transform.position.x);
-                var y = Math.Floor(Math.Abs(truck.transform.position.y));
-
-                var truckStartCell = _baseDataLayer.transform.GetChild((int)(y + x * _map.m_Height));
-                truck.GetComponent<PathFollower>().SetList(new List<Tile>() {truckStartCell.gameObject.GetComponent<Tile>()});
-
-                truck.GetComponent<SpriteRenderer>().sortingOrder = 2;
+                var x = (int)Math.Floor(childObj.transform.position.x);
+                var y = (int)Math.Floor(Math.Abs(childObj.transform.position.y));
+                
+                CreateSingleTruck(x, y);
             }
         }
+    }
+
+    public void CreateSingleTruck(int cellX, int cellY)
+    {
+        var truck = Instantiate(truckPrefab);
+
+        var truckStartCell = _baseDataLayer.transform.GetChild((int)(cellY + cellX * _map.m_Height));
+        var startPos = truckStartCell.transform.position;
+        startPos.x += 0.5f;
+        startPos.y += 0.5f;
+        truck.transform.position = startPos;
+        truck.GetComponent<PathFollower>().SetList(new List<Tile>() {truckStartCell.gameObject.GetComponent<Tile>()});
+
+        truck.GetComponent<SpriteRenderer>().sortingOrder = 2;
     }
 
     void UpdateEnvironment()
