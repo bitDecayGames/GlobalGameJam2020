@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.2" tiledversion="1.2.1" orientation="orthogonal" renderorder="right-up" width="20" height="10" tilewidth="80" tileheight="80" infinite="0" nextlayerid="4" nextobjectid="63">
+<map version="1.2" tiledversion="1.3.2" orientation="orthogonal" renderorder="right-up" compressionlevel="0" width="20" height="10" tilewidth="80" tileheight="80" infinite="0" nextlayerid="4" nextobjectid="63">
  <tileset firstgid="1" source="../Art/Tilesets/roadsTiles.tsx"/>
  <tileset firstgid="73" source="buildings.tsx"/>
  <layer id="1" name="data" width="20" height="10">
@@ -8,15 +8,15 @@
 24,66,24,24,24,24,24,24,24,28,62,62,62,62,62,64,20,20,36,63,
 1,42,62,62,63,20,24,20,20,61,20,20,20,20,24,41,65,4,55,27,
 12,20,24,20,1,4,4,4,4,10,4,4,4,4,2,4,11,24,24,61,
-17,4,4,4,11,20,20,24,20,12,24,24,24,24,12,24,12,24,20,61,
-24,20,20,20,9,4,4,4,4,11,24,24,24,66,12,24,9,4,4,35,
-25,4,4,4,11,20,20,20,20,12,24,24,24,12,12,20,12,24,24,61,
+17,4,4,4,11,20,20,24,20,12,68,68,68,68,12,24,12,24,20,61,
+24,20,20,20,9,4,4,4,4,11,68,68,68,67,12,24,9,4,4,35,
+25,4,4,4,11,20,20,20,20,12,68,68,68,12,12,20,12,24,24,61,
 59,24,24,24,17,4,4,2,4,10,4,4,4,18,10,4,11,24,20,61,
 59,24,20,20,24,20,24,59,20,12,20,20,20,20,61,24,41,62,62,43,
 41,62,62,62,62,63,24,41,62,42,62,62,62,62,43,24,24,24,24,24
 </data>
  </layer>
- <objectgroup id="2" name="buildings">
+ <objectgroup id="2" name="buildings" visible="0">
   <object id="1" gid="76" x="800" y="560" width="320" height="320"/>
   <object id="3" gid="73" x="640" y="400" width="80" height="160"/>
   <object id="5" gid="73" x="1360" y="160" width="80" height="160"/>
