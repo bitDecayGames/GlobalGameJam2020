@@ -139,8 +139,8 @@ public enum InventoryType {
     EMPTY,
     PLUNGER,
     WRENCH,
-    DUCTTAPE,
-    DRAIN_SNAKE,
     PAINT,
     LIGHT_BULB,
+    BATTERY,
+    HAMMER,
 }

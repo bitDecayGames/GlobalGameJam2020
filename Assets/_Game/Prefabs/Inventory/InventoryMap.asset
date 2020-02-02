@@ -19,11 +19,11 @@ MonoBehaviour:
     inventoryType: 1
   - image: {fileID: 21300000, guid: c8e7c4ccbcbb34bf19ea662088f5fe99, type: 3}
     inventoryType: 2
-  - image: {fileID: 0}
-    inventoryType: 3
-  - image: {fileID: 0}
-    inventoryType: 4
   - image: {fileID: 21300000, guid: 8e4a44e0684844f52ae34bcb950bfb70, type: 3}
-    inventoryType: 5
+    inventoryType: 3
   - image: {fileID: 21300000, guid: 4009f74d947c84cdfb33d5b85bda82b5, type: 3}
+    inventoryType: 4
+  - image: {fileID: 21300000, guid: e23932318da9c445da90be984e071a0e, type: 3}
+    inventoryType: 5
+  - image: {fileID: 21300000, guid: 40e766cd763734ab080e33843827cd90, type: 3}
     inventoryType: 6
