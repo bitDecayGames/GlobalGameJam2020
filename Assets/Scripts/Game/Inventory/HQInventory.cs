@@ -6,8 +6,14 @@ public class HQInventory : MonoBehaviour {
     public Sprite EightSlotUpgradeSprite;
     public Sprite TwelveSlotUpgradeSprite;
     public SpriteRenderer SlotRenderer;
+    public UpgradeButton FirstTruckUpgrade;
+    public UpgradeButton SecondTruckUpgrade;
+    public UpgradeButton ThirdTruckUpgrade;
+    public UpgradeButton FirstExpandUpgrade;
+    public UpgradeButton SecondExpandUpgrade;
 
     private Inventory inventory;
+    private int numOfTrucks = 1;
 
     private void Start() {
         inventory = GetComponentInChildren<Inventory>();
@@ -34,6 +40,7 @@ public class HQInventory : MonoBehaviour {
     public void UpgradeTo8Slots() {
         SlotRenderer.sprite = EightSlotUpgradeSprite;
         UpgradeToANumberOfSlots(8);
+        SecondExpandUpgrade.SetIsAvailable(true);
     }
 
     public void UpgradeTo12Slots() {
@@ -52,6 +59,16 @@ public class HQInventory : MonoBehaviour {
                 inventorySlot.locked = true;
                 inventorySlotSpriteRenderer.enabled = false;
             }
+        }
+    }
+
+    public void PurchaseNewTruck() {
+        // TODO: spawn the truck in the HQ
+        numOfTrucks += 1;
+        if (numOfTrucks == 2) {
+            SecondTruckUpgrade.SetIsAvailable(true);
+        } else if (numOfTrucks == 3) {
+            ThirdTruckUpgrade.SetIsAvailable(true);
         }
     }
 }
