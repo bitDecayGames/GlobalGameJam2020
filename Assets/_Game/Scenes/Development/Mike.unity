@@ -824,37 +824,32 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1950992177, guid: bf29d9564823649b4b99f9143a0289cc, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 52.100037
-      objectReference: {fileID: 0}
-    - target: {fileID: 780195084589647870, guid: bf29d9564823649b4b99f9143a0289cc,
-        type: 3}
-      propertyPath: m_textInfo.characterCount
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 780195084589647870, guid: bf29d9564823649b4b99f9143a0289cc,
-        type: 3}
-      propertyPath: m_textInfo.spaceCount
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 780195084589647870, guid: bf29d9564823649b4b99f9143a0289cc,
-        type: 3}
-      propertyPath: m_textInfo.wordCount
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 780195084589647870, guid: bf29d9564823649b4b99f9143a0289cc,
-        type: 3}
-      propertyPath: m_textInfo.lineCount
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 780195084589647870, guid: bf29d9564823649b4b99f9143a0289cc,
-        type: 3}
-      propertyPath: m_textInfo.pageCount
-      value: 0
+      value: 52.099976
       objectReference: {fileID: 0}
     - target: {fileID: 1203235613515202638, guid: bf29d9564823649b4b99f9143a0289cc,
         type: 3}
       propertyPath: m_Layer
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3034037042172845004, guid: bf29d9564823649b4b99f9143a0289cc,
+        type: 3}
+      propertyPath: m_FontData.m_FontSize
+      value: 53
+      objectReference: {fileID: 0}
+    - target: {fileID: 3034037042172845004, guid: bf29d9564823649b4b99f9143a0289cc,
+        type: 3}
+      propertyPath: m_FontData.m_MaxSize
+      value: 53
+      objectReference: {fileID: 0}
+    - target: {fileID: 3034037042172845004, guid: bf29d9564823649b4b99f9143a0289cc,
+        type: 3}
+      propertyPath: m_FontData.m_FontStyle
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4036010248259696751, guid: bf29d9564823649b4b99f9143a0289cc,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4649147151570603821, guid: bf29d9564823649b4b99f9143a0289cc,
         type: 3}
@@ -971,11 +966,6 @@ PrefabInstance:
       propertyPath: PossibleLocations.Array.data[3]
       value: 
       objectReference: {fileID: 13073630}
-    - target: {fileID: 7918923764015675002, guid: bf29d9564823649b4b99f9143a0289cc,
-        type: 3}
-      propertyPath: m_Layer
-      value: 5
-      objectReference: {fileID: 0}
     - target: {fileID: 8092516221766255288, guid: bf29d9564823649b4b99f9143a0289cc,
         type: 3}
       propertyPath: m_Layer
