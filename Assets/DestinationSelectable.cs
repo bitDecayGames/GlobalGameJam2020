@@ -3,11 +3,17 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class DestinationSelectable : MonoBehaviour
 {
     private void OnMouseUpAsButton()
-    {   
+    {
+        if (EventSystem.current.IsPointerOverGameObject())
+        {
+            return;
+        }
+        
         var pather = SelectionManager.currentSelected.GetComponentInChildren<PathFollower>();
         var pathfinder = new PathFinder();
 

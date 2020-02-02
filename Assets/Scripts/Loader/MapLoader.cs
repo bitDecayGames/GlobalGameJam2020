@@ -110,11 +110,22 @@ public class MapLoader : MonoBehaviour
             {
                 throw new Exception("No type property on tile: " + currentTile);
             }
+            
+            
 
             if (typeProp.GetValueAsString() == "DOOR")
             {
-                Debug.Log("Adding a location");
-                jobMgr.AddPossibleLocation(currentTile.gameObject);
+                CustomProperty jobbingProp;
+                if (!props.TryGetCustomProperty("jobbing", out jobbingProp))
+                {
+                    throw new Exception("No jobbing property on door tile: " + currentTile);
+                }
+
+                if (jobbingProp.GetValueAsBool())
+                {
+                    Debug.Log("Adding a location");
+                    jobMgr.AddPossibleLocation(currentTile.gameObject);
+                }
             }
         }
         
@@ -133,11 +144,11 @@ public class MapLoader : MonoBehaviour
 
             if (tallProp.GetValueAsBool())
             {
-                currentTile.GetComponentInChildren<SpriteRenderer>().sortingOrder = 1;
+                currentTile.GetComponentInChildren<SpriteRenderer>().sortingOrder = 3;
             }
             else
             {
-                currentTile.GetComponentInChildren<SpriteRenderer>().sortingOrder = 0;
+                currentTile.GetComponentInChildren<SpriteRenderer>().sortingOrder = 1;
             }
         }
     }
@@ -158,6 +169,8 @@ public class MapLoader : MonoBehaviour
 
                 var truckStartCell = _baseDataLayer.transform.GetChild((int)(y + x * _map.m_Height));
                 truck.GetComponent<PathFollower>().SetList(new List<Tile>() {truckStartCell.gameObject.GetComponent<Tile>()});
+
+                truck.GetComponent<SpriteRenderer>().sortingOrder = 2;
             }
         }
 

@@ -119,6 +119,7 @@
   <properties>
    <property name="conns" value="0"/>
    <property name="entrance" value="8"/>
+   <property name="jobbing" type="bool" value="true"/>
    <property name="name" value="house"/>
    <property name="type" value="DOOR"/>
   </properties>
@@ -355,6 +356,15 @@
   <properties>
    <property name="conns" value="14"/>
    <property name="type" value="ROAD"/>
+  </properties>
+ </tile>
+ <tile id="65">
+  <properties>
+   <property name="conns" value="0"/>
+   <property name="entrance" value="8"/>
+   <property name="jobbing" type="bool" value="false"/>
+   <property name="name" value="house"/>
+   <property name="type" value="DOOR"/>
   </properties>
  </tile>
 </tileset>

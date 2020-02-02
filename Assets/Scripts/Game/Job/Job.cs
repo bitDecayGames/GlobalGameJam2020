@@ -28,13 +28,15 @@ public class Job : MonoBehaviour {
         var length = Required.Count;
         var totalWidth = length * BUBBLE_WIDTH;
         for (int i = 0; i < length; i++) {
-            var x = (totalWidth / -2f) + (i * BUBBLE_WIDTH);
+            var xOffset = (totalWidth / -2f) + (i * BUBBLE_WIDTH) + 0.5f;
+            var yOffset = 0.75f;
             var bubbleObj = new GameObject();
             bubbleObj.name = "JobRequirement: " + Required[i];
             bubbleObj.transform.parent = transform;
             bubbleObj.transform.localPosition = Vector3.zero;
             var bubbleObjPos = bubbleObj.transform.position;
-            bubbleObjPos.x = x;
+            bubbleObjPos.x += xOffset;
+            bubbleObjPos.y += yOffset;
             bubbleObj.transform.position = bubbleObjPos;
             var bubbleSpr = bubbleObj.AddComponent<SpriteRenderer>();
             bubbleSpr.sortingLayerName = "UI";
