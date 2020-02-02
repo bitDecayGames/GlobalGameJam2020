@@ -65,7 +65,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 4.8
+  orthographic size: 3.94375
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -102,6 +102,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   truckPrefab: {fileID: 1654460017490443039, guid: 73902e564717c4a6d8690ca0ad66fa1f,
+    type: 3}
+  storeInventory: {fileID: 602862018616964671, guid: 5e8e9eeeeb3a4483eabff873d2bad67f,
+    type: 3}
+  HQInventory: {fileID: 8120127882481651000, guid: bdfbfadb04cc545f29223014da13efb0,
     type: 3}
 --- !u!114 &6930914338370242392
 MonoBehaviour:
@@ -169,8 +173,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _pc2D: {fileID: 6930914338370242392}
-  MaxHorizontalInfluence: 1
-  MaxVerticalInfluence: 1
+  MaxHorizontalInfluence: 1.5
+  MaxVerticalInfluence: 1.5
   InfluenceSmoothness: 0.2
 --- !u!114 &6930914338370242391
 MonoBehaviour:
