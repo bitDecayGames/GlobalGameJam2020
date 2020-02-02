@@ -49,12 +49,8 @@ public class JobLocator : MonoBehaviour
                 float max = Mathf.Max(Mathf.Abs(onScreenPos.x), Mathf.Abs(onScreenPos.y)); //get largest offset
                 onScreenPos = (onScreenPos/(max*2))+new Vector2(0.5f, 0.5f); //undo mapping
 
-                Debug.Log($"Pre clamp: {onScreenPos}");
-                
                 onScreenPos.x = Mathf.Clamp(onScreenPos.x, .05f, .95f);
                 onScreenPos.y = Mathf.Clamp(onScreenPos.y, .05f, .95f);
-                
-                Debug.Log($"Post clamp: {onScreenPos}");
                 
                 Vector3 screenPosVector3 = new Vector3(onScreenPos.x*Screen.width, onScreenPos.y*Screen.height, camera.nearClipPlane);
                 Vector3 finalSpritePosition = camera.ScreenToWorldPoint(screenPosVector3);
