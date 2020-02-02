@@ -123,7 +123,22 @@ public class MapLoader : MonoBehaviour
         for (var i = 0; i < buildingLayer.transform.childCount; i++)
         {
             var currentTile = buildingLayer.transform.GetChild(i);
-            currentTile.GetComponentInChildren<SpriteRenderer>().sortingOrder = 0;
+            var props = currentTile.GetComponent<SuperCustomProperties>();
+
+            CustomProperty tallProp;
+            if (!props.TryGetCustomProperty("tall", out tallProp))
+            {
+                throw new Exception("No tall property on tile: " + currentTile);
+            }
+
+            if (tallProp.GetValueAsBool())
+            {
+                currentTile.GetComponentInChildren<SpriteRenderer>().sortingOrder = 1;
+            }
+            else
+            {
+                currentTile.GetComponentInChildren<SpriteRenderer>().sortingOrder = 0;
+            }
         }
     }
 
