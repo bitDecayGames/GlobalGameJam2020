@@ -21,9 +21,9 @@ public class HQInventory : MonoBehaviour {
 
     private void Start() {
         inventory = GetComponentInChildren<Inventory>();
+        UpgradeTo4Slots();
         // TODO: need to actually get the renderer of the 
         renderer = transform.parent.GetComponentInParent<SpriteRenderer>();
-        UpgradeTo4Slots();
     }
 
     // private void Update() {
