@@ -109,6 +109,24 @@ public class PathFollower : MonoBehaviour
                 }
             }
             
+            foreach (var reqItem in job.Required)
+            {
+                found = false;
+                foreach (var slot in inv.Slots)
+                {
+                    if (slot.Item == reqItem)
+                    {
+                        if (slot.Item == InventoryType.PAINT ||
+                            slot.Item == InventoryType.BATTERY ||
+                            slot.Item == InventoryType.LIGHT_BULB)
+                        {
+                            // Remove the stuff from the player
+                            inv.RemoveItemType(slot.Item);
+                        }
+                    }
+                }
+            }
+            
             Debug.Log("GOTTA START THE JOB");
             job.MarkJobAsBeingWorkedOn(() => { Debug.Log("JOB DONE");});
         }
