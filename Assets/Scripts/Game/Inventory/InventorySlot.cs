@@ -143,4 +143,5 @@ public enum InventoryType {
     LIGHT_BULB,
     BATTERY,
     HAMMER,
+    JOB_PANEL, // this is a hack, just to get the sprite at a weird point in the job cycle
 }

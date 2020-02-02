@@ -7,7 +7,7 @@ public class JobManager : MonoBehaviour {
     public UnityEvent OnPhoneRing;
 
     private List<GameObject> UnavailableLocations = new List<GameObject>();
-    private List<GameObject> PossibleLocations = new List<GameObject>(); // PLEASE DON'T EDIT THIS DIRECTLY, IT IS PUBLIC FOR DEBUG PURPOSES
+    public List<GameObject> PossibleLocations = new List<GameObject>(); // PLEASE DON'T EDIT THIS DIRECTLY, IT IS PUBLIC FOR DEBUG PURPOSES
     private bool CallIsWaiting;
     private float CurrentPhoneCallTimer;
     private float NextPhoneCallTimer = 20.0f; // this is the starting number of seconds between phone call rings
@@ -34,7 +34,7 @@ public class JobManager : MonoBehaviour {
         var location = PossibleLocations[Random.Range(0, PossibleLocations.Count)];
         UnavailableLocations.Add(location); // only one job per location at a time
         // TODO: Create the requirements for a job that are based on the hardness level the player is currently at
-        var requirements = new List<InventoryType> {InventoryType.WRENCH, InventoryType.PLUNGER};
+        var requirements = new List<InventoryType> {InventoryType.WRENCH};
 
         // // create the job as a child object of the location the job is at
         // var jobObj = new GameObject();
