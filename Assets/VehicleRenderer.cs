@@ -11,6 +11,8 @@ public class VehicleRenderer : MonoBehaviour
     public Sprite down;
 
     public Sprite left;
+    
+    public SpriteRenderer overlayRender;
 
     private SpriteRenderer render;
     private PositionSeeker seeker;
@@ -29,18 +31,28 @@ public class VehicleRenderer : MonoBehaviour
         {
             if (seeker.lastMove.x != 0)
             {
-                render.sprite = left;
+                SetSprite(left);
             }
             else if (seeker.lastMove.y > 0)
             {
-                render.sprite = up;
+                SetSprite(up);
             }
             else if (seeker.lastMove.y < 0)
             {
-                render.sprite = down;
+                SetSprite(down);
             }
 
-            render.flipX = seeker.lastMove.x > 0;
+            FlipSprite(seeker.lastMove.x > 0);
         }
+    }
+
+    private void SetSprite(Sprite sprite) {
+        render.sprite = sprite;
+        if (overlayRender != null) overlayRender.sprite = sprite;
+    }
+
+    private void FlipSprite(bool flipX) {
+        render.flipX = flipX;
+        if (overlayRender != null) overlayRender.flipX = flipX;
     }
 }
