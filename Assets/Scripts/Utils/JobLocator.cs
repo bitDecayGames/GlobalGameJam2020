@@ -42,7 +42,7 @@ public class JobLocator : MonoBehaviour
                 Vector3 screenPos = camera.WorldToViewportPoint(activeJobs[i].transform.position); //get viewport positions
                 if(screenPos.x >= 0 && screenPos.x <= 1 && screenPos.y >= 0 && screenPos.y <= 1)
                 {
-                    return;
+                    continue;
                 } 
                 spriteRenderer.enabled = true;
                 Vector2 onScreenPos = new Vector2(screenPos.x-0.5f, screenPos.y-0.5f)*2; //2D version, new mapping
