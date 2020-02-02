@@ -181,7 +181,8 @@ public class MapLoader : MonoBehaviour
         buildingCollider.isTrigger = true;
 
         // set up the colider to match the size and location of the sprite
-        var s = buildingTile.gameObject.GetComponentInChildren<SpriteRenderer>().bounds.size;
+        var renderer = buildingTile.gameObject.GetComponentInChildren<SpriteRenderer>();
+        var s = renderer.bounds.size;
         buildingCollider.size = s;
         buildingCollider.offset = s / 2;
         /*
