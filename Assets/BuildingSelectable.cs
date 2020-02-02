@@ -64,6 +64,13 @@ public class BuildingSelectable : MonoBehaviour
             this.door = collision.gameObject;
             this.doorDistance = currentDistance;
 
+            // Remove the colider from the door
+            var doorCollider = this.door.GetComponent<BoxCollider2D>();
+            if (doorCollider)
+            {
+                doorCollider.enabled = false;
+            }
+
         }
 
 
