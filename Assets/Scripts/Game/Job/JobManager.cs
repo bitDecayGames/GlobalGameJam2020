@@ -46,6 +46,10 @@ public class JobManager : MonoBehaviour {
         job.Init(ItemMap, requirements, SecondsUntilJobFailure, SecondsToCompleteJob + requirements.Count, isSuccess => {
             Debug.Log($"Job is done: " + (isSuccess ? "Success!" : "FAILED!"));
             // TODO: maybe just pay ourselves here for the job based on the above requirements?
+            if (isSuccess)
+            {
+                FindObjectOfType<Wallet>().AddMoney(10);
+            }
             // make this location available again to receive a job
             UnavailableLocations.Remove(location);
             AddPossibleLocation(location);
