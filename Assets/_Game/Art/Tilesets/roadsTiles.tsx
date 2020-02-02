@@ -51,25 +51,25 @@
  </tile>
  <tile id="8">
   <properties>
-   <property name="conns" value=""/>
+   <property name="conns" value="7"/>
    <property name="type" value="ROAD"/>
   </properties>
  </tile>
  <tile id="9">
   <properties>
-   <property name="conns" value=""/>
+   <property name="conns" value="15"/>
    <property name="type" value="ROAD"/>
   </properties>
  </tile>
  <tile id="10">
   <properties>
-   <property name="conns" value=""/>
+   <property name="conns" value="13"/>
    <property name="type" value="ROAD"/>
   </properties>
  </tile>
  <tile id="11">
   <properties>
-   <property name="conns" value=""/>
+   <property name="conns" value="5"/>
    <property name="type" value="ROAD"/>
   </properties>
  </tile>
@@ -99,19 +99,19 @@
  </tile>
  <tile id="16">
   <properties>
-   <property name="conns" value=""/>
+   <property name="conns" value="3"/>
    <property name="type" value="ROAD"/>
   </properties>
  </tile>
  <tile id="17">
   <properties>
-   <property name="conns" value=""/>
+   <property name="conns" value="11"/>
    <property name="type" value="ROAD"/>
   </properties>
  </tile>
  <tile id="18">
   <properties>
-   <property name="conns" value=""/>
+   <property name="conns" value="9"/>
    <property name="type" value="ROAD"/>
   </properties>
  </tile>
