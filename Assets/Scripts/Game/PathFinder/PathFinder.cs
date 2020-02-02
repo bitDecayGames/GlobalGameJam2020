@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System;
 using System.Linq;
+using SuperTiled2Unity;
+using TMPro;
 
 public class PathFinder {
     public IEnumerable<Tile> getTilePath(Tile start, Tile goal) {
@@ -20,14 +22,14 @@ public class PathFinder {
         while (openList.Count > 0) {
             var current = nodeWithLowestFCost(openList);
             if (current.sameLocation(goal)) {
-                return constructPath(goal);
+                return constructPath(current);
             }
             openList.Remove(current);
             closedList.Add(current);
             foreach( var neighbor in neighbors(current)) {
-                if (contains(closedList, neighbor) != null) {
+                if (contains(closedList, neighbor) == null) {
                     neighbor.f = neighbor.g + heuristic(neighbor, goal);
-                    if (contains(openList, neighbor) != null) {
+                    if (contains(openList, neighbor) == null) {
                         openList.Add(neighbor);
                     } else {
                         var openNeighbor = contains(openList, neighbor);
@@ -51,9 +53,10 @@ public class PathFinder {
         var path = new List<Node>(); // set containing node
         path.Add(node);
         while(node.parent != null) {
-            var parentNode = node.parent;
-            path.Add(parentNode);
+            node = node.parent;
+            path.Add(node);
         }
+        path.Reverse();
         return path;
     }
     private float heuristic(Node n, Node goal) {
@@ -72,11 +75,23 @@ public class PathFinder {
 
     private List<Node> neighbors(Node node) {
         var possibleNeighbors = new List<Node>();
-        possibleNeighbors.Add(node.north);
-        possibleNeighbors.Add(node.south);
-        possibleNeighbors.Add(node.east);
-        possibleNeighbors.Add(node.west);
-        var validNeighbors = possibleNeighbors.Where(n => n != null || n.tile.tileType != TileType.SOLID).ToList();
+        if ((node.tile.connections & 1) != 0)
+        {
+            possibleNeighbors.Add(new Node(node.tile.north));
+        }
+        if ((node.tile.connections & 2) != 0)
+        {
+            possibleNeighbors.Add(new Node(node.tile.east));
+        }
+        if ((node.tile.connections & 4) != 0)
+        {
+            possibleNeighbors.Add(new Node(node.tile.south));
+        }
+        if ((node.tile.connections & 8) != 0)
+        {
+            possibleNeighbors.Add(new Node(node.tile.west));
+        }
+        var validNeighbors = possibleNeighbors.Where(n => n.tile != null && n.tile.tileType != TileType.SOLID).ToList();
        
         foreach (var neighbor in validNeighbors) {
             neighbor.g = node.g + 1;
@@ -87,23 +102,16 @@ public class PathFinder {
     }
 
     public class Node {
-        public float f; // the total cost of the path via this node
-        public float g; // the incremental cost of moving from the start node to this node
-        public float h;  // the distance between this node and the goal
+        public float f = 0; // the total cost of the path via this node
+        public float g = 0; // the incremental cost of moving from the start node to this node
+        public float h = 0;  // the distance between this node and the goal
         public Node parent;
-        public Node north = null;
-        public Node south = null;
-        public Node east = null;
-        public Node west = null;
     
         public Tile tile;
 
         public Node(Tile tile)
         {
-            if (tile.north != null) this.north = new Node(tile.north);
-            if (tile.east != null) this.east = new Node(tile.east);
-            if (tile.south != null) this.south = new Node(tile.south);
-            if (tile.west != null) this.west = new Node(tile.west);
+            this.tile = tile;
         }
 
         public float getX() {

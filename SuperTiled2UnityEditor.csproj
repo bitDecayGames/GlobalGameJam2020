@@ -384,6 +384,9 @@
     <Reference Include="UnityEditor.LinuxStandalone.Extensions">
       <HintPath>/Applications/Unity/Hub/Editor/2019.3.0f6/PlaybackEngines/LinuxStandaloneSupport/UnityEditor.LinuxStandalone.Extensions.dll</HintPath>
     </Reference>
+    <Reference Include="JetBrains.Rider.Unity.Editor.Plugin.Repacked">
+      <HintPath>/Users/logan.moore/Desktop/GlobalGameJam2020/Assets/Plugins/Editor/JetBrains/JetBrains.Rider.Unity.Editor.Plugin.Repacked.dll</HintPath>
+    </Reference>
     <Reference Include="UnityEditor.Advertisements">
       <HintPath>/Users/logan.moore/Desktop/GlobalGameJam2020/Library/PackageCache/com.unity.ads@2.0.8/Editor/UnityEditor.Advertisements.dll</HintPath>
     </Reference>
@@ -398,9 +401,6 @@
     </Reference>
     <Reference Include="UnityEditor.Purchasing">
       <HintPath>/Users/logan.moore/Desktop/GlobalGameJam2020/Library/PackageCache/com.unity.purchasing@2.0.6/Editor/UnityEditor.Purchasing.dll</HintPath>
-    </Reference>
-    <Reference Include="JetBrains.Rider.Unity.Editor.Plugin.Repacked">
-      <HintPath>/Users/logan.moore/Desktop/GlobalGameJam2020/Assets/Plugins/Editor/JetBrains/JetBrains.Rider.Unity.Editor.Plugin.Repacked.dll</HintPath>
     </Reference>
     <Reference Include="nunit.framework">
       <HintPath>/Users/logan.moore/Desktop/GlobalGameJam2020/Library/PackageCache/com.unity.ext.nunit@1.0.0/net35/unity-custom/nunit.framework.dll</HintPath>

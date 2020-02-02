@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class DestinationSelectable : MonoBehaviour
@@ -8,6 +9,10 @@ public class DestinationSelectable : MonoBehaviour
     {
         Debug.Log("You clicked the secret tile");
         
-        SelectionManager.currentSelected.GetComponentInChildren<PathFollower>().SetList(new List<Tile>() {GetComponent<Tile>()});
+        var pather = SelectionManager.currentSelected.GetComponentInChildren<PathFollower>();
+        var pathfinder = new PathFinder();
+        var newPath = pathfinder.getTilePath(pather.path[pather.path.Count - 1], GetComponent<Tile>());
+        
+        pather.SetList(newPath.ToList());
     }
 }

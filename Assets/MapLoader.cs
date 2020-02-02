@@ -23,7 +23,8 @@ public class MapLoader : MonoBehaviour
 
         _baseDataLayer = _map.transform.Find("Grid").Find("data").GetComponent<SuperTileLayer>();
 
-        var testList = new List<Tile>();
+        // TODO: Remove when real level parsing is in place
+        var pathSet = false;
         
         // Rig up all the cardinal directions. THIS LOOP ASSUMES some things:
         // children are in Columns from left to right
@@ -55,12 +56,21 @@ public class MapLoader : MonoBehaviour
                 _baseDataLayer.transform.GetChild(i - _map.m_Height).GetComponent<Tile>().east = tileComp;
             }
 
-            testList.Add(tileComp);
-        }
-        
-        var testCar = FindObjectOfType<PathFollower>();
-        testCar.SetList(testList);
+            CustomProperty conProp;
+            if (!props.TryGetCustomProperty("conns", out conProp))
+            {
+                throw new Exception("NO CONNS FOUND");
+            }
 
+            tileComp.connections = conProp.GetValueAsInt();
+            
+            if (!pathSet)
+            {
+                pathSet = true;
+                var testCar = FindObjectOfType<PathFollower>();
+                testCar.SetList(new List<Tile>() {tileComp});
+            }
+        }
     }
 
     // Update is called once per frame

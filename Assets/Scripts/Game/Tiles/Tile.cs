@@ -8,6 +8,8 @@ public class Tile : MonoBehaviour {
     public Tile east;
     public Tile south;
 
+    public int connections;
+
     public List<Tile> neighbors() {
         return new List<Tile>{west, north, east, south};
     }
