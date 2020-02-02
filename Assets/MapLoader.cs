@@ -54,6 +54,13 @@ public class MapLoader : MonoBehaviour
             TileType tType;
             TileType.TryParse(solidProp.GetValueAsString(), true, out tType);
             tileComp.tileType = tType;
+
+            if (tType == TileType.DOOR || tType == TileType.ROAD)
+            {
+                currentTile.gameObject.AddComponent<DestinationSelectable>();
+                currentTile.gameObject.AddComponent<BoxCollider2D>();
+            }
+            
             if (i % _map.m_Height != 0)
             {
                 tileComp.north = _baseDataLayer.transform.GetChild(i - 1).GetComponent<Tile>();

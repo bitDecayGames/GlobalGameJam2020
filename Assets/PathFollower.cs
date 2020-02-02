@@ -6,7 +6,7 @@ using Utils;
 public class PathFollower : MonoBehaviour
 {
     public List<Tile> path;
-    private int index;
+    public int index;
 
     private PositionSeeker seeker;
     

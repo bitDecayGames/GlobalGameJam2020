@@ -11,7 +11,13 @@ public class DestinationSelectable : MonoBehaviour
         
         var pather = SelectionManager.currentSelected.GetComponentInChildren<PathFollower>();
         var pathfinder = new PathFinder();
-        var newPath = pathfinder.getTilePath(pather.path[pather.path.Count - 1], GetComponent<Tile>());
+
+        var nodeToStart = pather.index;
+        if (nodeToStart >= pather.path.Count)
+        {
+            nodeToStart = pather.path.Count - 1;
+        }
+        var newPath = pathfinder.getTilePath(pather.path[nodeToStart], GetComponent<Tile>());
         
         pather.SetList(newPath);
     }
