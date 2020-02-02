@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<tileset version="1.2" tiledversion="1.2.1" name="buildings" tilewidth="320" tileheight="320" tilecount="11" columns="0">
+<tileset version="1.2" tiledversion="1.3.2" name="buildings" tilewidth="320" tileheight="320" tilecount="12" columns="0">
  <grid orientation="orthogonal" width="1" height="1"/>
  <tile id="0">
   <properties>
@@ -70,5 +70,8 @@
    <property name="tall" type="bool" value="true"/>
   </properties>
   <image width="320" height="240" source="../Art/Buildings/Commercial/shop.png"/>
+ </tile>
+ <tile id="12">
+  <image width="160" height="160" source="../Art/Buildings/Commercial/2x2_2.png"/>
  </tile>
 </tileset>
