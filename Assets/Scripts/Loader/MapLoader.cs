@@ -26,7 +26,7 @@ public class MapLoader : MonoBehaviour
         LoadTiles();
         LoadBuildings();
         CreateTrucks();
-
+        UpdateEnvironment();
     }
 
     void LoadTiles()
@@ -187,7 +187,24 @@ public class MapLoader : MonoBehaviour
                 truck.GetComponent<SpriteRenderer>().sortingOrder = 2;
             }
         }
+    }
 
-        
+    void UpdateEnvironment()
+    {
+        var objs = _map.transform.Find("Grid").Find("environment").GetComponent<SuperLayer>();
+        for (int i = 0; i < objs.transform.childCount; i++)
+        {
+            var childObj = objs.transform.GetChild(i);
+            if (Math.Abs(childObj.transform.position.y) > _map.m_Height / 2.0)
+            {
+                // lower half, this shiz renders high
+                childObj.GetComponent<SpriteRenderer>().sortingOrder = 2;
+            }
+            else
+            {
+                // upper half, this shiz renders low, behind stuff
+                childObj.GetComponent<SpriteRenderer>().sortingOrder = 0;
+            }
+        }
     }
 }
