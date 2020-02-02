@@ -63,7 +63,7 @@ public class HQInventory : MonoBehaviour {
     }
 
     public void PurchaseNewTruck() {
-        // TODO: spawn the truck in the HQ
+        GameObject.Find("Pro2DCamera").GetComponent<MapLoader>().CreateTruckDefaultSpawn();
         numOfTrucks += 1;
         if (numOfTrucks == 2) {
             SecondTruckUpgrade.SetIsAvailable(true);
