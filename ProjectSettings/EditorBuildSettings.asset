@@ -6,6 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/_Game/Scenes/Development/Tanner.unity
+    guid: 25ab76db5e47ad445a744ac560f72510
+  - enabled: 1
     path: Assets/_Game/Scenes/Menus/TitleScreen.unity
     guid: 358ba7203b34a2f4e8edcab9c1cad88c
   - enabled: 1
@@ -26,10 +29,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/_Game/Scenes/Development/Mike.unity
     guid: 0a7cdaf31b0224f9f9d66cc21981533b
-  - enabled: 1
-    path: Assets/_Game/Scenes/Development/Logan.unity.unity
+  - enabled: 0
+    path: 
     guid: 00000000000000000000000000000000
-  - enabled: 1
-    path: Assets/_Game/Scenes/Development/Tanner.unity
-    guid: d0f7959cf44fe1849a4af104ba50a2d8
+  - enabled: 0
+    path: 
+    guid: 00000000000000000000000000000000
   m_configObjects: {}
