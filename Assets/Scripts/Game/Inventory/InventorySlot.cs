@@ -47,6 +47,7 @@ public class InventorySlot : MonoBehaviour, InventoryDropListener {
     public void OnMouseDrag() {
         if (!isDragging && Item != InventoryType.EMPTY && !locked) {
             // on mouse drag start
+            FMODSoundEffectsPlayer.Instance.PlaySoundEffect(SFX.ClickGo);
             var drag = new GameObject();
             drag.transform.SetParent(transform);
             DragIcon = drag.AddComponent<SpriteRenderer>();
@@ -101,6 +102,10 @@ public class InventorySlot : MonoBehaviour, InventoryDropListener {
                         // FMOD: FX play "can't purchase this object" because user tried to purchase something they can't afford
                         FMODSoundEffectsPlayer.Instance.PlaySoundEffect(SFX.CannotBuy);
                     }
+                }
+                else
+                {
+                    FMODSoundEffectsPlayer.Instance.PlaySoundEffect(SFX.ClickGo);
                 }
             } else if (InventoryDropNotifier.NotifyOfDrop(gameObject, pos2, Item)) {
                 Debug.Log($"Moved item {Item}");

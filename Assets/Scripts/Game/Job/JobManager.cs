@@ -10,9 +10,9 @@ public class JobManager : MonoBehaviour {
     public List<GameObject> PossibleLocations = new List<GameObject>(); // PLEASE DON'T EDIT THIS DIRECTLY, IT IS PUBLIC FOR DEBUG PURPOSES
     public bool CallIsWaiting;
     private float CurrentPhoneCallTimer = 3f;
-    private float NextPhoneCallTimer = 20.0f; // this is the starting number of seconds between phone call rings
-    private float MinNextPhoneCallTime = 5.0f; // you must wait at least this long for another job
-    private float SecondsUntilJobFailure = 30.0f; // how long you have without working on this job before it fails
+    private float NextPhoneCallTimer = 1f;//20.0f; // this is the starting number of seconds between phone call rings
+    private float MinNextPhoneCallTime = 1f;//5.0f; // you must wait at least this long for another job
+    private float SecondsUntilJobFailure = 5f;//30.0f; // how long you have without working on this job before it fails
     private float SecondsToCompleteJob = 3.0f; // how long the car has to sit there for the job to be done
 
     /// <summary>
@@ -32,24 +32,24 @@ public class JobManager : MonoBehaviour {
         Debug.Log("Create job");
         // Pick a random location that doesn't already have a job
         var location = PossibleLocations[Random.Range(0, PossibleLocations.Count)];
+        PossibleLocations.Remove(location);
         UnavailableLocations.Add(location); // only one job per location at a time
-        // TODO: Create the requirements for a job that are based on the hardness level the player is currently at
-        var requirements = new List<InventoryType> {InventoryType.WRENCH};
-
-        // // create the job as a child object of the location the job is at
-        // var jobObj = new GameObject();
-        // jobObj.name = "Job";
-        // jobObj.transform.parent = location;
-        // jobObj.transform.localPosition = Vector3.zero;
+        var wallet = FindObjectOfType<Wallet>();
+        var curMoney = 0;
+        if (wallet != null) {
+            curMoney = wallet.TotalMoney;
+        }
+        var jobInfo = SmartJobBuilder.BuildSmartJob(curMoney);
+        
         var job = location.gameObject.AddComponent<Job>();
         // jobs take 1 second longer for each requirement.  Seems fair?
-        job.Init(ItemMap, requirements, SecondsUntilJobFailure, SecondsToCompleteJob + requirements.Count, isSuccess => {
+        job.Init(ItemMap, jobInfo.jobItems, jobInfo.price, SecondsUntilJobFailure, SecondsToCompleteJob + jobInfo.jobItems.Count, isSuccess => {
             Debug.Log($"Job is done: " + (isSuccess ? "Success!" : "FAILED!"));
             // FMOD: Fail and success
             if (isSuccess)
             {
                 FMODSoundEffectsPlayer.Instance.PlaySoundEffect(SFX.CompleteTask);
-                FindObjectOfType<Wallet>().AddMoney(10);
+                FindObjectOfType<Wallet>().AddMoney((int) jobInfo.price);
             }
             else
             {
