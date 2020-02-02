@@ -9,7 +9,7 @@ public class JobManager : MonoBehaviour {
     private List<GameObject> UnavailableLocations = new List<GameObject>();
     private List<GameObject> PossibleLocations = new List<GameObject>(); // PLEASE DON'T EDIT THIS DIRECTLY, IT IS PUBLIC FOR DEBUG PURPOSES
     private bool CallIsWaiting;
-    private float CurrentPhoneCallTimer;
+    private float CurrentPhoneCallTimer = 3f;
     private float NextPhoneCallTimer = 20.0f; // this is the starting number of seconds between phone call rings
     private float MinNextPhoneCallTime = 5.0f; // you must wait at least this long for another job
     private float SecondsUntilJobFailure = 30.0f; // how long you have without working on this job before it fails
@@ -45,10 +45,15 @@ public class JobManager : MonoBehaviour {
         // jobs take 1 second longer for each requirement.  Seems fair?
         job.Init(ItemMap, requirements, SecondsUntilJobFailure, SecondsToCompleteJob + requirements.Count, isSuccess => {
             Debug.Log($"Job is done: " + (isSuccess ? "Success!" : "FAILED!"));
-            // TODO: maybe just pay ourselves here for the job based on the above requirements?
+            // FMOD: Fail and success
             if (isSuccess)
             {
+                FMODSoundEffectsPlayer.Instance.PlaySoundEffect(SFX.CompleteTask);
                 FindObjectOfType<Wallet>().AddMoney(10);
+            }
+            else
+            {
+                FMODSoundEffectsPlayer.Instance.PlaySoundEffect(SFX.FailTask);
             }
             // make this location available again to receive a job
             UnavailableLocations.Remove(location);
@@ -63,6 +68,8 @@ public class JobManager : MonoBehaviour {
         if (CallIsWaiting) {
             Debug.Log("Phone call answered");
             CallIsWaiting = false;
+            // FMOD
+            FMODSoundEffectsPlayer.Instance.PlaySoundEffect(SFX.PhoneAnswer);
             NextPhoneCallTimer *= 0.9f; // TODO: this number could be affected by upgrades to get the next job faster?
             if (NextPhoneCallTimer < MinNextPhoneCallTime) NextPhoneCallTimer = MinNextPhoneCallTime;
             CreateJob();
@@ -77,6 +84,8 @@ public class JobManager : MonoBehaviour {
                 CurrentPhoneCallTimer = NextPhoneCallTimer;
                 if (OnPhoneRing != null) {
                     // TODO: FX: play phone call noise here (maybe get softer as time goes on so we don't annoy ppl? You can use the NextPhoneCallTimer as a volume control since it starts at 20 and goes to 5 over time.)
+                    // FMOD
+                    FMODSoundEffectsPlayer.Instance.PlaySoundEffect(SFX.Phone);
                     OnPhoneRing.Invoke(); // this notifies the phone UI element to do it's ring sequence
                 }
             }

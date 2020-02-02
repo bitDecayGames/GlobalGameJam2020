@@ -11,6 +11,14 @@
     "Success",
     "Failure",
     "CannotBuy",
-    "Trash"
+    "Trash",
+    "ClickGo",
+    "PhoneAnswer",
+    "FailTask",
+    "FailurePerson",
+    "JobReached",
+    "WorkSquishLoop",
+    "WorkMetalLoop",
+    "WorkWoodLoop"
   ]
 }
