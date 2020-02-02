@@ -1,9 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System;
 using System.Linq;
-using SuperTiled2Unity;
-using TMPro;
 
 public class PathFinder {
     public List<Tile> getTilePath(Tile start, Tile goal) {
@@ -12,6 +9,7 @@ public class PathFinder {
         var path = this.getPath(startNode, goalNode);
         if (path == null)
         {
+           UnityEngine.Debug.Log("NO PATH WAS FOUND TO: " + goal);
             return new List<Tile>() {start};
         }
         return path.Select(n => n.tile).ToList();
@@ -55,7 +53,10 @@ public class PathFinder {
 
     private List<Node> constructPath(Node node) {
         var path = new List<Node>(); // set containing node
-        path.Add(node);
+        if (node.tile.tileType != TileType.DOOR)
+        {
+            path.Add(node);
+        }
         while(node.parent != null) {
             node = node.parent;
             path.Add(node);
