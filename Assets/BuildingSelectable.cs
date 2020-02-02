@@ -43,6 +43,16 @@ public class BuildingSelectable : MonoBehaviour
 
     }
 
+    private void Update()
+    {
+        if (Input.GetMouseButtonUp(0))
+        {
+            Debug.Log("clicked on a building:" + this.door);
+            var buildingCollider = this.gameObject.GetComponentInChildren<BoxCollider2D>();
+            SelectDestination(this.door);
+        }
+    }
+
     public void OnTriggerEnter2D(Collider2D collision)
     {
         
@@ -71,10 +81,10 @@ public class BuildingSelectable : MonoBehaviour
 
     }
     
-    private void OnMouseUpAsButton()
-    {
-        Debug.Log("clicked on a building:" + this.door);
-        var buildingCollider = this.gameObject.GetComponentInChildren<BoxCollider2D>();
-        SelectDestination(this.door);
-    }
+    // private void OnMouseUpAsButton()
+    // {
+    //     Debug.Log("clicked on a building:" + this.door);
+    //     var buildingCollider = this.gameObject.GetComponentInChildren<BoxCollider2D>();
+    //     SelectDestination(this.door);
+    // }
 }
