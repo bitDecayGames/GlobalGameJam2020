@@ -45,8 +45,6 @@ public class BuildingSelectable : MonoBehaviour
 
     public void OnTriggerEnter2D(Collider2D collision)
     {
-        
-        Debug.Log("collided with a building!");
         var potentialDoor = collision.gameObject;
         
         var doorTile = potentialDoor.GetComponent<Tile>();
@@ -65,6 +63,13 @@ public class BuildingSelectable : MonoBehaviour
             Debug.Log("collided with a *close* door!");
             this.door = collision.gameObject;
             this.doorDistance = currentDistance;
+
+            // Remove the colider from the door
+            var doorCollider = this.door.GetComponent<BoxCollider2D>();
+            if (doorCollider)
+            {
+                doorCollider.enabled = false;
+            }
 
         }
 
