@@ -135,7 +135,6 @@
 		<property name="length">
 			<value>72</value>
 		</property>
-		<property name="name" />
 		<relationship name="timeline">
 			<destination>{fbe6c7de-813f-4acc-a895-4dc1ba8539c6}</destination>
 		</relationship>

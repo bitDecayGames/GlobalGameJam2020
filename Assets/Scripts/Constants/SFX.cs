@@ -20,4 +20,5 @@ public class SFX
 	public const string WorkSquishLoop = "WorkSquishLoop";
 	public const string WorkMetalLoop = "WorkMetalLoop";
 	public const string WorkWoodLoop = "WorkWoodLoop";
+	public const string Purchase = "Purchase";
 }

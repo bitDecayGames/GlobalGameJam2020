@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.00.00">
+	<object class="AudioFile" id="{1dfbc0f3-fd2e-4218-a8c8-9def5f9926a5}">
+		<property name="assetPath">
+			<value>Blastwave_FX_CashRegister_S08IN.92.wav</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>44.0999985</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>5.0880045351473919</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{fe823660-c101-4fc8-9657-8b0fde2a30b7}</destination>
+		</relationship>
+	</object>
+</objects>
