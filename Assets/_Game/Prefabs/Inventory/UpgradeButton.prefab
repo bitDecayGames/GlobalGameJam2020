@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5489329538322974171}
   - component: {fileID: 5489329538322974170}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: ButtonImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -94,7 +94,7 @@ GameObject:
   - component: {fileID: 5489329538376600718}
   - component: {fileID: 5489329538376600719}
   - component: {fileID: 5489329538376600716}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -296,7 +296,7 @@ GameObject:
   - component: {fileID: 5489329538598191874}
   - component: {fileID: 5489329538598191875}
   - component: {fileID: 1315234050}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: UpgradeButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
