@@ -10,9 +10,9 @@ public class JobManager : MonoBehaviour {
     public List<GameObject> PossibleLocations = new List<GameObject>(); // PLEASE DON'T EDIT THIS DIRECTLY, IT IS PUBLIC FOR DEBUG PURPOSES
     public bool CallIsWaiting;
     private float CurrentPhoneCallTimer = 3f;
-    private float NextPhoneCallTimer = 1f;//20.0f; // this is the starting number of seconds between phone call rings
-    private float MinNextPhoneCallTime = 1f;//5.0f; // you must wait at least this long for another job
-    private float SecondsUntilJobFailure = 5f;//30.0f; // how long you have without working on this job before it fails
+    private float NextPhoneCallTimer = 20.0f; // this is the starting number of seconds between phone call rings
+    private float MinNextPhoneCallTime = 5.0f; // you must wait at least this long for another job
+    private float SecondsUntilJobFailure = 30.0f; // how long you have without working on this job before it fails
     private float SecondsToCompleteJob = 3.0f; // how long the car has to sit there for the job to be done
 
     /// <summary>
