@@ -14,7 +14,7 @@ TagManager:
   - 
   - 
   - CameraBounds
-  - 
+  - OVER_UI
   - 
   - 
   - 
@@ -61,4 +61,7 @@ TagManager:
     locked: 0
   - name: Geometry
     uniqueID: 2944032809
+    locked: 0
+  - name: OverEverything
+    uniqueID: 4182053545
     locked: 0
