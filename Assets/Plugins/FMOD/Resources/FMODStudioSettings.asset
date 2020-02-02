@@ -16,7 +16,7 @@ MonoBehaviour:
   HasSourceProject: 1
   HasPlatforms: 1
   sourceProjectPath: FmodProject/project.fspro
-  sourceBankPath: FmodProject\Build
+  sourceBankPath: FmodProject/Build
   SourceBankPathUnformatted: 
   AutomaticEventLoading: 1
   BankLoadType: 0
