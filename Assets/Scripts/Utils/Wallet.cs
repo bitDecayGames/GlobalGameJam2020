@@ -1,5 +1,6 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Wallet : MonoBehaviour, ShopPurchaseListener {
     public int Money;
@@ -17,6 +18,9 @@ public class Wallet : MonoBehaviour, ShopPurchaseListener {
 
     private void Update() {
         TextMeshProUI.text = MoneyConverter.IntToMoney(Money);
+        if (Money < 0) {
+            SceneManager.LoadScene("GameOver");
+        }
     }
 
     public void AddMoney(int money) {
@@ -26,6 +30,7 @@ public class Wallet : MonoBehaviour, ShopPurchaseListener {
 
     public void SubtractMoney(int money) {
         Money -= money;
+        
     }
 
     public bool OnPurchase(GameObject source, InventoryType item, float price) {

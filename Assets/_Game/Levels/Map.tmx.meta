@@ -9,8 +9,15 @@ ScriptedImporter:
   assetBundleVariant: 
   script: {fileID: 11500000, guid: 1fa25d03934ea624a82bf2fcee6f0873, type: 3}
   missingFiles: []
-  errors: []
-  warnings: []
+  errors:
+  - Errors detected in tileset 'buildings.tsx'. Check the tileset inspector for more
+    details. Your map may be broken until these are fixed.
+  - Missing tile '85' on tile object ''
+  warnings:
+  - Pixels Per Unit mismatch between map (60) and tileset '../Art/Tilesets/roadsTiles.tsx'
+    (80)
+  - Pixels Per Unit mismatch between map (60) and tileset 'buildings.tsx' (80)
+  - Pixels Per Unit mismatch between map (60) and tileset 'environment.tsx' (80)
   missingSortingLayers: []
   missingLayers: []
   missingTags: []
