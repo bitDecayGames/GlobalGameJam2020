@@ -41,7 +41,7 @@ public class MapLoader : MonoBehaviour
         for (var i = 0; i < _baseDataLayer.transform.childCount; i++)
         {
             var currentTile = _baseDataLayer.transform.GetChild(i);
-            currentTile.GetComponent<SpriteRenderer>().sortingOrder = -1;
+            currentTile.GetComponent<SpriteRenderer>().sortingOrder = -1; // -1 is the background layer
             var props = currentTile.GetComponent<SuperCustomProperties>();
             
             CustomProperty solidProp;
@@ -250,7 +250,7 @@ public class MapLoader : MonoBehaviour
             else
             {
                 // upper half, this shiz renders low, behind stuff
-                childObj.GetComponent<SpriteRenderer>().sortingOrder = 0;
+                childObj.GetComponent<SpriteRenderer>().sortingOrder = 2;
             }
         }
     }
