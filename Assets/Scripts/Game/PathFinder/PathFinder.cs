@@ -6,11 +6,15 @@ using SuperTiled2Unity;
 using TMPro;
 
 public class PathFinder {
-    public IEnumerable<Tile> getTilePath(Tile start, Tile goal) {
+    public List<Tile> getTilePath(Tile start, Tile goal) {
         var startNode = new Node(start);
         var goalNode = new Node(goal);
         var path = this.getPath(startNode, goalNode);
-        return path.Select(n => n.tile);
+        if (path == null)
+        {
+            return new List<Tile>() {start};
+        }
+        return path.Select(n => n.tile).ToList();
     }
     
     public List<Node> getPath(Node start, Node goal) {  

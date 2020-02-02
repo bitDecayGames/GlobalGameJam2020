@@ -13,6 +13,6 @@ public class DestinationSelectable : MonoBehaviour
         var pathfinder = new PathFinder();
         var newPath = pathfinder.getTilePath(pather.path[pather.path.Count - 1], GetComponent<Tile>());
         
-        pather.SetList(newPath.ToList());
+        pather.SetList(newPath);
     }
 }
