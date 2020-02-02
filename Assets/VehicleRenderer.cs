@@ -7,10 +7,14 @@ using UnityEngine.Serialization;
 public class VehicleRenderer : MonoBehaviour
 {
     public Sprite up;
-
     public Sprite down;
-
     public Sprite left;
+
+    public Sprite betterUp;
+    public Sprite betterDown;
+    public Sprite betterLeft;
+
+    public bool upgraded = false;
     
     public SpriteRenderer overlayRender;
 
@@ -31,15 +35,15 @@ public class VehicleRenderer : MonoBehaviour
         {
             if (seeker.lastMove.x != 0)
             {
-                SetSprite(left);
+                SetSprite(upgraded ? betterLeft : left);
             }
             else if (seeker.lastMove.y > 0)
             {
-                SetSprite(up);
+                SetSprite(upgraded ? betterUp : up);
             }
             else if (seeker.lastMove.y < 0)
             {
-                SetSprite(down);
+                SetSprite(upgraded ? betterDown : down);
             }
 
             FlipSprite(seeker.lastMove.x > 0);
