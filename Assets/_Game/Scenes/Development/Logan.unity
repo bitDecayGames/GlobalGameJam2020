@@ -402,6 +402,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 327869680, guid: bf29d9564823649b4b99f9143a0289cc, type: 3}
+      propertyPath: Money
+      value: 600
+      objectReference: {fileID: 0}
     - target: {fileID: 1950992177, guid: bf29d9564823649b4b99f9143a0289cc, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: 52.100006
