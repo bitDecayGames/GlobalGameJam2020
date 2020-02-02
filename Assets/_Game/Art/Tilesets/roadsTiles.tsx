@@ -117,6 +117,7 @@
  </tile>
  <tile id="19">
   <properties>
+   <property name="conns" value="0"/>
    <property name="entrance" value="8"/>
    <property name="name" value="house"/>
    <property name="type" value="DOOR"/>

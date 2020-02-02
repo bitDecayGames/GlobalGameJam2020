@@ -17,6 +17,16 @@ PrefabInstance:
       propertyPath: isShop
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 667085179069278977, guid: f5b4fd2483c444b4b980e43edec1c514,
+        type: 3}
+      propertyPath: price
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 667085179069278977, guid: f5b4fd2483c444b4b980e43edec1c514,
+        type: 3}
+      propertyPath: Item
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 667085179245651180, guid: f5b4fd2483c444b4b980e43edec1c514,
         type: 3}
       propertyPath: listener
@@ -27,10 +37,20 @@ PrefabInstance:
       propertyPath: isShop
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 667085179245651180, guid: f5b4fd2483c444b4b980e43edec1c514,
+        type: 3}
+      propertyPath: price
+      value: 150
+      objectReference: {fileID: 0}
+    - target: {fileID: 667085179245651180, guid: f5b4fd2483c444b4b980e43edec1c514,
+        type: 3}
+      propertyPath: Item
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 667085179823585617, guid: f5b4fd2483c444b4b980e43edec1c514,
         type: 3}
       propertyPath: m_Name
-      value: ShopBubble-9Space
+      value: ShopBubble-9Space Variant
       objectReference: {fileID: 0}
     - target: {fileID: 667085179823585619, guid: f5b4fd2483c444b4b980e43edec1c514,
         type: 3}
@@ -97,6 +117,16 @@ PrefabInstance:
       propertyPath: isShop
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 667085179883393036, guid: f5b4fd2483c444b4b980e43edec1c514,
+        type: 3}
+      propertyPath: Item
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 667085179883393036, guid: f5b4fd2483c444b4b980e43edec1c514,
+        type: 3}
+      propertyPath: price
+      value: 200
+      objectReference: {fileID: 0}
     - target: {fileID: 667085180712938774, guid: f5b4fd2483c444b4b980e43edec1c514,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -156,6 +186,16 @@ PrefabInstance:
         type: 3}
       propertyPath: isShop
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7208557696986371090, guid: f5b4fd2483c444b4b980e43edec1c514,
+        type: 3}
+      propertyPath: Item
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7208557696986371090, guid: f5b4fd2483c444b4b980e43edec1c514,
+        type: 3}
+      propertyPath: price
+      value: 300
       objectReference: {fileID: 0}
     - target: {fileID: 7339658213293136938, guid: f5b4fd2483c444b4b980e43edec1c514,
         type: 3}

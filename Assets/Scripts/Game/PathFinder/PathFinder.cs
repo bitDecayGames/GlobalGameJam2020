@@ -1,25 +1,21 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System;
 using System.Linq;
+
 public class PathFinder {
-    public static void Test()
-    {
-        Console.WriteLine("Hello Test!");
-        var expected = new List<Node>();
-        //expected.Add(new Node(0, 0, new Tile()));
-        var got = new List<Node>();
-       
-        assertEquals(expected, got);
-    }
-
-    public static void assertEquals(List<Node> a, List<Node> b) {
-        if (!a.SequenceEqual(b)) {
-            throw new Exception($"{a} does not equal {b}. That's bad");
+    public List<Tile> getTilePath(Tile start, Tile goal) {
+        var startNode = new Node(start);
+        var goalNode = new Node(goal);
+        var path = this.getPath(startNode, goalNode);
+        if (path == null)
+        {
+           UnityEngine.Debug.Log("NO PATH WAS FOUND TO: " + goal);
+            return new List<Tile>() {start};
         }
+        return path.Select(n => n.tile).ToList();
     }
-
-    public List<Node> getPath(Node start, Node goal) { 
+    
+    public List<Node> getPath(Node start, Node goal) {  
         var openList = new List<Node>(); // set containing start
         openList.Add(start);
         var closedList = new List<Node>(); // empty set
@@ -28,14 +24,14 @@ public class PathFinder {
         while (openList.Count > 0) {
             var current = nodeWithLowestFCost(openList);
             if (current.sameLocation(goal)) {
-                return constructPath(goal);
+                return constructPath(current);
             }
             openList.Remove(current);
             closedList.Add(current);
             foreach( var neighbor in neighbors(current)) {
-                if (contains(closedList, neighbor) != null) {
+                if (contains(closedList, neighbor) == null) {
                     neighbor.f = neighbor.g + heuristic(neighbor, goal);
-                    if (contains(openList, neighbor) != null) {
+                    if (contains(openList, neighbor) == null) {
                         openList.Add(neighbor);
                     } else {
                         var openNeighbor = contains(openList, neighbor);
@@ -57,16 +53,20 @@ public class PathFinder {
 
     private List<Node> constructPath(Node node) {
         var path = new List<Node>(); // set containing node
-        path.Add(node);
-        while(node.parent != null) {
-            var parentNode = node.parent;
-            path.Add(parentNode);
+        if (node.tile.tileType != TileType.DOOR)
+        {
+            path.Add(node);
         }
+        while(node.parent != null) {
+            node = node.parent;
+            path.Add(node);
+        }
+        path.Reverse();
         return path;
     }
-    private int heuristic(Node n, Node goal) {
+    private float heuristic(Node n, Node goal) {
         // Simple Manhattan Distance
-        return Math.Abs(n.x - goal.x) + Math.Abs(n.y - goal.y);
+        return Math.Abs(n.getX() - goal.getX()) + Math.Abs(n.getY() - goal.getY());
     }
 
     private Node contains(List<Node> list, Node searchFor) {
@@ -80,11 +80,23 @@ public class PathFinder {
 
     private List<Node> neighbors(Node node) {
         var possibleNeighbors = new List<Node>();
-        possibleNeighbors.Add(node.north);
-        possibleNeighbors.Add(node.south);
-        possibleNeighbors.Add(node.east);
-        possibleNeighbors.Add(node.west);
-        var validNeighbors = possibleNeighbors.Where(n => n != null || n.tile.type != TileType.SOLID).ToList();
+        if ((node.tile.connections & 1) != 0)
+        {
+            possibleNeighbors.Add(new Node(node.tile.north));
+        }
+        if ((node.tile.connections & 2) != 0)
+        {
+            possibleNeighbors.Add(new Node(node.tile.east));
+        }
+        if ((node.tile.connections & 4) != 0)
+        {
+            possibleNeighbors.Add(new Node(node.tile.south));
+        }
+        if ((node.tile.connections & 8) != 0)
+        {
+            possibleNeighbors.Add(new Node(node.tile.west));
+        }
+        var validNeighbors = possibleNeighbors.Where(n => n.tile != null && n.tile.tileType != TileType.SOLID).ToList();
        
         foreach (var neighbor in validNeighbors) {
             neighbor.g = node.g + 1;
@@ -95,46 +107,30 @@ public class PathFinder {
     }
 
     public class Node {
-        public int x;
-        public int y;
-
-        public int f; // the total cost of the path via this node
-        public int g; // the incremental cost of moving from the start node to this node
-        public int h;  // the distance between this node and the goal
+        public float f = 0; // the total cost of the path via this node
+        public float g = 0; // the incremental cost of moving from the start node to this node
+        public float h = 0;  // the distance between this node and the goal
         public Node parent;
-        public Node north = null;
-        public Node south = null;
-        public Node east = null;
-        public Node west = null;
     
         public Tile tile;
 
-        public Node(int x, int y, Tile tile) {
-            this.x = x;
-            this.y = y;
-
+        public Node(Tile tile)
+        {
             this.tile = tile;
         }
 
-        public bool sameLocation(Node other) {
-            return this.x == other.x && this.y == other.y;
+        public float getX() {
+            return this.tile.transform.position.x;
         }
 
-        public override string ToString() {
-            return $"({x}, {y})";
+        public float getY()
+        {
+            return this.tile.transform.position.y;
+        }
+
+        public bool sameLocation(Node other)
+        {
+            return this.getX() == other.getX() && this.getY() == other.getY();
         }
     }
-
-    public class Tile {
-        public Tile north = null;
-        public Tile south = null;
-        public Tile east = null;
-        public Tile west = null;
-        public TileType type = TileType.EMPTY;
-    }
-    
-    public enum TileType {
-        SOLID,
-        EMPTY
-    } 
 }

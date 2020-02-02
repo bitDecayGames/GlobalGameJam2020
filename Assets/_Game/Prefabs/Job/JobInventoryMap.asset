@@ -10,11 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 31461e383d11478b9431f29a62ba0eee, type: 3}
-  m_Name: InventoryMap
+  m_Name: JobInventoryMap
   m_EditorClassIdentifier: 
   items:
-  - image: {fileID: 21300000, guid: 03f1fbe3541dc46f5a4e33b28e986e58, type: 3}
-    inventoryType: 0
   - image: {fileID: 21300000, guid: 445c36a17eb87456782a5352f39b01fd, type: 3}
     inventoryType: 1
   - image: {fileID: 21300000, guid: c8e7c4ccbcbb34bf19ea662088f5fe99, type: 3}
