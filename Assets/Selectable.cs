@@ -19,6 +19,7 @@ public class Selectable : MonoBehaviour
 
     private void OnMouseUpAsButton()
     {
+        Debug.Log("Thou hast clicketh me");
         SelectionManager.SetSelected(gameObject);
     }
 }

@@ -4,7 +4,8 @@ using UnityEngine;
 using Random = System.Random;
 
 public class Job : MonoBehaviour {
-    private const float BUBBLE_WIDTH = 0.3f;
+    private const float BUBBLE_WIDTH = 0.5f;
+    private const float VERTICAL_OFFSET = 0.75f;
     
     private List<InventoryType> Required;
     private float SecondsRemainingUntilFailure;
@@ -23,22 +24,40 @@ public class Job : MonoBehaviour {
         SecondsRemainingUntilFailure = SecondsUntilFailure;
         SecondsRemainingToComplete = SecondsToComplete;
         this.OnJobEnd = OnJobEnd;
+        CreateRequirementPanel();
         CreateRequirementBubbles();
+    }
+
+    private void CreateRequirementPanel() {
+        var panelObj = new GameObject();
+        panelObj.name = "Panel";
+        panelObj.transform.parent = transform;
+        var pos = new Vector3(0, 0, 0);
+        pos.y += VERTICAL_OFFSET;
+        panelObj.transform.localPosition = pos;
+        var panelSpr = panelObj.AddComponent<SpriteRenderer>();
+        var itemKey = itemMap.Get(InventoryType.JOB_PANEL);
+        if (itemKey == null) throw new Exception("Can't find job panel key");
+        panelSpr.sprite = itemMap.Get(InventoryType.JOB_PANEL).image;
+        panelSpr.drawMode = SpriteDrawMode.Sliced;
+        panelSpr.sortingLayerName = "UI";
+        panelSpr.sortingOrder = -1;
+        panelSpr.size = new Vector2(BUBBLE_WIDTH * 1.5f, Required.Count * BUBBLE_WIDTH + BUBBLE_WIDTH * 0.5f);
     }
 
     private void CreateRequirementBubbles() {
         var length = Required.Count;
         var totalWidth = length * BUBBLE_WIDTH;
         for (int i = 0; i < length; i++) {
-            var xOffset = (totalWidth / -2f) + (i * BUBBLE_WIDTH) + 0.5f;
-            var yOffset = 0.75f;
+            var xOffset = (i * BUBBLE_WIDTH);
+            var yOffset = VERTICAL_OFFSET + 0.4f;
             var bubbleObj = new GameObject();
             bubbleObj.name = "JobRequirement: " + Required[i];
             bubbleObj.transform.parent = transform;
             bubbleObj.transform.localPosition = Vector3.zero;
             var bubbleObjPos = bubbleObj.transform.position;
-            bubbleObjPos.x += xOffset;
-            bubbleObjPos.y += yOffset;
+            // bubbleObjPos.x += xOffset;
+            bubbleObjPos.y += yOffset + xOffset;
             bubbleObj.transform.position = bubbleObjPos;
             var bubbleSpr = bubbleObj.AddComponent<SpriteRenderer>();
             bubbleSpr.sortingLayerName = "UI";

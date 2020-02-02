@@ -367,4 +367,22 @@
    <property name="type" value="DOOR"/>
   </properties>
  </tile>
+ <tile id="66">
+  <properties>
+   <property name="conns" value="0"/>
+   <property name="entrance" value="8"/>
+   <property name="jobbing" type="bool" value="false"/>
+   <property name="name" value="house"/>
+   <property name="type" value="DOOR"/>
+  </properties>
+ </tile>
+ <tile id="67">
+  <properties>
+   <property name="conns" value="0"/>
+   <property name="entrance" value="8"/>
+   <property name="jobbing" type="bool" value="false"/>
+   <property name="name" value="house"/>
+   <property name="type" value="SOLID"/>
+  </properties>
+ </tile>
 </tileset>
