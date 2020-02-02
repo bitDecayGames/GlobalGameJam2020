@@ -9,6 +9,8 @@ public class MapLoader : MonoBehaviour
     private SuperMap _map;
     private SuperTileLayer _baseDataLayer;
     public GameObject truckPrefab;
+    public GameObject storeInventory;
+    public GameObject HQInventory;
 
     
     // Start is called before the first frame update
@@ -97,7 +99,7 @@ public class MapLoader : MonoBehaviour
             throw new Exception("No job manager found on the main camera");
         }
 
-
+        var NonJobIndex = 0;
 
         for (var i = 0; i < _baseDataLayer.transform.childCount; i++)
         {
@@ -125,6 +127,18 @@ public class MapLoader : MonoBehaviour
                 {
                     Debug.Log("Adding a location");
                     jobMgr.AddPossibleLocation(currentTile.gameObject);
+                }
+                else
+                {
+                    NonJobIndex++;
+                    if (NonJobIndex == 1)
+                    {
+                        // XXX: This is our Tool shop
+                        Instantiate(storeInventory, currentTile.transform);
+                    } else if (NonJobIndex == 2)
+                    {
+                        Instantiate(HQInventory, currentTile.transform);
+                    }
                 }
             }
         }
