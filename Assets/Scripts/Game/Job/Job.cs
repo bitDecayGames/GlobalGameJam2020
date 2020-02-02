@@ -52,6 +52,7 @@ public class Job : MonoBehaviour {
     /// </summary>
     /// <param name="OnJobComplete">A call back to let you know that you've completed the job so you can remove the items for that job and re-enable car select-ability</param>
     public void MarkJobAsBeingWorkedOn(Action OnJobComplete) {
+        Debug.Log("JOB BEING WORKED");
         IsBeingWorkedOn = true;
         this.OnJobComplete = OnJobComplete;
     }
@@ -59,16 +60,28 @@ public class Job : MonoBehaviour {
     private void Update() {
         if (IsBeingWorkedOn) {
             SecondsRemainingToComplete -= Time.deltaTime;
-            if (SecondsRemainingToComplete <= 0) IsComplete = true;
+            if (SecondsRemainingToComplete <= 0)
+            {
+                IsBeingWorkedOn = false;
+                IsComplete = true;
+            }
         } else if (IsComplete) {
             // TODO: FX: play some completed job sound (maybe based on the Required types?)
             if (OnJobComplete != null) OnJobComplete();
             if (OnJobEnd != null) OnJobEnd(true);
-            Destroy(gameObject);
+            Destroy(this);
+            for (int i = 0; i < transform.childCount; i++)
+            {
+                Destroy(transform.GetChild(i).gameObject);
+            }
         } else if (IsFailed) {
             // TODO: FX: play some failed job sound (maybe based on the Required types?)
             if (OnJobEnd != null) OnJobEnd(false);
-            Destroy(gameObject);
+            Destroy(this);
+            for (int i = 0; i < transform.childCount; i++)
+            {
+                Destroy(transform.GetChild(i).gameObject);
+            }
         } else {
             SecondsRemainingUntilFailure -= Time.deltaTime;
             if (SecondsRemainingUntilFailure <= 0) IsFailed = true;

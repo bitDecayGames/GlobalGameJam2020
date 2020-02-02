@@ -21,6 +21,14 @@ public class MapLoader : MonoBehaviour
             return;
         }
 
+        LoadTiles();
+        LoadBuildings();
+
+        
+    }
+
+    void LoadTiles()
+    {
         _baseDataLayer = _map.transform.Find("Grid").Find("data").GetComponent<SuperTileLayer>();
 
         // TODO: Remove when real level parsing is in place
@@ -89,9 +97,38 @@ public class MapLoader : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
-    void Update()
+    void LoadBuildings()
     {
+        _baseDataLayer = _map.transform.Find("Grid").Find("data").GetComponent<SuperTileLayer>();
+
+        // TODO: Remove when real level parsing is in place
+        var pathSet = false;
         
+        
+        var jobMgr = UnityEngine.Object.FindObjectOfType<JobManager>();
+        if (jobMgr == null)
+        {
+            throw new Exception("No job manager found on the main camera");
+        }
+
+
+
+        for (var i = 0; i < _baseDataLayer.transform.childCount; i++)
+        {
+            var currentTile = _baseDataLayer.transform.GetChild(i);
+            var props = currentTile.GetComponent<SuperCustomProperties>();
+
+            CustomProperty typeProp;
+            if (!props.TryGetCustomProperty("type", out typeProp))
+            {
+                throw new Exception("No type property on tile: " + currentTile);
+            }
+
+            if (typeProp.GetValueAsString() == "DOOR")
+            {
+                Debug.Log("Adding a location");
+                jobMgr.AddPossibleLocation(currentTile.gameObject);
+            }
+        }
     }
 }

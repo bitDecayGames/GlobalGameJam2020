@@ -6,9 +6,8 @@ public class JobManager : MonoBehaviour {
     public InventoryItemToSprites ItemMap;
     public UnityEvent OnPhoneRing;
 
-    private List<Transform> UnavailableLocations = new List<Transform>();
-    [Header("Don't actually set this! It is only for Debugging.")]
-    public List<Transform> PossibleLocations = new List<Transform>(); // PLEASE DON'T EDIT THIS DIRECTLY, IT IS PUBLIC FOR DEBUG PURPOSES
+    private List<GameObject> UnavailableLocations = new List<GameObject>();
+    private List<GameObject> PossibleLocations = new List<GameObject>(); // PLEASE DON'T EDIT THIS DIRECTLY, IT IS PUBLIC FOR DEBUG PURPOSES
     private bool CallIsWaiting;
     private float CurrentPhoneCallTimer;
     private float NextPhoneCallTimer = 20.0f; // this is the starting number of seconds between phone call rings
@@ -22,7 +21,7 @@ public class JobManager : MonoBehaviour {
     /// tiles to find houses. 
     /// </summary>
     /// <param name="possibleLocation">the transform of the object that you want the job bubble to hover over</param>
-    private void AddPossibleLocation(Transform possibleLocation) {
+    public void AddPossibleLocation(GameObject possibleLocation) {
         PossibleLocations.Add(possibleLocation);
     }
 
@@ -37,12 +36,12 @@ public class JobManager : MonoBehaviour {
         // TODO: Create the requirements for a job that are based on the hardness level the player is currently at
         var requirements = new List<InventoryType> {InventoryType.WRENCH, InventoryType.PLUNGER};
 
-        // create the job as a child object of the location the job is at
-        var jobObj = new GameObject();
-        jobObj.name = "Job";
-        jobObj.transform.parent = location;
-        jobObj.transform.localPosition = Vector3.zero;
-        var job = jobObj.AddComponent<Job>();
+        // // create the job as a child object of the location the job is at
+        // var jobObj = new GameObject();
+        // jobObj.name = "Job";
+        // jobObj.transform.parent = location;
+        // jobObj.transform.localPosition = Vector3.zero;
+        var job = location.gameObject.AddComponent<Job>();
         // jobs take 1 second longer for each requirement.  Seems fair?
         job.Init(ItemMap, requirements, SecondsUntilJobFailure, SecondsToCompleteJob + requirements.Count, isSuccess => {
             Debug.Log($"Job is done: " + (isSuccess ? "Success!" : "FAILED!"));

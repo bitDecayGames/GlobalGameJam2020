@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Utils;
@@ -7,6 +8,9 @@ public class PathFollower : MonoBehaviour
 {
     public List<Tile> path;
     public int index;
+
+    public GameObject destination;
+    public bool done = true;
 
     private PositionSeeker seeker;
     
@@ -27,6 +31,24 @@ public class PathFollower : MonoBehaviour
         
         if (index >= path.Count)
         {
+            if (done)
+            {
+                return;
+            }
+
+            done = true;
+            if (destination == null)
+            {
+                Debug.Log("There was no destination to tell of done-ness");
+                return;
+            }
+            // TODO: Call our destination and mark as done
+            var job = destination.GetComponent<Job>();
+            if (job != null)
+            {
+                Debug.Log("GOTTA START THE JOB");
+                job.MarkJobAsBeingWorkedOn(() => { Debug.Log("JOB DONE");});
+            }
             return;
         }
         else if (seeker.arrived)
@@ -51,5 +73,11 @@ public class PathFollower : MonoBehaviour
         }
         // Add .5 to each so it goes to the center
         seeker.dest = VectorMath.V3toV2(path[index].transform.position) + new Vector2(0.5f, 0.5f);
+    }
+
+    public void SetDestinationObject(GameObject destObj)
+    {
+        destination = destObj;
+        done = false;
     }
 }
