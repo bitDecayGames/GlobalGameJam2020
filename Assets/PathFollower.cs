@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using Game;
 using UnityEngine;
+using UnityEngine.Serialization;
 using Utils;
 
 public class PathFollower : MonoBehaviour
@@ -10,7 +12,7 @@ public class PathFollower : MonoBehaviour
     public int index;
 
     public GameObject destination;
-    public bool done = true;
+    [FormerlySerializedAs("done")] public bool jobCheckDone = true;
 
     private PositionSeeker seeker;
 
@@ -40,25 +42,24 @@ public class PathFollower : MonoBehaviour
         
         if (index >= path.Count)
         {
-            if (done)
-            {
-                return;
-            }
-
-            done = true;
             if (destination == null)
             {
-                Debug.Log("There was no destination to tell of done-ness");
                 return;
             }
             // TODO: Call our destination and mark as done
-            var job = destination.GetComponent<Job>();
-            if (job != null)
+            
+            if (!jobCheckDone)
             {
-                Debug.Log("GOTTA START THE JOB");
-                job.MarkJobAsBeingWorkedOn(() => { Debug.Log("JOB DONE");});
-                return;
+                tryStartJob();
             }
+
+            var occ = destination.GetComponentInChildren<Occupiable>();
+            if (occ != null)
+            {
+                // TODO: If we have multiple trucks at one location, this is gunna be buggy af
+                occ.occupier = gameObject;
+            }
+
             
             // TODO: Check for interactable here
             return;
@@ -67,6 +68,17 @@ public class PathFollower : MonoBehaviour
         {
             index++;
             setDest();
+        }
+    }
+
+    void tryStartJob()
+    {
+        jobCheckDone = true;
+        var job = destination.GetComponent<Job>();
+        if (job != null)
+        {
+            Debug.Log("GOTTA START THE JOB");
+            job.MarkJobAsBeingWorkedOn(() => { Debug.Log("JOB DONE");});
         }
     }
 
@@ -89,7 +101,17 @@ public class PathFollower : MonoBehaviour
 
     public void SetDestinationObject(GameObject destObj)
     {
+        if (destination != null)
+        {
+            var occ = destination.GetComponentInChildren<Occupiable>();
+            if (occ != null)
+            {
+                // TODO: If we have multiple trucks at one location, this is gunna be buggy af
+                occ.occupier = null;
+            }
+        }
+        
         destination = destObj;
-        done = false;
+        jobCheckDone = false;
     }
 }
