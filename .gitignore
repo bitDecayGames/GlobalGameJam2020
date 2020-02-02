@@ -26,3 +26,5 @@ Assets/ProCamera2D
 SuperTiled2Unity.csproj
 SuperTiled2UnityEditor.csproj
 .vs
+
+build/
