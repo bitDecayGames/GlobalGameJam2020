@@ -77,6 +77,38 @@ public class PathFollower : MonoBehaviour
         var job = destination.GetComponent<Job>();
         if (job != null)
         {
+            // TODO: compare inventory
+
+            var inv = GetComponentInChildren<Inventory>();
+
+            if (inv == null)
+            {
+                Debug.Log("no inventory found on the arriving vehicle");
+                return;
+            }
+
+            var found = false;
+            foreach (var reqItem in job.Required)
+            {
+                found = false;
+                foreach (var slot in inv.Slots)
+                {
+                    if (slot.Item == reqItem)
+                    {
+                        found = true;
+                    }
+                }
+
+                if (!found)
+                {
+                    // we are missing an item for the job
+                    // TODO: SFX for bad job attempt?
+                    Debug.Log("Did not have item needed for job: " + reqItem);
+                    
+                    return;
+                }
+            }
+            
             Debug.Log("GOTTA START THE JOB");
             job.MarkJobAsBeingWorkedOn(() => { Debug.Log("JOB DONE");});
         }
