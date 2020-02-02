@@ -13,6 +13,15 @@ public class DestinationSelectable : MonoBehaviour
         {
             return;
         }
+
+        if (SelectionManager.currentSelected == null)
+        {
+            // no vehicle selected
+            // TODO: show this building's inventory if it has one
+            // Ideally, with a timer, as we have no way to deselect buildings as they aren't selectable
+            
+            return;
+        }
         
         var pather = SelectionManager.currentSelected.GetComponentInChildren<PathFollower>();
         var pathfinder = new PathFinder();
