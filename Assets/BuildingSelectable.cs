@@ -55,8 +55,6 @@ public class BuildingSelectable : MonoBehaviour
 
     public void OnTriggerEnter2D(Collider2D collision)
     {
-        
-        Debug.Log("collided with a building!");
         var potentialDoor = collision.gameObject;
         
         var doorTile = potentialDoor.GetComponent<Tile>();
