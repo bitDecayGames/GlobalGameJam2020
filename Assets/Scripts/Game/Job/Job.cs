@@ -34,6 +34,7 @@ public class Job : MonoBehaviour {
         panelObj.transform.parent = transform;
         var pos = new Vector3(0, 0, 0);
         pos.y += VERTICAL_OFFSET;
+        pos.x += 0.5f;
         panelObj.transform.localPosition = pos;
         var panelSpr = panelObj.AddComponent<SpriteRenderer>();
         var itemKey = itemMap.Get(InventoryType.JOB_PANEL);
@@ -56,7 +57,7 @@ public class Job : MonoBehaviour {
             bubbleObj.transform.parent = transform;
             bubbleObj.transform.localPosition = Vector3.zero;
             var bubbleObjPos = bubbleObj.transform.position;
-            // bubbleObjPos.x += xOffset;
+            bubbleObjPos.x += 0.5f;
             bubbleObjPos.y += yOffset + xOffset;
             bubbleObj.transform.position = bubbleObjPos;
             var bubbleSpr = bubbleObj.AddComponent<SpriteRenderer>();
