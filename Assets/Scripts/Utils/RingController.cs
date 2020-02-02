@@ -20,7 +20,7 @@ public class RingController : MonoBehaviour
     {
         Timer += Time.deltaTime;
 
-        if (Timer > 1)
+        if (Timer > .1f)
         {
             Timer = 0;
             ringLeft = !ringLeft;

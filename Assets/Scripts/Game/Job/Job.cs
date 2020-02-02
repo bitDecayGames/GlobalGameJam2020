@@ -1,13 +1,15 @@
 using System;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using Random = System.Random;
 
 public class Job : MonoBehaviour {
     private const float BUBBLE_WIDTH = 0.5f;
     private const float VERTICAL_OFFSET = 0.75f;
-    
+
     public List<InventoryType> Required;
+    public float Price;
     private float SecondsRemainingUntilFailure;
     private float SecondsRemainingToComplete;
     private bool IsBeingWorkedOn;
@@ -18,13 +20,15 @@ public class Job : MonoBehaviour {
     private Action<bool> OnJobEnd; // true if the job is successfully completed
     private int SoundEffectId;
 
-    public void Init(InventoryItemToSprites itemMap, List<InventoryType> Required, float SecondsUntilFailure, float SecondsToComplete, Action<bool> OnJobEnd) {
+    public void Init(InventoryItemToSprites itemMap, List<InventoryType> Required, float price, float SecondsUntilFailure, float SecondsToComplete, Action<bool> OnJobEnd) {
         this.itemMap = itemMap;
         this.Required = Required;
+        Price = price;
         SecondsRemainingUntilFailure = SecondsUntilFailure;
         SecondsRemainingToComplete = SecondsToComplete;
         this.OnJobEnd = OnJobEnd;
         CreateRequirementPanel();
+        CreateMoneyText();
         CreateRequirementBubbles();
     }
 
@@ -44,6 +48,25 @@ public class Job : MonoBehaviour {
         panelSpr.sortingLayerName = "UI";
         panelSpr.sortingOrder = -1;
         panelSpr.size = new Vector2(BUBBLE_WIDTH * 1.5f, Required.Count * BUBBLE_WIDTH + BUBBLE_WIDTH * 0.5f);
+    }
+
+    private void CreateMoneyText() {
+        var textObj = new GameObject();
+        textObj.transform.SetParent(transform);
+        var text = textObj.AddComponent<TextMeshPro>();
+        var textLocPos = text.transform.localPosition;
+
+        text.text = MoneyConverter.FloatToMoney(Price);
+        text.alignment = TextAlignmentOptions.Left;
+        text.fontSize = 4;
+        text.color = new Color(71 / 255.0f, 170 / 255.0f, 44 / 255.0f);
+        text.sortingLayerID = SortingLayer.NameToID("UI");
+        text.rectTransform.sizeDelta = new Vector2(5, 1);
+
+        textLocPos.y = VERTICAL_OFFSET;
+        textLocPos.z = 0;
+        textLocPos.x = 3f;
+        text.transform.localPosition = textLocPos;
     }
 
     private void CreateRequirementBubbles() {
@@ -70,56 +93,58 @@ public class Job : MonoBehaviour {
             }
         }
     }
-    
+
     /// <summary>
     /// Use this for when the car shows up at the customer's house and is now working on the job
     /// </summary>
     /// <param name="OnJobComplete">A call back to let you know that you've completed the job so you can remove the items for that job and re-enable car select-ability</param>
     public void MarkJobAsBeingWorkedOn(Action OnJobComplete) {
-        // FMOD: Job reached
-        FMODSoundEffectsPlayer.Instance.PlaySoundEffect(SFX.JobReached);
-        Random random = new Random();
-        switch (random.Next(0, 3))
-        {
-            case 0:
-                SoundEffectId = FMODSoundEffectsPlayer.Instance.PlaySustainedSoundEffect(SFX.WorkMetalLoop);
-                break;
-            case 1:
-                SoundEffectId = FMODSoundEffectsPlayer.Instance.PlaySustainedSoundEffect(SFX.WorkSquishLoop);
-                break;
-            case 2:
-                SoundEffectId = FMODSoundEffectsPlayer.Instance.PlaySustainedSoundEffect(SFX.WorkWoodLoop);
-                break;
+        if (!IsBeingWorkedOn) {
+            // FMOD: Job reached
+            FMODSoundEffectsPlayer.Instance.PlaySoundEffect(SFX.JobReached);
+            Random random = new Random();
+            switch (random.Next(0, 3)) {
+                case 0:
+                    SoundEffectId = FMODSoundEffectsPlayer.Instance.PlaySustainedSoundEffect(SFX.WorkMetalLoop);
+                    break;
+                case 1:
+                    SoundEffectId = FMODSoundEffectsPlayer.Instance.PlaySustainedSoundEffect(SFX.WorkSquishLoop);
+                    break;
+                case 2:
+                    SoundEffectId = FMODSoundEffectsPlayer.Instance.PlaySustainedSoundEffect(SFX.WorkWoodLoop);
+                    break;
+            }
+
+            FMODSoundEffectsPlayer.Instance.PlaySoundEffect(SFX.JobReached);
+            Debug.Log("JOB BEING WORKED");
+            IsBeingWorkedOn = true;
+            this.OnJobComplete = OnJobComplete;
         }
-        FMODSoundEffectsPlayer.Instance.PlaySoundEffect(SFX.JobReached);
-        Debug.Log("JOB BEING WORKED");
-        IsBeingWorkedOn = true;
-        this.OnJobComplete = OnJobComplete;
     }
 
     private void Update() {
         if (IsBeingWorkedOn) {
             SecondsRemainingToComplete -= Time.deltaTime;
-            if (SecondsRemainingToComplete <= 0)
-            {
+            if (SecondsRemainingToComplete <= 0) {
                 IsBeingWorkedOn = false;
                 IsComplete = true;
             }
         } else if (IsComplete) {
             FMODSoundEffectsPlayer.Instance.StopSustainedSoundEffect(SoundEffectId);
-            if (OnJobComplete != null) { OnJobComplete();}
+            if (OnJobComplete != null) {
+                OnJobComplete();
+            }
+
             if (OnJobEnd != null) OnJobEnd(true);
             Destroy(this);
-            for (int i = 0; i < transform.childCount; i++)
-            {
+            for (int i = 0; i < transform.childCount; i++) {
                 Destroy(transform.GetChild(i).gameObject);
             }
         } else if (IsFailed) {
             // FMOD: play some failed job sound (maybe based on the Required types?)
             if (OnJobEnd != null) OnJobEnd(false);
             Destroy(this);
-            for (int i = 0; i < transform.childCount; i++)
-            {
+            for (int i = 0; i < transform.childCount; i++) {
                 Destroy(transform.GetChild(i).gameObject);
             }
         } else {

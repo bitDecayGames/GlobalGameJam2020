@@ -74,8 +74,11 @@ public class HQInventory : MonoBehaviour {
         GameObject.Find("Pro2DCamera").GetComponent<MapLoader>().CreateTruckDefaultSpawn();
         numOfTrucks += 1;
         if (numOfTrucks == 2) {
+            FMODSoundEffectsPlayer.Instance.PlaySoundEffect(SFX.NewTruck);
             SecondTruckUpgrade.SetIsAvailable(true);
-        } else if (numOfTrucks == 3) {
+        } else if (numOfTrucks == 3)
+        {
+            FMODSoundEffectsPlayer.Instance.PlaySoundEffect(SFX.NewTruck);
             ThirdTruckUpgrade.SetIsAvailable(true);
         }
     }

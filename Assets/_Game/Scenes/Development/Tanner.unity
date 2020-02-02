@@ -283,18 +283,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 6930914338370242395, guid: ab7fdf4cb83256543ab0c8d550311cee,
-        type: 3}
-      propertyPath: storeInventory
-      value: 
-      objectReference: {fileID: 602862018616964671, guid: 5e8e9eeeeb3a4483eabff873d2bad67f,
-        type: 3}
-    - target: {fileID: 6930914338370242395, guid: ab7fdf4cb83256543ab0c8d550311cee,
-        type: 3}
-      propertyPath: HQInventory
-      value: 
-      objectReference: {fileID: 8120127882481651000, guid: bdfbfadb04cc545f29223014da13efb0,
-        type: 3}
     - target: {fileID: 6930914338370242396, guid: ab7fdf4cb83256543ab0c8d550311cee,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -350,11 +338,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6930914338370242397, guid: ab7fdf4cb83256543ab0c8d550311cee,
-        type: 3}
-      propertyPath: orthographic size
-      value: 3.94375
-      objectReference: {fileID: 0}
     - target: {fileID: 6930914338370242399, guid: ab7fdf4cb83256543ab0c8d550311cee,
         type: 3}
       propertyPath: m_Name
@@ -369,6 +352,19 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 327869680, guid: bf29d9564823649b4b99f9143a0289cc, type: 3}
+      propertyPath: Money
+      value: 100000
+      objectReference: {fileID: 0}
+    - target: {fileID: 1950992177, guid: bf29d9564823649b4b99f9143a0289cc, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 52.100006
+      objectReference: {fileID: 0}
+    - target: {fileID: 6204675161552233461, guid: bf29d9564823649b4b99f9143a0289cc,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -49.99997
+      objectReference: {fileID: 0}
     - target: {fileID: 6684870662185359964, guid: bf29d9564823649b4b99f9143a0289cc,
         type: 3}
       propertyPath: m_CullTransparentMesh
@@ -468,6 +464,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_CullTransparentMesh
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6684870663907256283, guid: bf29d9564823649b4b99f9143a0289cc,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bf29d9564823649b4b99f9143a0289cc, type: 3}
@@ -590,7 +591,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 190142873}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -801,7 +802,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 190142873}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
