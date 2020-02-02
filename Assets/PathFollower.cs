@@ -103,6 +103,8 @@ public class PathFollower : MonoBehaviour
                 {
                     // we are missing an item for the job
                     // TODO: SFX for bad job attempt?
+                    // FMOD: Can't complete job 
+                    FMODSoundEffectsPlayer.Instance.PlaySoundEffect(SFX.CannotBuy);
                     Debug.Log("Did not have item needed for job: " + reqItem);
                     
                     return;

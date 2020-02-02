@@ -6,6 +6,8 @@
 		</property>
 		<relationship name="assignedStrips">
 			<destination>{1cfa0b28-6954-4a40-8af6-0756fc68891b}</destination>
+			<destination>{a33386f7-47a9-499f-9a47-9dc31d32e69a}</destination>
+			<destination>{f3d7bc63-8ba8-4188-b021-58b679f68cbc}</destination>
 		</relationship>
 		<relationship name="mixer">
 			<destination>{30be5d97-c10a-41c4-8072-941fbcd398dc}</destination>
