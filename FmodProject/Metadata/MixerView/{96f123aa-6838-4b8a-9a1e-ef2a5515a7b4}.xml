@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.00.00">
+	<object class="UiMixerView" id="{96f123aa-6838-4b8a-9a1e-ef2a5515a7b4}">
+		<property name="name">
+			<value>SFX</value>
+		</property>
+		<relationship name="assignedStrips">
+			<destination>{1cfa0b28-6954-4a40-8af6-0756fc68891b}</destination>
+		</relationship>
+		<relationship name="mixer">
+			<destination>{30be5d97-c10a-41c4-8072-941fbcd398dc}</destination>
+		</relationship>
+	</object>
+</objects>
