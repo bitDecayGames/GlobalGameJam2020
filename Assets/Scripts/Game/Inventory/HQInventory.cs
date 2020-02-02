@@ -12,11 +12,17 @@ public class HQInventory : MonoBehaviour {
     public UpgradeButton FirstExpandUpgrade;
     public UpgradeButton SecondExpandUpgrade;
 
+    public Sprite firstDanUpgrade;
+    public Sprite secondDanUpgrade;
+
     private Inventory inventory;
+    private SpriteRenderer renderer;
     private int numOfTrucks = 1;
 
     private void Start() {
         inventory = GetComponentInChildren<Inventory>();
+        // TODO: need to actually get the renderer of the 
+        renderer = transform.parent.GetComponentInParent<SpriteRenderer>();
         UpgradeTo4Slots();
     }
 
@@ -40,11 +46,13 @@ public class HQInventory : MonoBehaviour {
     public void UpgradeTo8Slots() {
         SlotRenderer.sprite = EightSlotUpgradeSprite;
         UpgradeToANumberOfSlots(8);
+        renderer.sprite = firstDanUpgrade;
         SecondExpandUpgrade.SetIsAvailable(true);
     }
 
     public void UpgradeTo12Slots() {
         SlotRenderer.sprite = TwelveSlotUpgradeSprite;
+        renderer.sprite = secondDanUpgrade;
         UpgradeToANumberOfSlots(12);
     }
 

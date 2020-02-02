@@ -340,6 +340,25 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1950992177, guid: bf29d9564823649b4b99f9143a0289cc, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 52.099976
+      objectReference: {fileID: 0}
+    - target: {fileID: 6204675161552233461, guid: bf29d9564823649b4b99f9143a0289cc,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -50.00003
+      objectReference: {fileID: 0}
+    - target: {fileID: 6684870662185359952, guid: bf29d9564823649b4b99f9143a0289cc,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0.099975586
+      objectReference: {fileID: 0}
+    - target: {fileID: 6684870662185359952, guid: bf29d9564823649b4b99f9143a0289cc,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 186.79999
+      objectReference: {fileID: 0}
     - target: {fileID: 6684870662185359964, guid: bf29d9564823649b4b99f9143a0289cc,
         type: 3}
       propertyPath: m_CullTransparentMesh
@@ -517,27 +536,22 @@ Camera:
     type: 3}
   m_PrefabInstance: {fileID: 793223788}
   m_PrefabAsset: {fileID: 0}
---- !u!1001 &1868236634
+--- !u!1001 &2118901455
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: -9041365028240462659, guid: ecb264b14ab7c4119ad22d1cf6a0c21d,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: -7118181429892417582, guid: ecb264b14ab7c4119ad22d1cf6a0c21d,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 1.3248978
       objectReference: {fileID: 0}
     - target: {fileID: -7118181429892417582, guid: ecb264b14ab7c4119ad22d1cf6a0c21d,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -1.5450072
       objectReference: {fileID: 0}
     - target: {fileID: -7118181429892417582, guid: ecb264b14ab7c4119ad22d1cf6a0c21d,
         type: 3}
