@@ -8,7 +8,7 @@ public class JobManager : MonoBehaviour {
 
     private List<GameObject> UnavailableLocations = new List<GameObject>();
     public List<GameObject> PossibleLocations = new List<GameObject>(); // PLEASE DON'T EDIT THIS DIRECTLY, IT IS PUBLIC FOR DEBUG PURPOSES
-    private bool CallIsWaiting;
+    public bool CallIsWaiting;
     private float CurrentPhoneCallTimer = 3f;
     private float NextPhoneCallTimer = 20.0f; // this is the starting number of seconds between phone call rings
     private float MinNextPhoneCallTime = 5.0f; // you must wait at least this long for another job
