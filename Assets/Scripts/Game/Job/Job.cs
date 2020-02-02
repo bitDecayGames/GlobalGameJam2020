@@ -76,25 +76,28 @@ public class Job : MonoBehaviour {
     /// </summary>
     /// <param name="OnJobComplete">A call back to let you know that you've completed the job so you can remove the items for that job and re-enable car select-ability</param>
     public void MarkJobAsBeingWorkedOn(Action OnJobComplete) {
-        // FMOD: Job reached
-        FMODSoundEffectsPlayer.Instance.PlaySoundEffect(SFX.JobReached);
-        Random random = new Random();
-        switch (random.Next(0, 3))
+        if (!IsBeingWorkedOn)
         {
-            case 0:
-                SoundEffectId = FMODSoundEffectsPlayer.Instance.PlaySustainedSoundEffect(SFX.WorkMetalLoop);
-                break;
-            case 1:
-                SoundEffectId = FMODSoundEffectsPlayer.Instance.PlaySustainedSoundEffect(SFX.WorkSquishLoop);
-                break;
-            case 2:
-                SoundEffectId = FMODSoundEffectsPlayer.Instance.PlaySustainedSoundEffect(SFX.WorkWoodLoop);
-                break;
+            // FMOD: Job reached
+            FMODSoundEffectsPlayer.Instance.PlaySoundEffect(SFX.JobReached);
+            Random random = new Random();
+            switch (random.Next(0, 3))
+            {
+                case 0:
+                    SoundEffectId = FMODSoundEffectsPlayer.Instance.PlaySustainedSoundEffect(SFX.WorkMetalLoop);
+                    break;
+                case 1:
+                    SoundEffectId = FMODSoundEffectsPlayer.Instance.PlaySustainedSoundEffect(SFX.WorkSquishLoop);
+                    break;
+                case 2:
+                    SoundEffectId = FMODSoundEffectsPlayer.Instance.PlaySustainedSoundEffect(SFX.WorkWoodLoop);
+                    break;
+            }
+            FMODSoundEffectsPlayer.Instance.PlaySoundEffect(SFX.JobReached);
+            Debug.Log("JOB BEING WORKED");
+            IsBeingWorkedOn = true;
+            this.OnJobComplete = OnJobComplete;
         }
-        FMODSoundEffectsPlayer.Instance.PlaySoundEffect(SFX.JobReached);
-        Debug.Log("JOB BEING WORKED");
-        IsBeingWorkedOn = true;
-        this.OnJobComplete = OnJobComplete;
     }
 
     private void Update() {

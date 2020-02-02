@@ -283,6 +283,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 6930914338370242394, guid: ab7fdf4cb83256543ab0c8d550311cee,
+        type: 3}
+      propertyPath: MaxHorizontalInfluence
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6930914338370242394, guid: ab7fdf4cb83256543ab0c8d550311cee,
+        type: 3}
+      propertyPath: MaxVerticalInfluence
+      value: 1.5
+      objectReference: {fileID: 0}
     - target: {fileID: 6930914338370242395, guid: ab7fdf4cb83256543ab0c8d550311cee,
         type: 3}
       propertyPath: storeInventory
@@ -369,6 +379,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 327869680, guid: bf29d9564823649b4b99f9143a0289cc, type: 3}
+      propertyPath: Money
+      value: 100000
+      objectReference: {fileID: 0}
     - target: {fileID: 6684870662185359964, guid: bf29d9564823649b4b99f9143a0289cc,
         type: 3}
       propertyPath: m_CullTransparentMesh
