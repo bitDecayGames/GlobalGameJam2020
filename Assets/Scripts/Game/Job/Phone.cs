@@ -7,7 +7,6 @@ public class Phone : MonoBehaviour {
     
     public void OnCallComingIn() {
         // TODO: you might want to animate this phone sprite some how, like maybe make it blink white?
-        Debug.Log("Incoming call...");
         // TODO: take this thing out, just for debugging
         GetComponentInChildren<Text>().text = "(Incomming Call...)";
     }
@@ -16,7 +15,6 @@ public class Phone : MonoBehaviour {
         // TODO: take this thing out, just for debugging
         GetComponentInChildren<Text>().text = "(No Calls)";
         if (OnCallAnswered != null) {
-            Debug.Log("Call answered");
             OnCallAnswered.Invoke();
         }
     }

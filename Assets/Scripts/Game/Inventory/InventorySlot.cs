@@ -61,7 +61,7 @@ public class InventorySlot : MonoBehaviour, InventoryDropListener {
                 var textLocPos = text.transform.localPosition;
                 textLocPos.y = 0.4f;
                 text.transform.localPosition = textLocPos;
-                text.text = $"${price}";
+                text.text = MoneyConverter.FloatToMoney(price);
                 text.alignment = TextAlignmentOptions.Center;
                 text.fontSize = 4;
                 text.color = textColor;
@@ -94,15 +94,18 @@ public class InventorySlot : MonoBehaviour, InventoryDropListener {
                     if (ShopPurchaseNotifier.NotifyOfPurchase(gameObject, Item, price)) {
                         InventoryDropNotifier.NotifyOfDrop(gameObject, pos2, Item);
                         Debug.Log($"Purchased {Item}");
-                        // TODO: FX play successful purchase ca-ching! because user bought the Item
+                        // FMOD: FX play successful purchase ca-ching! because user bought the Item
+                        FMODSoundEffectsPlayer.Instance.PlaySoundEffect(SFX.Purchase);
                     } else {
                         Debug.Log($"Failed to purchase {Item}");
-                        // TODO: FX play "can't purchase this object" because user tried to purchase something they can't afford
+                        // FMOD: FX play "can't purchase this object" because user tried to purchase something they can't afford
+                        FMODSoundEffectsPlayer.Instance.PlaySoundEffect(SFX.CannotBuy);
                     }
                 }
             } else if (InventoryDropNotifier.NotifyOfDrop(gameObject, pos2, Item)) {
                 Debug.Log($"Moved item {Item}");
                 // TODO: FX: play moved item (Item) into some other inventory
+                FMODSoundEffectsPlayer.Instance.PlaySoundEffect(SFX.TransferItem);
                 Set(ItemMap.Get(InventoryType.EMPTY));
             }
         }
@@ -116,6 +119,7 @@ public class InventorySlot : MonoBehaviour, InventoryDropListener {
         if (OnInventoryCheckDrop(source, worldPosition)) {
             if (isTrash) {
                 // TODO: FX: play item went into trash can noise
+                FMODSoundEffectsPlayer.Instance.PlaySoundEffect(SFX.Trash);
                 return true;
             } else {
                 var itemKey = ItemMap.Get(item);
@@ -143,4 +147,5 @@ public enum InventoryType {
     LIGHT_BULB,
     BATTERY,
     HAMMER,
+    JOB_PANEL, // this is a hack, just to get the sprite at a weird point in the job cycle
 }

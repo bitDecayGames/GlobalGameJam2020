@@ -29,6 +29,9 @@ public class CarInventory : MonoBehaviour {
     public void UpgradeTo6Slots() {
         SlotRenderer.sprite = SixSlotUpgradeSprite;
         UpgradeToANumberOfSlots(6);
+        // TODO: switch the truck visuals to be the van visuals 
+        // TODO: SFX For upgrading vehicle
+        transform.parent.GetComponent<VehicleRenderer>().upgraded = true;
     }
 
     private void UpgradeToANumberOfSlots(int number) {

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.00.00">
+	<object class="AudioFile" id="{e24253e9-55e1-49e9-b7a9-c2d88de14a7c}">
+		<property name="assetPath">
+			<value>WorkSquish.wav</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>44.0999985</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>2.3076870748299321</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{fe823660-c101-4fc8-9657-8b0fde2a30b7}</destination>
+		</relationship>
+	</object>
+</objects>

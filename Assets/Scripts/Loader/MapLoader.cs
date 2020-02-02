@@ -5,13 +5,14 @@ using SuperTiled2Unity;
 using UnityEngine;
 
 public class MapLoader : MonoBehaviour
-{    
+{
     private SuperMap _map;
     private SuperTileLayer _baseDataLayer;
     public GameObject truckPrefab;
     public GameObject storeInventory;
     public GameObject HQInventory;
 
+    private Vector2 truckSpawn = new Vector2();
     
     // Start is called before the first frame update
     void Start()
@@ -26,7 +27,7 @@ public class MapLoader : MonoBehaviour
         LoadTiles();
         LoadBuildings();
         CreateTrucks();
-
+        UpdateEnvironment();
     }
 
     void LoadTiles()
@@ -205,19 +206,51 @@ public class MapLoader : MonoBehaviour
             var childObj = objs.transform.GetChild(i);
             if (childObj.name == "truckSpawn")
             {
-                var truck = Instantiate(truckPrefab);
-                truck.transform.position = childObj.transform.position;
+                var x = (int)Math.Floor(childObj.transform.position.x);
+                var y = (int)Math.Floor(Math.Abs(childObj.transform.position.y));
 
-                var x = Math.Floor(truck.transform.position.x);
-                var y = Math.Floor(Math.Abs(truck.transform.position.y));
-
-                var truckStartCell = _baseDataLayer.transform.GetChild((int)(y + x * _map.m_Height));
-                truck.GetComponent<PathFollower>().SetList(new List<Tile>() {truckStartCell.gameObject.GetComponent<Tile>()});
-
-                truck.GetComponent<SpriteRenderer>().sortingOrder = 2;
+                truckSpawn.Set(x, y);
+                
+                CreateSingleTruck(x, y);
             }
         }
+    }
 
-        
+    public void CreateTruckDefaultSpawn()
+    {
+        CreateSingleTruck((int) truckSpawn.x, (int) truckSpawn.y);
+    }
+
+    public void CreateSingleTruck(int cellX, int cellY)
+    {
+        var truck = Instantiate(truckPrefab);
+
+        var truckStartCell = _baseDataLayer.transform.GetChild((int)(cellY + cellX * _map.m_Height));
+        var startPos = truckStartCell.transform.position;
+        startPos.x += 0.5f;
+        startPos.y += 0.5f;
+        truck.transform.position = startPos;
+        truck.GetComponent<PathFollower>().SetList(new List<Tile>() {truckStartCell.gameObject.GetComponent<Tile>()});
+
+        truck.GetComponent<SpriteRenderer>().sortingOrder = 2;
+    }
+
+    void UpdateEnvironment()
+    {
+        var objs = _map.transform.Find("Grid").Find("environment").GetComponent<SuperLayer>();
+        for (int i = 0; i < objs.transform.childCount; i++)
+        {
+            var childObj = objs.transform.GetChild(i);
+            if (Math.Abs(childObj.transform.position.y) > _map.m_Height / 2.0)
+            {
+                // lower half, this shiz renders high
+                childObj.GetComponent<SpriteRenderer>().sortingOrder = 2;
+            }
+            else
+            {
+                // upper half, this shiz renders low, behind stuff
+                childObj.GetComponent<SpriteRenderer>().sortingOrder = 0;
+            }
+        }
     }
 }

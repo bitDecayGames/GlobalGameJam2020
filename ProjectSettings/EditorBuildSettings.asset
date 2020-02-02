@@ -5,18 +5,18 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
+  - enabled: 0
+    path: 
+    guid: 00000000000000000000000000000000
   - enabled: 1
-    path: Assets/_Game/Scenes/Development/Tanner.unity
-    guid: 25ab76db5e47ad445a744ac560f72510
+    path: Assets/_Game/Scenes/BitdecaySplash.unity
+    guid: ba92940fb9202ac48a5b013179d2cf92
   - enabled: 1
     path: Assets/_Game/Scenes/Menus/TitleScreen.unity
     guid: 358ba7203b34a2f4e8edcab9c1cad88c
   - enabled: 1
     path: Assets/_Game/Scenes/Menus/Credits.unity
     guid: 7743121c791ff02489f423b474567c28
-  - enabled: 1
-    path: Assets/_Game/Scenes/BitdecaySplash.unity
-    guid: ba92940fb9202ac48a5b013179d2cf92
   - enabled: 1
     path: Assets/_Game/Scenes/Splash Screen/GameJamSplash.unity
     guid: 907c37ab556c5064ea3a14dee3e5f853
@@ -38,4 +38,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/_Game/Scenes/Development/Logan.unity
     guid: de8c9bef7f40045209512e198e4b0417
+  - enabled: 1
+    path: Assets/_Game/Scenes/Development/Tanner.unity
+    guid: 7d233b572d53497418d119392ea23188
   m_configObjects: {}

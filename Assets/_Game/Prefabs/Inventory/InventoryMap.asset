@@ -27,3 +27,5 @@ MonoBehaviour:
     inventoryType: 5
   - image: {fileID: 21300000, guid: 40e766cd763734ab080e33843827cd90, type: 3}
     inventoryType: 6
+  - image: {fileID: 21300000, guid: ca38d2b4d16164a8582537d8a52d3e1e, type: 3}
+    inventoryType: 7
