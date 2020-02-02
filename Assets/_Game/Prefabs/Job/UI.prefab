@@ -312,7 +312,7 @@ Canvas:
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 0
-  m_SortingLayerID: 0
+  m_SortingLayerID: 508739695
   m_SortingOrder: 0
   m_TargetDisplay: 0
 --- !u!114 &6684870662799151114
@@ -412,11 +412,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  PossibleLocations:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
 --- !u!1 &6684870663907256284
 GameObject:
   m_ObjectHideFlags: 0

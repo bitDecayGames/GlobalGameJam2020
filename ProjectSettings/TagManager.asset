@@ -13,7 +13,7 @@ TagManager:
   - UI
   - 
   - 
-  - 
+  - CameraBounds
   - 
   - 
   - 
@@ -58,4 +58,7 @@ TagManager:
     locked: 0
   - name: Sky
     uniqueID: 247122455
+    locked: 0
+  - name: Geometry
+    uniqueID: 2944032809
     locked: 0
