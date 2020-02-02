@@ -61,7 +61,7 @@ public class InventorySlot : MonoBehaviour, InventoryDropListener {
                 var textLocPos = text.transform.localPosition;
                 textLocPos.y = 0.4f;
                 text.transform.localPosition = textLocPos;
-                text.text = $"${price}";
+                text.text = MoneyConverter.FloatToMoney(price);
                 text.alignment = TextAlignmentOptions.Center;
                 text.fontSize = 4;
                 text.color = textColor;

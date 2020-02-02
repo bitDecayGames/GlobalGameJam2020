@@ -817,9 +817,9 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 327869680, guid: bf29d9564823649b4b99f9143a0289cc, type: 3}
-      propertyPath: Money
-      value: 100000
+    - target: {fileID: 1950992177, guid: bf29d9564823649b4b99f9143a0289cc, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 52.100006
       objectReference: {fileID: 0}
     - target: {fileID: 6684870662546622628, guid: bf29d9564823649b4b99f9143a0289cc,
         type: 3}
@@ -886,31 +886,6 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 2144535811}
-    - target: {fileID: 6684870663821655822, guid: bf29d9564823649b4b99f9143a0289cc,
-        type: 3}
-      propertyPath: PossibleLocations.Array.size
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 6684870663821655822, guid: bf29d9564823649b4b99f9143a0289cc,
-        type: 3}
-      propertyPath: PossibleLocations.Array.data[0]
-      value: 
-      objectReference: {fileID: 1691763707}
-    - target: {fileID: 6684870663821655822, guid: bf29d9564823649b4b99f9143a0289cc,
-        type: 3}
-      propertyPath: PossibleLocations.Array.data[1]
-      value: 
-      objectReference: {fileID: 293895342}
-    - target: {fileID: 6684870663821655822, guid: bf29d9564823649b4b99f9143a0289cc,
-        type: 3}
-      propertyPath: PossibleLocations.Array.data[2]
-      value: 
-      objectReference: {fileID: 122597821}
-    - target: {fileID: 6684870663821655822, guid: bf29d9564823649b4b99f9143a0289cc,
-        type: 3}
-      propertyPath: PossibleLocations.Array.data[3]
-      value: 
-      objectReference: {fileID: 13073630}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bf29d9564823649b4b99f9143a0289cc, type: 3}
 --- !u!1001 &8713821543669757884
