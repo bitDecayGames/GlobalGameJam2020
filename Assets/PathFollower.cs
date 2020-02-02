@@ -57,7 +57,10 @@ public class PathFollower : MonoBehaviour
             {
                 Debug.Log("GOTTA START THE JOB");
                 job.MarkJobAsBeingWorkedOn(() => { Debug.Log("JOB DONE");});
+                return;
             }
+            
+            // TODO: Check for interactable here
             return;
         }
         else if (seeker.arrived)
