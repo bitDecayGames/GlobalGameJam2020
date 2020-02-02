@@ -35,6 +35,8 @@ public class JobManager : MonoBehaviour {
         UnavailableLocations.Add(location); // only one job per location at a time
         // TODO: Create the requirements for a job that are based on the hardness level the player is currently at
         var requirements = new List<InventoryType> {InventoryType.WRENCH};
+        // TODO: Create price from requirements
+        var price = 100;
 
         // // create the job as a child object of the location the job is at
         // var jobObj = new GameObject();
@@ -43,13 +45,13 @@ public class JobManager : MonoBehaviour {
         // jobObj.transform.localPosition = Vector3.zero;
         var job = location.gameObject.AddComponent<Job>();
         // jobs take 1 second longer for each requirement.  Seems fair?
-        job.Init(ItemMap, requirements, SecondsUntilJobFailure, SecondsToCompleteJob + requirements.Count, isSuccess => {
+        job.Init(ItemMap, requirements, price, SecondsUntilJobFailure, SecondsToCompleteJob + requirements.Count, isSuccess => {
             Debug.Log($"Job is done: " + (isSuccess ? "Success!" : "FAILED!"));
             // FMOD: Fail and success
             if (isSuccess)
             {
                 FMODSoundEffectsPlayer.Instance.PlaySoundEffect(SFX.CompleteTask);
-                FindObjectOfType<Wallet>().AddMoney(10);
+                FindObjectOfType<Wallet>().AddMoney(price);
             }
             else
             {
