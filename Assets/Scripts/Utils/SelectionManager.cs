@@ -21,7 +21,7 @@ public static class SelectionManager
         {
             indicator = selectionMgr.GetComponent<FollowObject>();
         }
-
+        
         indicator.GetComponentInChildren<SpriteRenderer>().enabled = true;
         
         if (indicator.chase != null)
@@ -31,6 +31,8 @@ public static class SelectionManager
 
         indicator.chase = o;
         currentSelected = o;
+        // FMOD
+        FMODSoundEffectsPlayer.Instance.PlaySoundEffect(SFX.Click);
     }
 
     public static void ClearSelection()

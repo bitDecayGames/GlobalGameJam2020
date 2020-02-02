@@ -2,7 +2,7 @@ public class Songs
 {
 	public enum SongName
 	{
-		AnotherDay = 239,
+		Song = 151,
 		PauseSong = 149,
 	}
 }
