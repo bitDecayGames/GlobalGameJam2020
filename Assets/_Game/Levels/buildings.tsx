@@ -50,7 +50,7 @@
   <properties>
    <property name="tall" type="bool" value="true"/>
   </properties>
-  <image width="80" height="160" source="../Art/Buildings/Residential/1x1_1.png"/>
+  <image width="80" height="115" source="../Art/Buildings/Residential/1x1_1.png"/>
  </tile>
  <tile id="8">
   <properties>
