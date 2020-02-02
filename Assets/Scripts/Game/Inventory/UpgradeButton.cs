@@ -14,7 +14,7 @@ public class UpgradeButton : MonoBehaviour {
     }
 
     public void SetPrice(float price) {
-        GetComponentInChildren<TextMeshPro>().text = "$" + price;
+        GetComponentInChildren<TextMeshPro>().text = MoneyConverter.FloatToMoney(price);
     }
 
     public void OnMouseUpAsButton() {

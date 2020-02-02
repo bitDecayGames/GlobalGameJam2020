@@ -1,9 +1,7 @@
-using System;
 using TMPro;
 using UnityEngine;
 
-public class Wallet : MonoBehaviour, ShopPurchaseListener
-{
+public class Wallet : MonoBehaviour, ShopPurchaseListener {
     public int Money;
     public TextMeshProUGUI TextMeshProUI;
 
@@ -15,18 +13,15 @@ public class Wallet : MonoBehaviour, ShopPurchaseListener
         ShopPurchaseNotifier.RemoveListener(this);
     }
 
-    private void Update()
-    {
-        TextMeshProUI.text = $"Wallet: ${Money}";
+    private void Update() {
+        TextMeshProUI.text = MoneyConverter.IntToMoney(Money);
     }
 
-    public void AddMoney(int money)
-    {
+    public void AddMoney(int money) {
         Money += money;
     }
 
-    public void SubtractMoney(int money)
-    {
+    public void SubtractMoney(int money) {
         Money -= money;
     }
 
