@@ -41,7 +41,7 @@ public class MapLoader : MonoBehaviour
         for (var i = 0; i < _baseDataLayer.transform.childCount; i++)
         {
             var currentTile = _baseDataLayer.transform.GetChild(i);
-            currentTile.GetComponent<SpriteRenderer>().sortingOrder = -1; // -1 is the background layer
+            currentTile.GetComponent<SpriteRenderer>().sortingOrder = -1;
             var props = currentTile.GetComponent<SuperCustomProperties>();
             
             CustomProperty solidProp;
@@ -65,9 +65,8 @@ public class MapLoader : MonoBehaviour
 
             if (tType == TileType.DOOR || tType == TileType.ROAD)
             {
-                //currentTile.gameObject.AddComponent<DestinationSelectable>();
-                var doorCollider = currentTile.gameObject.AddComponent<BoxCollider2D>();
-                doorCollider.isTrigger = true;
+                currentTile.gameObject.AddComponent<DestinationSelectable>();
+                currentTile.gameObject.AddComponent<BoxCollider2D>();
             }
             
             if (i % _map.m_Height != 0)
@@ -103,7 +102,6 @@ public class MapLoader : MonoBehaviour
 
         var NonJobIndex = 0;
 
-        var allDoors = new List<GameObject>();
         for (var i = 0; i < _baseDataLayer.transform.childCount; i++)
         {
             var currentTile = _baseDataLayer.transform.GetChild(i);
@@ -120,7 +118,6 @@ public class MapLoader : MonoBehaviour
 
             if (typeProp.GetValueAsString() == "DOOR")
             {
-                allDoors.Add(currentTile.gameObject);
                 CustomProperty jobbingProp;
                 if (!props.TryGetCustomProperty("jobbing", out jobbingProp))
                 {
@@ -153,7 +150,7 @@ public class MapLoader : MonoBehaviour
         {
             var currentTile = buildingLayer.transform.GetChild(i);
             var props = currentTile.GetComponent<SuperCustomProperties>();
-            MakeBuildingSelectable(currentTile, allDoors);
+
             CustomProperty tallProp;
             if (!props.TryGetCustomProperty("tall", out tallProp))
             {
@@ -169,34 +166,6 @@ public class MapLoader : MonoBehaviour
                 currentTile.GetComponentInChildren<SpriteRenderer>().sortingOrder = 1;
             }
         }
-    }
-
-    void MakeBuildingSelectable(Transform buildingTile, List<GameObject> allDoors)
-    {
-        var buildingSelectable = buildingTile.gameObject.AddComponent<BuildingSelectable>();
-        var buildingCollider = buildingTile.gameObject.AddComponent<BoxCollider2D>();
-        var rigid = buildingTile.gameObject.AddComponent<Rigidbody2D>();
-        rigid.isKinematic = true;
-        //rigid.collisionDetectionMode = CollisionDetectionMode2D.Continuous;
-        buildingCollider.isTrigger = true;
-
-        // set up the colider to match the size and location of the sprite
-        var renderer = buildingTile.gameObject.GetComponentInChildren<SpriteRenderer>();
-        var s = renderer.bounds.size;
-        buildingCollider.size = s;
-        buildingCollider.offset = s / 2;
-        /*
-        Debug.Log("looking for a door");
-        foreach(var door in allDoors)
-        {
-            var doorCollider = door.gameObject.GetComponentInChildren<BoxCollider2D>();
-            if (doorCollider.IsTouching(buildingCollider))
-            {
-                Debug.Log("found a door!");
-                buildingSelectable.door = door.gameObject;
-            }
-        }
-        */
     }
 
     void CreateTrucks()
@@ -250,7 +219,7 @@ public class MapLoader : MonoBehaviour
             else
             {
                 // upper half, this shiz renders low, behind stuff
-                childObj.GetComponent<SpriteRenderer>().sortingOrder = 2;
+                childObj.GetComponent<SpriteRenderer>().sortingOrder = 0;
             }
         }
     }

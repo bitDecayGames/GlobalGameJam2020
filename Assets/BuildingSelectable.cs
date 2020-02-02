@@ -39,6 +39,7 @@ public class BuildingSelectable : MonoBehaviour
         var newPath = pathfinder.getTilePath(pather.path[nodeToStart], destination.GetComponent<Tile>());
 
         pather.SetList(newPath);
+        Debug.Log("Setting destination from BuildingSelectable");
         pather.SetDestinationObject(destination);
 
     }
