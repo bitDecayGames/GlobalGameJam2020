@@ -6,9 +6,7 @@ using UnityEngine;
 public class DestinationSelectable : MonoBehaviour
 {
     private void OnMouseUpAsButton()
-    {
-        Debug.Log("You clicked the secret tile");
-        
+    {   
         var pather = SelectionManager.currentSelected.GetComponentInChildren<PathFollower>();
         var pathfinder = new PathFinder();
 

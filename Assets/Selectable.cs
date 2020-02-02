@@ -19,7 +19,6 @@ public class Selectable : MonoBehaviour
 
     private void OnMouseUpAsButton()
     {
-        Debug.Log("You clicked me!");
         SelectionManager.SetSelected(gameObject);
     }
 }
