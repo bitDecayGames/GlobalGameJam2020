@@ -36,12 +36,12 @@ public class JobLocator : MonoBehaviour
         {
             SpriteRenderer spriteRenderer;
             spriteRenderer = jobMarkers[i].GetComponent<SpriteRenderer>();
+            spriteRenderer.enabled = false;
             if (i < activeJobs.Length)
             {
                 Vector3 screenPos = camera.WorldToViewportPoint(activeJobs[i].transform.position); //get viewport positions
                 if(screenPos.x >= 0 && screenPos.x <= 1 && screenPos.y >= 0 && screenPos.y <= 1)
                 {
-                    spriteRenderer.enabled = false;
                     return;
                 } 
                 spriteRenderer.enabled = true;
