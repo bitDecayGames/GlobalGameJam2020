@@ -1,5 +1,16 @@
 {
   "SFX":[
-    "Sound"
+    "Click",
+    "Cash",
+    "TransferItem",
+    "Phone",
+    "BuyTruck",
+    "BuyVan",
+    "Happy",
+    "CompleteTask",
+    "Success",
+    "Failure",
+    "CannotBuy",
+    "Trash"
   ]
 }

@@ -29,4 +29,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/_Game/Scenes/Development/Logan.unity.unity
     guid: 00000000000000000000000000000000
+  - enabled: 1
+    path: Assets/_Game/Scenes/Development/Tanner.unity
+    guid: d0f7959cf44fe1849a4af104ba50a2d8
   m_configObjects: {}

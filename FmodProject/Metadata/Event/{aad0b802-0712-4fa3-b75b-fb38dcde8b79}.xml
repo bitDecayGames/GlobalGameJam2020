@@ -8,7 +8,7 @@
 			<value>1</value>
 		</property>
 		<relationship name="folder">
-			<destination>{bdaf96c9-b262-4e76-973a-2c0b96715774}</destination>
+			<destination>{f34dc970-79a2-4874-9597-44b6cdb773e6}</destination>
 		</relationship>
 		<relationship name="mixer">
 			<destination>{e250e0e2-ded9-4d2e-bd9f-2ec575d4b8bf}</destination>
@@ -98,7 +98,7 @@
 	</object>
 	<object class="EventMixerGroup" id="{842495bf-ff4b-4b72-8dbd-34a66200ba8b}">
 		<property name="volume">
-			<value>-5.5</value>
+			<value>-10.5</value>
 		</property>
 		<property name="name">
 			<value>Audio 1</value>
