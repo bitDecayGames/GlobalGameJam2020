@@ -63,9 +63,8 @@ public class MapLoader : MonoBehaviour
             TileType.TryParse(solidProp.GetValueAsString(), true, out tType);
             tileComp.tileType = tType;
 
-            if (tType == TileType.DOOR || tType == TileType.ROAD)
+            if (tType == TileType.DOOR)
             {
-                //currentTile.gameObject.AddComponent<DestinationSelectable>();
                 var doorCollider = currentTile.gameObject.AddComponent<BoxCollider2D>();
                 doorCollider.isTrigger = true;
             }
@@ -183,8 +182,8 @@ public class MapLoader : MonoBehaviour
         // set up the colider to match the size and location of the sprite
         var renderer = buildingTile.gameObject.GetComponentInChildren<SpriteRenderer>();
         var s = renderer.bounds.size;
-        buildingCollider.size = s;
-        buildingCollider.offset = s / 2;
+        buildingCollider.size = s * 0.9f;
+        buildingCollider.offset = s / 2 ;
         /*
         Debug.Log("looking for a door");
         foreach(var door in allDoors)

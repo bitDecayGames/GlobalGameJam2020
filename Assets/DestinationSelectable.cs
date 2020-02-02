@@ -7,8 +7,9 @@ using UnityEngine.EventSystems;
 
 public class DestinationSelectable : MonoBehaviour
 {
-    private void OnMouseUpAsButton()
+    public void SelectDestination(GameObject destination)
     {
+        Debug.Log("clicked on a destination");
         if (EventSystem.current.IsPointerOverGameObject())
         {
             return;
@@ -19,10 +20,10 @@ public class DestinationSelectable : MonoBehaviour
             // no vehicle selected
             // TODO: show this building's inventory if it has one
             // Ideally, with a timer, as we have no way to deselect buildings as they aren't selectable
-            
+
             return;
         }
-        
+
         var pather = SelectionManager.currentSelected.GetComponentInChildren<PathFollower>();
         var pathfinder = new PathFinder();
 
@@ -31,9 +32,16 @@ public class DestinationSelectable : MonoBehaviour
         {
             nodeToStart = Math.Max(0, pather.path.Count - 1);
         }
-        var newPath = pathfinder.getTilePath(pather.path[nodeToStart], GetComponent<Tile>());
-        
+        var newPath = pathfinder.getTilePath(pather.path[nodeToStart], destination.GetComponent<Tile>());
+
         pather.SetList(newPath);
-        pather.SetDestinationObject(gameObject);
+        pather.SetDestinationObject(destination);
+
+    }
+
+
+    private void OnMouseUpAsButton()
+    {
+        SelectDestination(gameObject);
     }
 }
