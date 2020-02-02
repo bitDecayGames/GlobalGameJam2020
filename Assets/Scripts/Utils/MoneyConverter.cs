@@ -7,6 +7,6 @@ public static class MoneyConverter {
     
     public static String FloatToMoney(float money) {
         var str = String.Format("{0:C}", money);
-        return "$" + str.Substring(0, str.Length - 3);
+        return str.Substring(0, str.Length - 3);
     }
 }
