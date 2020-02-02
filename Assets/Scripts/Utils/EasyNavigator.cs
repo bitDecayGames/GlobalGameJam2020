@@ -14,7 +14,7 @@ namespace Utils {
                 GameObject fadeOutTransitionTemplate = Resources.Load<GameObject>(FadeToBlackTransitionObject);
                 GameObject fadeOutTransitionInstance = Instantiate(fadeOutTransitionTemplate);
                 fadeOutTransitionInstance.GetComponent<FadeToBlack>().FadeOutToScene(2f, sceneName);
-                FMODSoundEffectsPlayer.Instance.PlaySoundEffect(SFX.Sound);
+                FMODSoundEffectsPlayer.Instance.PlaySoundEffect(SFX.Click);
                 createdFadeoutTransition = true;
             }
         }
