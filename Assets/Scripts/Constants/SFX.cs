@@ -10,4 +10,6 @@ public class SFX
 	public const string CompleteTask = "CompleteTask";
 	public const string Success = "Success";
 	public const string Failure = "Failure";
+	public const string CannotBuy = "CannotBuy";
+	public const string Trash = "Trash";
 }
