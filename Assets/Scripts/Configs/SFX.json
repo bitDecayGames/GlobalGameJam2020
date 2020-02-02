@@ -20,6 +20,8 @@
     "WorkSquishLoop",
     "WorkMetalLoop",
     "WorkWoodLoop",
-    "Purchase"
+    "Purchase",
+    "EngineStart",
+    "NewTruck"
   ]
 }

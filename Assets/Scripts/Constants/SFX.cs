@@ -21,4 +21,6 @@ public class SFX
 	public const string WorkMetalLoop = "WorkMetalLoop";
 	public const string WorkWoodLoop = "WorkWoodLoop";
 	public const string Purchase = "Purchase";
+	public const string EngineStart = "EngineStart";
+	public const string NewTruck = "NewTruck";
 }
