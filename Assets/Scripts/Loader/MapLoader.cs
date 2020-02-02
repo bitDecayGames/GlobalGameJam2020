@@ -102,6 +102,7 @@ public class MapLoader : MonoBehaviour
         for (var i = 0; i < _baseDataLayer.transform.childCount; i++)
         {
             var currentTile = _baseDataLayer.transform.GetChild(i);
+            currentTile.GetComponent<SpriteRenderer>().sortingOrder = 0;
             var props = currentTile.GetComponent<SuperCustomProperties>();
 
             CustomProperty typeProp;
@@ -116,6 +117,14 @@ public class MapLoader : MonoBehaviour
                 jobMgr.AddPossibleLocation(currentTile.gameObject);
             }
         }
+        
+        var buildingLayer = _map.transform.Find("Grid").Find("buildings").GetComponent<SuperObjectLayer>();
+        
+        for (var i = 0; i < buildingLayer.transform.childCount; i++)
+        {
+            var currentTile = buildingLayer.transform.GetChild(i);
+            currentTile.GetComponentInChildren<SpriteRenderer>().sortingOrder = 0;
+        }
     }
 
     void CreateTrucks()
@@ -128,6 +137,12 @@ public class MapLoader : MonoBehaviour
             {
                 var truck = Instantiate(truckPrefab);
                 truck.transform.position = childObj.transform.position;
+
+                var x = Math.Floor(truck.transform.position.x);
+                var y = Math.Floor(Math.Abs(truck.transform.position.y));
+
+                var truckStartCell = _baseDataLayer.transform.GetChild((int)(y + x * _map.m_Height));
+                truck.GetComponent<PathFollower>().SetList(new List<Tile>() {truckStartCell.gameObject.GetComponent<Tile>()});
             }
         }
 

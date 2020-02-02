@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -13,7 +14,7 @@ public class DestinationSelectable : MonoBehaviour
         var nodeToStart = pather.index;
         if (nodeToStart >= pather.path.Count)
         {
-            nodeToStart = pather.path.Count - 1;
+            nodeToStart = Math.Max(0, pather.path.Count - 1);
         }
         var newPath = pathfinder.getTilePath(pather.path[nodeToStart], GetComponent<Tile>());
         

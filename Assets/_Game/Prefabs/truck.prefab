@@ -99,7 +99,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Speed: 1
-  dest: {x: 0, y: -2}
+  dest: {x: 0, y: 0}
   arrived: 0
   lastMove: {x: 0, y: 0}
 --- !u!114 &1654460017490443027

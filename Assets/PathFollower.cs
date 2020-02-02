@@ -13,12 +13,21 @@ public class PathFollower : MonoBehaviour
     public bool done = true;
 
     private PositionSeeker seeker;
-    
+
+    private void Awake()
+    {
+        seeker = GetComponent<PositionSeeker>();
+        if (seeker == null)
+        {
+            throw new Exception("No seeker found on the object for PathFollower to interact with");
+        }
+        setDest();
+    }
+
     // Start is called before the first frame update
     void Start()
     {
-        seeker = GetComponent<PositionSeeker>();
-        setDest();
+        
     }
 
     // Update is called once per frame
