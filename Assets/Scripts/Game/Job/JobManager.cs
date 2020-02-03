@@ -53,7 +53,7 @@ public class JobManager : MonoBehaviour {
             }
             else
             {
-                FindObjectOfType<Wallet>().SubtractMoney((int) (jobInfo.price * 0.5f));
+                FindObjectOfType<Wallet>().SubtractFromTotalMoney((int) (jobInfo.price * 0.5f));
                 FMODSoundEffectsPlayer.Instance.PlaySoundEffect(SFX.FailTask);
             }
             // make this location available again to receive a job

@@ -30,7 +30,11 @@ public class Wallet : MonoBehaviour, ShopPurchaseListener {
 
     public void SubtractMoney(int money) {
         Money -= money;
-        
+    }
+
+    public void SubtractFromTotalMoney(int money) {
+        Money -= money;
+        TotalMoney -= money; // this is to keep the player in the correct difficulty level
     }
 
     public bool OnPurchase(GameObject source, InventoryType item, float price) {

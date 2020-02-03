@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class WinCondition : MonoBehaviour {
-    public int WinAmount = 100000;
+    public int WinAmount = 50000;
     public TextMeshProUGUI WinDisplayText;
 
     private Wallet wallet;
