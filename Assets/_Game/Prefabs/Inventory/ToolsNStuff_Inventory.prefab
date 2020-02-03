@@ -438,7 +438,7 @@ MonoBehaviour:
   locked: 0
   isShop: 1
   isTrash: 0
-  price: 8000
+  price: 3000
 --- !u!58 &28703894399675244
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -826,7 +826,7 @@ PrefabInstance:
     - target: {fileID: 7675772619375025164, guid: d018168f6a6cd47f596ee57314fd53f9,
         type: 3}
       propertyPath: price
-      value: 4000
+      value: 2000
       objectReference: {fileID: 0}
     - target: {fileID: 7989252389396693534, guid: d018168f6a6cd47f596ee57314fd53f9,
         type: 3}
@@ -846,7 +846,7 @@ PrefabInstance:
     - target: {fileID: 7989252389396693534, guid: d018168f6a6cd47f596ee57314fd53f9,
         type: 3}
       propertyPath: price
-      value: 2000
+      value: 1000
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d018168f6a6cd47f596ee57314fd53f9, type: 3}
