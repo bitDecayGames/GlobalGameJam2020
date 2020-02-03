@@ -8,13 +8,13 @@ public static class SmartJobBuilder {
     private static List<InventoryType> EASY = new List<InventoryType> {InventoryType.LIGHT_BULB, InventoryType.WRENCH, InventoryType.PAINT};
 
     private static int mediumMoney = 1210; // amount paid per medium item
-    private static float minMediumMoney = 5000; // required to get this amount of total money before MEDIUM difficulty
+    private static float minMediumMoney = 10000; // required to get this amount of total money before MEDIUM difficulty
     private static int minMedium = 2;
     private static int maxMedium = 3;
     private static List<InventoryType> MEDIUM = new List<InventoryType> {InventoryType.BATTERY, InventoryType.PLUNGER};
 
     private static int hardMoney = 2010; // amount paid per hard item
-    private static float minHardMoney = 10000; // required to get this amount of total money before HARD difficulty
+    private static float minHardMoney = 30000; // required to get this amount of total money before HARD difficulty
     private static int minHard = 3;
     private static int maxHard = 6;
     private static List<InventoryType> HARD = new List<InventoryType> {InventoryType.HAMMER};
