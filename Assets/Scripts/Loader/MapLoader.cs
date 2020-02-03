@@ -124,8 +124,11 @@ public class MapLoader : MonoBehaviour
                 currentTile.GetComponentInChildren<SpriteRenderer>().sortingOrder = 1;
             }
 
-            if (getPropertyAsString("specialBuilding", currentTile) == "tools") {
+            var specialBuildingProp = getPropertyAsString("specialBuilding", currentTile);
+            if (specialBuildingProp == "tools") {
                 currentTile.gameObject.AddComponent<ToolsNStuffMarker>(); // so that we can find the tools building easily
+            } else if (specialBuildingProp == "dans") {
+                currentTile.gameObject.AddComponent<HQMarker>(); // so that we can find the tools building easily
             }
         }
     }

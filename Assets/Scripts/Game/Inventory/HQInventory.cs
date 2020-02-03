@@ -22,8 +22,8 @@ public class HQInventory : MonoBehaviour {
     private void Start() {
         inventory = GetComponentInChildren<Inventory>();
         UpgradeTo4Slots();
-        // TODO: need to actually get the renderer of the 
-        renderer = transform.parent.GetComponentInParent<SpriteRenderer>();
+        var dans = FindObjectOfType<HQMarker>();
+        if (dans != null) renderer = dans.GetComponentInChildren<SpriteRenderer>();
     }
 
     // private void Update() {
@@ -47,6 +47,7 @@ public class HQInventory : MonoBehaviour {
         SlotRenderer.sprite = EightSlotUpgradeSprite;
         UpgradeToANumberOfSlots(8);
         renderer.sprite = firstDanUpgrade;
+        renderer.transform.localScale = new Vector3(1.25f, 1.25f, 1); // because scaling is weird when coming from tiled
         SecondExpandUpgrade.SetIsAvailable(true);
     }
 
