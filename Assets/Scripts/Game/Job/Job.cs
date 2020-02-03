@@ -46,12 +46,13 @@ public class Job : MonoBehaviour {
         panelSpr.sprite = itemMap.Get(InventoryType.JOB_PANEL).image;
         panelSpr.drawMode = SpriteDrawMode.Sliced;
         panelSpr.sortingLayerName = "UI";
-        panelSpr.sortingOrder = -1;
+        panelSpr.sortingOrder = 30;
         panelSpr.size = new Vector2(BUBBLE_WIDTH * 1.5f, Required.Count * BUBBLE_WIDTH + BUBBLE_WIDTH * 0.5f);
     }
 
     private void CreateMoneyText() {
         var textObj = new GameObject();
+        textObj.name = "Money Text";
         textObj.transform.SetParent(transform);
         var text = textObj.AddComponent<TextMeshPro>();
         var textLocPos = text.transform.localPosition;
@@ -61,6 +62,7 @@ public class Job : MonoBehaviour {
         text.fontSize = 4;
         text.color = new Color(71 / 255.0f, 170 / 255.0f, 44 / 255.0f);
         text.sortingLayerID = SortingLayer.NameToID("UI");
+        text.sortingOrder = 32;
         text.rectTransform.sizeDelta = new Vector2(5, 1);
 
         textLocPos.y = VERTICAL_OFFSET;
@@ -85,6 +87,7 @@ public class Job : MonoBehaviour {
             bubbleObj.transform.position = bubbleObjPos;
             var bubbleSpr = bubbleObj.AddComponent<SpriteRenderer>();
             bubbleSpr.sortingLayerName = "UI";
+            bubbleSpr.sortingOrder = 31;
             var key = itemMap.Get(Required[i]);
             if (key != null) {
                 bubbleSpr.sprite = key.image;
