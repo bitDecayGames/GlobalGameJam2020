@@ -63,10 +63,10 @@ public class MapLoader : MonoBehaviour
             TileType.TryParse(solidProp.GetValueAsString(), true, out tType);
             tileComp.tileType = tType;
 
-            if (tType == TileType.DOOR || tType == TileType.ROAD)
+            if (tType == TileType.DOOR)
             {
-                currentTile.gameObject.AddComponent<DestinationSelectable>();
-                currentTile.gameObject.AddComponent<BoxCollider2D>();
+                var doorCollider = currentTile.gameObject.AddComponent<BoxCollider2D>();
+                doorCollider.isTrigger = true;
             }
             
             if (i % _map.m_Height != 0)
@@ -102,6 +102,7 @@ public class MapLoader : MonoBehaviour
 
         var NonJobIndex = 0;
 
+        var allDoors = new List<GameObject>();
         for (var i = 0; i < _baseDataLayer.transform.childCount; i++)
         {
             var currentTile = _baseDataLayer.transform.GetChild(i);
@@ -118,6 +119,7 @@ public class MapLoader : MonoBehaviour
 
             if (typeProp.GetValueAsString() == "DOOR")
             {
+                allDoors.Add(currentTile.gameObject);
                 CustomProperty jobbingProp;
                 if (!props.TryGetCustomProperty("jobbing", out jobbingProp))
                 {
@@ -150,7 +152,7 @@ public class MapLoader : MonoBehaviour
         {
             var currentTile = buildingLayer.transform.GetChild(i);
             var props = currentTile.GetComponent<SuperCustomProperties>();
-
+            MakeBuildingSelectable(currentTile, allDoors);
             CustomProperty tallProp;
             if (!props.TryGetCustomProperty("tall", out tallProp))
             {
@@ -168,6 +170,34 @@ public class MapLoader : MonoBehaviour
         }
     }
 
+    void MakeBuildingSelectable(Transform buildingTile, List<GameObject> allDoors)
+    {
+        var buildingSelectable = buildingTile.gameObject.AddComponent<BuildingSelectable>();
+        var buildingCollider = buildingTile.gameObject.AddComponent<BoxCollider2D>();
+        var rigid = buildingTile.gameObject.AddComponent<Rigidbody2D>();
+        rigid.isKinematic = true;
+        //rigid.collisionDetectionMode = CollisionDetectionMode2D.Continuous;
+        buildingCollider.isTrigger = true;
+
+        // set up the colider to match the size and location of the sprite
+        var renderer = buildingTile.gameObject.GetComponentInChildren<SpriteRenderer>();
+        var s = renderer.bounds.size;
+        buildingCollider.size = s * 0.9f;
+        buildingCollider.offset = s / 2 ;
+        /*
+        Debug.Log("looking for a door");
+        foreach(var door in allDoors)
+        {
+            var doorCollider = door.gameObject.GetComponentInChildren<BoxCollider2D>();
+            if (doorCollider.IsTouching(buildingCollider))
+            {
+                Debug.Log("found a door!");
+                buildingSelectable.door = door.gameObject;
+            }
+        }
+        */
+    }
+
     void CreateTrucks()
     {
         var objs = _map.transform.Find("Grid").Find("poi").GetComponent<SuperObjectLayer>();
@@ -181,20 +211,17 @@ public class MapLoader : MonoBehaviour
 
                 truckSpawn.Set(x, y);
                 
-                var truckInventory = CreateSingleTruck(x, y);
-                truckInventory.SetSlot(0, InventoryType.WRENCH);
-                truckInventory.SetSlot(1, InventoryType.LIGHT_BULB);
-                truckInventory.SetSlot(2, InventoryType.PAINT);
+                CreateSingleTruck(x, y);
             }
         }
     }
 
-    public Inventory CreateTruckDefaultSpawn()
+    public void CreateTruckDefaultSpawn()
     {
-        return CreateSingleTruck((int) truckSpawn.x, (int) truckSpawn.y);
+        CreateSingleTruck((int) truckSpawn.x, (int) truckSpawn.y);
     }
 
-    public Inventory CreateSingleTruck(int cellX, int cellY)
+    public void CreateSingleTruck(int cellX, int cellY)
     {
         var truck = Instantiate(truckPrefab);
 
@@ -206,7 +233,6 @@ public class MapLoader : MonoBehaviour
         truck.GetComponent<PathFollower>().SetList(new List<Tile>() {truckStartCell.gameObject.GetComponent<Tile>()});
 
         truck.GetComponent<SpriteRenderer>().sortingOrder = 2;
-        return truck.GetComponentInChildren<Inventory>();
     }
 
     void UpdateEnvironment()
