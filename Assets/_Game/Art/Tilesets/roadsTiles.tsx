@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<tileset version="1.2" tiledversion="1.2.1" name="mapTiles" tilewidth="80" tileheight="80" tilecount="72" columns="8">
+<tileset version="1.2" tiledversion="1.3.2" name="mapTiles" tilewidth="80" tileheight="80" tilecount="72" columns="8">
  <image source="roads.png" width="640" height="720"/>
  <tile id="0">
   <properties>
@@ -363,7 +363,7 @@
    <property name="conns" value="0"/>
    <property name="entrance" value="8"/>
    <property name="jobbing" type="bool" value="false"/>
-   <property name="name" value="house"/>
+   <property name="name" value="shop"/>
    <property name="type" value="DOOR"/>
   </properties>
  </tile>
@@ -372,7 +372,7 @@
    <property name="conns" value="0"/>
    <property name="entrance" value="8"/>
    <property name="jobbing" type="bool" value="false"/>
-   <property name="name" value="house"/>
+   <property name="name" value="hq"/>
    <property name="type" value="DOOR"/>
   </properties>
  </tile>
@@ -381,8 +381,8 @@
    <property name="conns" value="0"/>
    <property name="entrance" value="8"/>
    <property name="jobbing" type="bool" value="false"/>
-   <property name="name" value="house"/>
-   <property name="type" value="SOLID"/>
+   <property name="name" value="connection"/>
+   <property name="type" value="CONNECTION"/>
   </properties>
  </tile>
 </tileset>

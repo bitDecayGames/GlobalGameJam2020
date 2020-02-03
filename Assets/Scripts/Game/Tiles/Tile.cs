@@ -19,4 +19,5 @@ public enum TileType {
     SOLID,
     DOOR,
     ROAD,
+    CONNECTION,
 }

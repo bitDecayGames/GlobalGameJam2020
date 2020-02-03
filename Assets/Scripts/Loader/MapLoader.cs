@@ -20,7 +20,7 @@ public class MapLoader : MonoBehaviour
         _map = FindObjectOfType<SuperMap>();
         if (_map == null)
         {
-            Debug.Log("Unable to find tilemap... What did you do...");
+            Debug.LogError("Unable to find tilemap... What did you do...");
             return;
         }
 
@@ -42,30 +42,17 @@ public class MapLoader : MonoBehaviour
         {
             var currentTile = _baseDataLayer.transform.GetChild(i);
             currentTile.GetComponent<SpriteRenderer>().sortingOrder = -1;
-            var props = currentTile.GetComponent<SuperCustomProperties>();
-            
-            CustomProperty solidProp;
-            var found = props.TryGetCustomProperty("type", out solidProp);
-            if (!found)
-            {
-                throw new Exception($"Unable to find 'solid' property on custom properties of object");
-            }
-            
-            var tileComp = currentTile.gameObject.AddComponent<Tile>();
-            CustomProperty conProp;
-            if (!props.TryGetCustomProperty("conns", out conProp))
-            {
-                throw new Exception("NO CONNS FOUND");
-            }
-            tileComp.connections = conProp.GetValueAsInt();
-            
-            TileType tType;
-            TileType.TryParse(solidProp.GetValueAsString(), true, out tType);
-            tileComp.tileType = tType;
 
-            if (tType == TileType.DOOR || tType == TileType.ROAD)
+            var tileComp = currentTile.gameObject.AddComponent<Tile>();
+            tileComp.connections = getPropertyAsInt("conns", currentTile);
+            tileComp.tileType = getPropertyAsTileType("type", currentTile);
+
+            if (tileComp.tileType == TileType.DOOR || tileComp.tileType == TileType.ROAD)
             {
                 currentTile.gameObject.AddComponent<DestinationSelectable>();
+                currentTile.gameObject.AddComponent<BoxCollider2D>();
+            } else if (tileComp.tileType == TileType.CONNECTION) {
+                currentTile.gameObject.AddComponent<ConnectorTile>();
                 currentTile.gameObject.AddComponent<BoxCollider2D>();
             }
             
@@ -94,50 +81,29 @@ public class MapLoader : MonoBehaviour
     {
         _baseDataLayer = _map.transform.Find("Grid").Find("data").GetComponent<SuperTileLayer>();
         
-        var jobMgr = UnityEngine.Object.FindObjectOfType<JobManager>();
+        var jobMgr = FindObjectOfType<JobManager>();
         if (jobMgr == null)
         {
-            throw new Exception("No job manager found on the main camera");
+            throw new Exception("No job manager found in the world");
         }
-
-        var NonJobIndex = 0;
 
         for (var i = 0; i < _baseDataLayer.transform.childCount; i++)
         {
             var currentTile = _baseDataLayer.transform.GetChild(i);
             currentTile.GetComponent<SpriteRenderer>().sortingOrder = 0;
-            var props = currentTile.GetComponent<SuperCustomProperties>();
-
-            CustomProperty typeProp;
-            if (!props.TryGetCustomProperty("type", out typeProp))
-            {
-                throw new Exception("No type property on tile: " + currentTile);
-            }
             
-            
-
-            if (typeProp.GetValueAsString() == "DOOR")
+            if (getPropertyAsString("type", currentTile) == "DOOR")
             {
-                CustomProperty jobbingProp;
-                if (!props.TryGetCustomProperty("jobbing", out jobbingProp))
+                if (getPropertyAsBool("jobbing", currentTile))
                 {
-                    throw new Exception("No jobbing property on door tile: " + currentTile);
-                }
-
-                if (jobbingProp.GetValueAsBool())
-                {
-                    Debug.Log("Adding a location");
+                    // Debug.Log("Adding a location");
                     jobMgr.AddPossibleLocation(currentTile.gameObject);
                 }
-                else
-                {
-                    NonJobIndex++;
-                    if (NonJobIndex == 1)
-                    {
-                        // XXX: This is our Tool shop
+                else {
+                    var nameProp = getPropertyAsString("name", currentTile);
+                    if (nameProp == "shop") {
                         Instantiate(storeInventory, currentTile.transform);
-                    } else if (NonJobIndex == 2)
-                    {
+                    } else if (nameProp == "hq") {
                         Instantiate(HQInventory, currentTile.transform);
                     }
                 }
@@ -149,15 +115,7 @@ public class MapLoader : MonoBehaviour
         for (var i = 0; i < buildingLayer.transform.childCount; i++)
         {
             var currentTile = buildingLayer.transform.GetChild(i);
-            var props = currentTile.GetComponent<SuperCustomProperties>();
-
-            CustomProperty tallProp;
-            if (!props.TryGetCustomProperty("tall", out tallProp))
-            {
-                throw new Exception("No tall property on tile: " + currentTile);
-            }
-
-            if (tallProp.GetValueAsBool())
+            if (getPropertyAsBool("tall", currentTile))
             {
                 currentTile.GetComponentInChildren<SpriteRenderer>().sortingOrder = 3;
             }
@@ -182,6 +140,7 @@ public class MapLoader : MonoBehaviour
                 truckSpawn.Set(x, y);
                 
                 var truckInventory = CreateSingleTruck(x, y);
+                // give first truck one of each inventory item
                 truckInventory.SetSlot(0, InventoryType.WRENCH);
                 truckInventory.SetSlot(1, InventoryType.LIGHT_BULB);
                 truckInventory.SetSlot(2, InventoryType.PAINT);
@@ -226,5 +185,41 @@ public class MapLoader : MonoBehaviour
                 childObj.GetComponent<SpriteRenderer>().sortingOrder = 0;
             }
         }
+    }
+
+    private static CustomProperty getProperty(string name, Transform currentTile) {
+        var props = currentTile.GetComponent<SuperCustomProperties>();
+        CustomProperty prop;
+        if (!props.TryGetCustomProperty(name, out prop)) {
+            prop = new CustomProperty();
+        }
+
+        return prop;
+    }
+
+    private static String getPropertyAsString(string name, Transform currentTile) {
+        var prop = getProperty(name, currentTile);
+        if (prop.IsEmpty) return null;
+        return prop.GetValueAsString();
+    }
+
+    private static bool getPropertyAsBool(string name, Transform currentTile) {
+        var prop = getProperty(name, currentTile);
+        if (prop.IsEmpty) return false;
+        return prop.GetValueAsBool();
+    }
+
+    private static int getPropertyAsInt(string name, Transform currentTile) {
+        var prop = getProperty(name, currentTile);
+        if (prop.IsEmpty) return 0;
+        return prop.GetValueAsInt();
+    }
+    private static TileType getPropertyAsTileType(string name, Transform currentTile) {
+        var prop = getProperty(name, currentTile);
+        if (prop.IsEmpty) return TileType.SOLID;
+        
+        TileType tType;
+        TileType.TryParse(prop.GetValueAsString(), true, out tType);
+        return tType;
     }
 }

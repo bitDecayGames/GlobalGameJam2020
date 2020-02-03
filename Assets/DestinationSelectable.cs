@@ -14,6 +14,10 @@ public class DestinationSelectable : MonoBehaviour
             return;
         }
 
+        Select();
+    }
+
+    public void Select() {
         if (SelectionManager.currentSelected == null)
         {
             // no vehicle selected
