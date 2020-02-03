@@ -181,6 +181,7 @@ public class MapLoader : MonoBehaviour
 
     void UpdateEnvironment()
     {
+        Debug.Log($"Reorder tree environment to draw correctly: {_map.m_Height}");
         var objs = _map.transform.Find("Grid").Find("environment").GetComponent<SuperLayer>();
         for (int i = 0; i < objs.transform.childCount; i++)
         {
@@ -193,7 +194,7 @@ public class MapLoader : MonoBehaviour
             else
             {
                 // upper half, this shiz renders low, behind stuff
-                childObj.GetComponent<SpriteRenderer>().sortingOrder = 0;
+                childObj.GetComponent<SpriteRenderer>().sortingOrder = 1;
             }
         }
     }
