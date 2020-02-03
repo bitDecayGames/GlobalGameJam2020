@@ -8,7 +8,7 @@ public class MapLoader : MonoBehaviour
 {
     private SuperMap _map;
     private SuperTileLayer _baseDataLayer;
-    public GameObject truckPrefab;
+    public List<GameObject> truckPrefabs;
     public GameObject storeInventory;
     public GameObject HQInventory;
 
@@ -146,7 +146,7 @@ public class MapLoader : MonoBehaviour
 
                 truckSpawn.Set(x, y);
                 
-                var truckInventory = CreateSingleTruck(x, y);
+                var truckInventory = CreateSingleTruck(x, y, 0);
                 // give first truck one of each inventory item
                 truckInventory.SetSlot(0, InventoryType.WRENCH);
                 truckInventory.SetSlot(1, InventoryType.LIGHT_BULB);
@@ -155,13 +155,16 @@ public class MapLoader : MonoBehaviour
         }
     }
 
-    public Inventory CreateTruckDefaultSpawn()
+    public Inventory CreateTruckDefaultSpawn(int truckIndex)
     {
-        return CreateSingleTruck((int) truckSpawn.x, (int) truckSpawn.y);
+        return CreateSingleTruck((int) truckSpawn.x, (int) truckSpawn.y, truckIndex);
     }
 
-    public Inventory CreateSingleTruck(int cellX, int cellY)
-    {
+    public Inventory CreateSingleTruck(int cellX, int cellY, int truckIndex) {
+        GameObject truckPrefab;
+        if (truckPrefabs == null || truckPrefabs.Count == 0) throw new Exception("Truck prefab list cannot be empty");
+        if (truckIndex < truckPrefabs.Count) truckPrefab = truckPrefabs[truckIndex];
+        else truckPrefab = truckPrefabs[0];
         var truck = Instantiate(truckPrefab);
 
         var truckStartCell = _baseDataLayer.transform.GetChild((int)(cellY + cellX * _map.m_Height));

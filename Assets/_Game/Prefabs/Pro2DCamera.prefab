@@ -101,8 +101,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2de333d4aea342f09c59632c7737b53, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  truckPrefab: {fileID: 1654460017490443039, guid: 73902e564717c4a6d8690ca0ad66fa1f,
-    type: 3}
+  truckPrefabs:
+  - {fileID: 1654460017490443039, guid: 73902e564717c4a6d8690ca0ad66fa1f, type: 3}
+  - {fileID: 6383420491344867891, guid: 410b92be413b84081926ea3455744295, type: 3}
+  - {fileID: 4788498039313749859, guid: 45dd283f8c86c44808860ddf9ca74730, type: 3}
+  - {fileID: 683627006605355030, guid: ec3b7a7744e6847e49e8cb7f283e4e02, type: 3}
+  - {fileID: 7974704540299620625, guid: 2a73d081b07e3449eb4fcf2a5f9c5eab, type: 3}
   storeInventory: {fileID: 602862018616964671, guid: 5e8e9eeeeb3a4483eabff873d2bad67f,
     type: 3}
   HQInventory: {fileID: 8120127882481651000, guid: bdfbfadb04cc545f29223014da13efb0,

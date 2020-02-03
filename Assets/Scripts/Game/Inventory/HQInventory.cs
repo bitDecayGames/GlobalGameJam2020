@@ -72,8 +72,8 @@ public class HQInventory : MonoBehaviour {
     }
 
     public void PurchaseNewTruck() {
-        GameObject.Find("Pro2DCamera").GetComponent<MapLoader>().CreateTruckDefaultSpawn();
         numOfTrucks += 1;
+        FindObjectOfType<MapLoader>().CreateTruckDefaultSpawn(numOfTrucks - 1);
         if (numOfTrucks == 2) {
             FMODSoundEffectsPlayer.Instance.PlaySoundEffect(SFX.NewTruck);
             SecondTruckUpgrade.SetIsAvailable(true);

@@ -19,6 +19,7 @@ public class DestinationSelectable : MonoBehaviour
     }
 
     public void Select() {
+        Debug.Log($"Selected tile {name}");
         if (SelectionManager.currentSelected == null)
         {
             // no vehicle selected
