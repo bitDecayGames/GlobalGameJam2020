@@ -86,46 +86,30 @@ public class PathFollower : MonoBehaviour
                 Debug.Log("no inventory found on the arriving vehicle");
                 return;
             }
-
-            var found = false;
             foreach (var reqItem in job.Required)
             {
-                found = false;
-                foreach (var slot in inv.Slots)
-                {
-                    if (slot.Item == reqItem)
-                    {
-                        found = true;
-                    }
-                }
-
-                if (!found)
+                if (!inv.CheckForItemType(reqItem))
                 {
                     // we are missing an item for the job
                     // TODO: SFX for bad job attempt?
                     // FMOD: Can't complete job 
                     FMODSoundEffectsPlayer.Instance.PlaySoundEffect(SFX.CannotBuy);
                     Debug.Log("Did not have item needed for job: " + reqItem);
-                    
+                    job.gameObject.AddComponent<Blink>().Init(Color.red, 2, 0.1f);
+                    var toolsNStuff = FindObjectOfType<ToolsNStuffMarker>();
+                    if (toolsNStuff != null) toolsNStuff.gameObject.AddComponent<Blink>().Init(Color.yellow, 2, 0.1f);
                     return;
                 }
             }
             
             foreach (var reqItem in job.Required)
             {
-                found = false;
-                foreach (var slot in inv.Slots)
+                if (reqItem == InventoryType.PAINT ||
+                    reqItem == InventoryType.BATTERY ||
+                    reqItem == InventoryType.LIGHT_BULB)
                 {
-                    if (slot.Item == reqItem)
-                    {
-                        if (slot.Item == InventoryType.PAINT ||
-                            slot.Item == InventoryType.BATTERY ||
-                            slot.Item == InventoryType.LIGHT_BULB)
-                        {
-                            // Remove the stuff from the player
-                            inv.RemoveItemType(slot.Item);
-                        }
-                    }
+                    // Remove the stuff from the player
+                    inv.RemoveItemType(reqItem);
                 }
             }
             

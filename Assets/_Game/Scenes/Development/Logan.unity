@@ -316,6 +316,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 6930914338370242393, guid: ab7fdf4cb83256543ab0c8d550311cee,
+        type: 3}
+      propertyPath: _zoom
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6930914338370242395, guid: ab7fdf4cb83256543ab0c8d550311cee,
         type: 3}
       propertyPath: storeInventory
@@ -386,7 +391,7 @@ PrefabInstance:
     - target: {fileID: 6930914338370242397, guid: ab7fdf4cb83256543ab0c8d550311cee,
         type: 3}
       propertyPath: orthographic size
-      value: 3.0875
+      value: 5.0375
       objectReference: {fileID: 0}
     - target: {fileID: 6930914338370242399, guid: ab7fdf4cb83256543ab0c8d550311cee,
         type: 3}

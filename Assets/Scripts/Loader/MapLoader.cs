@@ -123,6 +123,10 @@ public class MapLoader : MonoBehaviour
             {
                 currentTile.GetComponentInChildren<SpriteRenderer>().sortingOrder = 1;
             }
+
+            if (getPropertyAsString("specialBuilding", currentTile) == "tools") {
+                currentTile.gameObject.AddComponent<ToolsNStuffMarker>(); // so that we can find the tools building easily
+            }
         }
     }
 
