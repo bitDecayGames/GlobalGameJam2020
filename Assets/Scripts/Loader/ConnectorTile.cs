@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class ConnectorTile : MonoBehaviour {
     private Tile tile;
@@ -9,8 +10,13 @@ public class ConnectorTile : MonoBehaviour {
     }
 
     private void OnMouseUpAsButton() {
-        var selectable = RecursiveFindDestinationSelectable(new List<Tile> {tile}, tile.neighbors());
-        if (selectable != null) selectable.Select();
+        // only continue if mouse did not click the UI
+        if (!EventSystem.current.IsPointerOverGameObject()) {
+            var selectable = RecursiveFindDestinationSelectable(new List<Tile> {tile}, tile.neighbors());
+            if (selectable != null) selectable.Select();
+        } else {
+            Debug.Log("UI Intercepted click");
+        }
     }
 
     private DestinationSelectable RecursiveFindDestinationSelectable(List<Tile> visited, List<Tile> toVist) {

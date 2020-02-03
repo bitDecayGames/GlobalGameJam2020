@@ -11,6 +11,7 @@ public class DestinationSelectable : MonoBehaviour
     {
         if (EventSystem.current.IsPointerOverGameObject())
         {
+            Debug.Log("UI Intercepted click");
             return;
         }
 
