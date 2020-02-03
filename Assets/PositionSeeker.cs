@@ -29,14 +29,20 @@ public class PositionSeeker : MonoBehaviour
         if (Vector2.Distance(VectorMath.V3toV2(transform.position), dest) > 0)
         {
             arrived = false;
-            lastMove = (dest - VectorMath.V3toV2(transform.position)).normalized * Speed * Time.deltaTime;
-            transform.position += VectorMath.V2toV3(lastMove);
+            lastMove = (dest - VectorMath.V3toV2(transform.position)).normalized * (Speed * Time.deltaTime);
+            var pos = transform.position;
+            pos.x += lastMove.x;
+            pos.y += lastMove.y;
+            transform.position = pos;
         }
 
         if (Vector2.Distance(VectorMath.V3toV2(transform.position), dest) < THRESHOLD)
         {
             arrived = true;
-            transform.position = VectorMath.V2toV3(dest);
+            var pos = transform.position;
+            pos.x = dest.x;
+            pos.y = dest.y;
+            transform.position = pos;
         }
     }
 }

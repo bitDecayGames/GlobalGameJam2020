@@ -40,7 +40,7 @@ public class DestinationSelectable : MonoBehaviour
         var newPath = pathfinder.getTilePath(pather.path[nodeToStart], GetComponent<Tile>());
         
         pather.SetList(newPath);
-        Debug.Log("Setting destination from DestinationSelectable");
+        // Debug.Log("Setting destination from DestinationSelectable");
         pather.SetDestinationObject(gameObject);
     }
 }

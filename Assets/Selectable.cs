@@ -1,24 +1,11 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Selectable : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
+    // TODO: this only hits the "first" collider which can be un-deterministic
     private void OnMouseUpAsButton()
     {
+        
         Debug.Log($"Selected {name}");
         SelectionManager.SetSelected(gameObject);
     }

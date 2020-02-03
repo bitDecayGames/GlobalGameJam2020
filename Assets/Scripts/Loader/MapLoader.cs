@@ -171,6 +171,7 @@ public class MapLoader : MonoBehaviour
         var startPos = truckStartCell.transform.position;
         startPos.x += 0.5f;
         startPos.y += 0.5f;
+        startPos.z = -1;
         truck.transform.position = startPos;
         truck.GetComponent<PathFollower>().SetList(new List<Tile>() {truckStartCell.gameObject.GetComponent<Tile>()});
 
