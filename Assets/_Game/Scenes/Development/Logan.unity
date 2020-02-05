@@ -321,6 +321,16 @@ PrefabInstance:
       propertyPath: _zoom
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6930914338370242394, guid: ab7fdf4cb83256543ab0c8d550311cee,
+        type: 3}
+      propertyPath: MaxHorizontalInfluence
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6930914338370242394, guid: ab7fdf4cb83256543ab0c8d550311cee,
+        type: 3}
+      propertyPath: MaxVerticalInfluence
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 6930914338370242396, guid: ab7fdf4cb83256543ab0c8d550311cee,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -379,7 +389,7 @@ PrefabInstance:
     - target: {fileID: 6930914338370242397, guid: ab7fdf4cb83256543ab0c8d550311cee,
         type: 3}
       propertyPath: orthographic size
-      value: 5.0375
+      value: 3.6125
       objectReference: {fileID: 0}
     - target: {fileID: 6930914338370242399, guid: ab7fdf4cb83256543ab0c8d550311cee,
         type: 3}
