@@ -5,6 +5,7 @@ public static class SelectionManager
 {
     public static GameObject selectionMgr;
     public static FollowObject indicator;
+    public static FollowObject sectorCircle;
 
     public static GameObject currentSelected;
     
@@ -21,8 +22,11 @@ public static class SelectionManager
         {
             indicator = selectionMgr.GetComponent<FollowObject>();
         }
-        
-        indicator.GetComponentInChildren<SpriteRenderer>().enabled = true;
+
+        foreach (SpriteRenderer spriteRenderer in indicator.GetComponentsInChildren<SpriteRenderer>())
+        {
+            spriteRenderer.enabled = true;
+        }
         
         if (indicator.chase != null)
         {
@@ -37,7 +41,10 @@ public static class SelectionManager
 
     public static void ClearSelection()
     {
-        indicator.GetComponentInChildren<SpriteRenderer>().enabled = false;
+        foreach (SpriteRenderer spriteRenderer in indicator.GetComponentsInChildren<SpriteRenderer>())
+        {
+            spriteRenderer.enabled = true;
+        }
         currentSelected = null;
 
     }
