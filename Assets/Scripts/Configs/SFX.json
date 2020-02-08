@@ -22,6 +22,9 @@
     "WorkWoodLoop",
     "Purchase",
     "EngineStart",
-    "NewTruck"
+    "NewTruck",
+    "DialTone",
+    "Chatter",
+    "PhoneHangup"
   ]
 }

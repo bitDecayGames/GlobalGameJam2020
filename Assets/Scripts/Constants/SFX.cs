@@ -23,4 +23,7 @@ public class SFX
 	public const string Purchase = "Purchase";
 	public const string EngineStart = "EngineStart";
 	public const string NewTruck = "NewTruck";
+	public const string DialTone = "DialTone";
+	public const string Chatter = "Chatter";
+	public const string PhoneHangup = "PhoneHangup";
 }

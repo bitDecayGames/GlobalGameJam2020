@@ -65,16 +65,17 @@ public class JobManager : MonoBehaviour {
     /// <summary>
     /// This method should get called when the phone UI element is clicked
     /// </summary>
-    public void OnPhoneCallTaken() {
+    public bool OnPhoneCallTaken() {
         if (CallIsWaiting) {
             Debug.Log("Phone call answered");
             CallIsWaiting = false;
             // FMOD
-            FMODSoundEffectsPlayer.Instance.PlaySoundEffect(SFX.PhoneAnswer);
             NextPhoneCallTimer *= 0.9f; // TODO: this number could be affected by upgrades to get the next job faster?
             if (NextPhoneCallTimer < MinNextPhoneCallTime) NextPhoneCallTimer = MinNextPhoneCallTime;
             CreateJob();
+            return true;
         }
+        return false;
     }
 
     private void Update() {

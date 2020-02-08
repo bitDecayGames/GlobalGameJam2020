@@ -5,7 +5,6 @@ public static class SelectionManager
 {
     public static GameObject selectionMgr;
     public static FollowObject indicator;
-    public static FollowObject sectorCircle;
 
     public static GameObject currentSelected;
     

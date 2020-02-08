@@ -58,10 +58,11 @@ public class FMODSoundEffectsPlayer : MonoBehaviour
 		}
 	}
 	
-	public void PlaySoundEffect(string soundEffect)
+	public EventInstance PlaySoundEffect(string soundEffect)
 	{
 		_eventInstance = RuntimeManager.CreateInstance(BuildEventString(soundEffect));
 		_eventInstance.start();
+		return _eventInstance;
 	}
 	
 	public void PlaySoundEffectWithCallback(string soundEffect, Delegates.SignalDoneCallback callback)
